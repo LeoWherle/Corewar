@@ -24,9 +24,9 @@ NAME = both
 
 MAKE  = make --no-print-directory
 
-LIBS = lib/clist
+LIBS = lib/clist lib/op
 LIBINC = $(addsuffix /include, $(addprefix -I, $(LIBS)))
-LIB_FLAGS = -Llib -lclist
+LIB_FLAGS = -Llib -lclist -lop
 
 CFLAGS = -W -Wall -Wextra -Iinclude $(LIBINC)
 LDFLAGS = $(LIB_FLAGS)
