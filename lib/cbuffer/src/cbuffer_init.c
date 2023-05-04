@@ -9,7 +9,7 @@
 #include "cbuffer.h"
 
 // returns 0 on success, 1 otherwise
-static inline int cbuffer_init(cbuffer_t *buffer, size_t size)
+static cbuffer_init(cbuffer_t *buffer, size_t size)
 {
     buffer->size = size;
     buffer->data = malloc(sizeof(char) * size);
