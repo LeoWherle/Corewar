@@ -22,7 +22,10 @@ RESET		=	\033[0m
 
 NAME = asm
 
-SRC = src/main.c \
+SRC =	src/main.c \
+		src/command_to_data.c	\
+		src/add_param.c	\
+		src/turn_str_to_word_array.c	\
 
 TEST_CRIT	=	\
 
