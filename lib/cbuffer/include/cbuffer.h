@@ -13,8 +13,6 @@
     typedef struct cbuffer_s {
         char *data;
         size_t size;
-        size_t head;
-        size_t tail;
     } cbuffer_t;
 
     cbuffer_t *cbuffer_create(size_t size);

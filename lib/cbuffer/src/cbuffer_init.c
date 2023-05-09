@@ -15,8 +15,6 @@ static cbuffer_init(cbuffer_t *buffer, size_t size)
     buffer->data = malloc(sizeof(char) * size);
     if (!buffer->data)
         return 0;
-    buffer->head = 0;
-    buffer->tail = 0;
     return 1;
 }
 
