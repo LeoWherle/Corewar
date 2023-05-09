@@ -5,12 +5,12 @@
 ** comand to data
 */
 
-char **turn_str_to_word_array(char const *str, char sep);
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include "mystr.h"
 #include "asm.h"
 #include "op.h"
 #include "herror.h"
@@ -72,7 +72,7 @@ bool line_to_command(command_t *com, int index)
     char **arg = NULL;
     char *type = NULL;
 
-    arg = turn_str_to_word_array(com->line, ' ');
+    arg = my_str_to_word_array(com->line, ' ');
     ASSERT_MALLOC(arg, false);
     com->code_command = op_tab[index].code;
     type = get_type(arg, index);

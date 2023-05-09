@@ -8,6 +8,7 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include "mystr.h"
 
 static int get_word_len(char const *str, char sep)
 {
@@ -27,18 +28,6 @@ static void copy_word(char const *src, char *dest, char sep)
         dest[i] = src[i];
     }
     dest[i] = '\0';
-}
-
-int my_strlen(char const *str)
-{
-    int index = 0;
-
-    if (!str)
-        return index;
-    while (str[index] != '\0'){
-        index++;
-    }
-    return index;
 }
 
 static int find_nb_word(char const *str, char sep)

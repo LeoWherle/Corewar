@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include "mystr.h"
 #include "op.h"
 #include "asm.h"
 
@@ -40,7 +41,7 @@ int add_register(char *dest, char *arg, int i)
 {
     int reg = 0;
 
-    reg = atoi(&arg[1]);
+    reg = my_getnbr(&arg[1]);
     add_int(dest, reg, i, REG_SIZE);
     return i + REG_SIZE;
 }
@@ -49,7 +50,7 @@ int add_direct(char *dest, char *arg, int i)
 {
     int dir = 0;
 
-    dir = atoi(&arg[1]);
+    dir = my_getnbr(&arg[1]);
     add_int(dest, dir, i, DIR_SIZE);
     return i + DIR_SIZE;
 }
@@ -58,7 +59,7 @@ int add_indirect(char *dest, char *arg, int i)
 {
     int ind = 0;
 
-    ind = atoi(arg);
+    ind = my_getnbr(arg);
     add_int(dest, ind, i, IND_SIZE);
     return i + IND_SIZE;
 }
