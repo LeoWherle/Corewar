@@ -69,16 +69,13 @@ void make_coding_byte(command_t *new, char *type, int index)
 
 bool line_to_command(command_t *com, int index)
 {
-    char **arg = NULL;
     char *type = NULL;
 
-    arg = my_str_to_word_array(com->line, ' ');
-    ASSERT_MALLOC(arg, false);
     com->code_command = op_tab[index].code;
-    type = get_type(arg, index);
+    type = get_type(com->line, index);
     ASSERT_MALLOC(type, false);
     make_coding_byte(com, type, index);
-    com->parameters = get_param(com->param_size, type, arg, index);
+    com->parameters = get_param(com->param_size, type, com->line, index);
     ASSERT_MALLOC(com->parameters, false);
     return true;
 }

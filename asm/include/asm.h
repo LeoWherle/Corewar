@@ -16,7 +16,7 @@
     } label_t;
 
     typedef struct command {
-        char *line;
+        char **line;
         char code_command;
         char coding_byte;
         char *parameters;
