@@ -1,80 +1,83 @@
 /*
-** EPITECH PROJECT, 2023
-** str_to_word_array
+** EPITECH PROJECT, 2022
+** str
 ** File description:
-** take a string and turns it into an array of word
+** to word array
 */
 
-#include <stddef.h>
 #include <stdlib.h>
 #include <stdio.h>
 
-static int get_word_len(char const *str, char sep)
+int is_sep(char check, char *sep)
 {
-    int index = 0;
-
-    while (str[index] != sep && str[index] != '\t' && str[index] != '\0') {
-        index++;
-    }
-    return index;
+    for (int i = 0; sep[i] != '\0'; i++)
+        if (check == sep[i])
+            return 1;
+    return 0;
 }
 
-static void copy_word(char const *src, char *dest, char sep)
-{
-    int i = 0;
-
-    for (i = 0; src[i] != sep && src[i] != '\t' && src[i] != '\0'; i++) {
-        dest[i] = src[i];
-    }
-    dest[i] = '\0';
-}
-
-int my_strlen(char const *str)
-{
-    int index = 0;
-
-    if (!str)
-        return index;
-    while (str[index] != '\0'){
-        index++;
-    }
-    return index;
-}
-
-static int find_nb_word(char const *str, char sep)
+int str_len(char *str, char *sep, int index)
 {
     int len = 0;
-    int nb_word = 0;
-    int i = 0;
+    int in = index;
 
-    len = my_strlen(str);
-    while (i < len) {
-        for (i = i; i < len && (str[i] == sep || str[i] == '\t'); i++);
-        if (i < len && str[i] != '\0')
-            nb_word++;
-        for (i = i; i < len && str[i] != sep && str[i] != '\t'; i++);
+    while (is_sep(str[in], sep) == 0 && str[in]) {
+        in++;
+        len++;
     }
-    return nb_word;
+    return len;
 }
 
-char **my_str_to_word_array(char const *str, char sep)
+int nb_words(char *str, char *sep)
 {
-    char **word_array = NULL;
-    int nb_word = 1;
-    int word_len = 0;
-    int index = 0;
+    int len = 0;
+    int i = 0;
 
-    nb_word = find_nb_word(str, sep);
-    if (nb_word == 0)
-        return NULL;
-    word_array = malloc((nb_word + 1) * sizeof(char *));
-    for (int i = 0; i < nb_word; i++) {
-        for (index = index; str[index] == sep || str[index] == '\t'; index++);
-        word_len = get_word_len(&str[index], sep);
-        word_array[i] = malloc((word_len + 1) * sizeof(char));
-        copy_word(&str[index], word_array[i], sep);
-        index += word_len + 1;
+    while (str[i] != '\0') {
+        while (is_sep(str[i], sep) == 1 && str[i] != '\0')
+            i++;
+        if (is_sep(str[i], sep) == 0 && str[i] != '\0')
+            len++;
+        while (is_sep(str[i], sep) == 0 && str[i] != '\0')
+            i++;
     }
-    word_array[nb_word] = NULL;
-    return word_array;
+    return len;
+}
+
+int array_loop(char **array, int len, char *str, char *sep)
+{
+    int i = 0;
+    int j = 0;
+    int in = 0;
+
+    while (is_sep(str[in], sep) == 1)
+        in++;
+    for (i = 0; i < len; i++) {
+        array[i] = malloc(sizeof(char) * str_len(str, sep, in) + 1);
+        if (array[i] == NULL)
+            return 0;
+        for (j = 0; is_sep(str[in], sep) == 0 && str[in]; j++) {
+            array[i][j] = str[in];
+            in++;
+        }
+        array[i][j] = '\0';
+        while (is_sep(str[in], sep) == 1)
+            in++;
+    }
+    array[i] = NULL;
+    return 1;
+}
+
+char **my_str_to_word_array(char *str, char *sep)
+{
+    int len = 0;
+    char** final = NULL;
+
+    len = nb_words(str, sep);
+    final = malloc(sizeof(char *) * (len + 1));
+    if (final == NULL)
+        return NULL;
+    if (!array_loop(final, len, str, sep))
+        return NULL;
+    return final;
 }

@@ -6,6 +6,8 @@
 */
 
 #include <stdbool.h>
+#include <stdio.h>
+#include "op.h"
 
 #ifndef ASM_H
     #define ASM_H
@@ -32,5 +34,6 @@
     int add_direct(char *dest, char *arg, int i);
     int add_indirect(char *dest, char *arg, int i);
     bool line_to_command(command_t *com, int index);
+    int header_parser(header_t *header, FILE *fd);
 
 #endif /* ASM_H */
