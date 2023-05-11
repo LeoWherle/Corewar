@@ -57,11 +57,9 @@ char *get_param(int param_size, char *type, char **arg, int index)
 void make_coding_byte(command_t *new, char *type, int index)
 {
     new->coding_byte = 0;
-    new->param_size = 0;
     for (int i = 0; i < op_tab[index].nbr_args; i++) {
         new->coding_byte <<= 2;
         new->coding_byte += type[i];
-        new->param_size += arg_type[type[i] - 1].size;
     }
     for (int i = 0; i < MAX_ARGS_NUMBER - op_tab[index].nbr_args; i++)
         new->coding_byte <<= 2;
