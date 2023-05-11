@@ -19,6 +19,7 @@
         char **line;
         char code_command;
         char coding_byte;
+        char *param_type;
         char *parameters;
         int param_size;
     } command_t;
