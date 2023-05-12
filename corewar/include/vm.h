@@ -13,7 +13,7 @@
     #include "op.h"
 
     typedef struct arena_s {
-        void *buffer;
+        char *buffer;
         size_t size;
     } arena_t;
 
