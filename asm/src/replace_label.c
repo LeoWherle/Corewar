@@ -15,14 +15,18 @@
 void concat_nbr(long int nbr, int order, char *new, int i)
 {
     int hold = 0;
+    int x = 0;
 
     if (nbr < 0) {
         new[i] = '-';
         i++;
     }
     hold = order;
-    for (; order >= 0; order--) {
-        new[i + order] = nbr % 10;
+    for (; order > 0; order--) {
+        x = nbr % 10;
+        if (x < 0)
+            x *= -1;
+        new[i + order - 1] = '0' + x;
         nbr /= 10;
     }
     new[i + hold] = '\0';
@@ -32,18 +36,19 @@ char *replace_label(char *line, long int abs_pos, long int goal)
 {
     long int relative_pos = 0;
     char *new = NULL;
-    int order = 1;
+    int order = 0;
     int hold = 0;
     int i = 1;
+    int neg = 0;
 
     relative_pos = goal - abs_pos;
     hold = relative_pos;
-    if (hold <= 0) order++;
+    if (hold <= 0) neg++;
     while (hold != 0) {
         order++;
         hold /= 10;
     }
-    new = malloc(order * sizeof(char));
+    new = malloc((order + neg + 2) * sizeof(char));
     ASSERT_MALLOC(new, NULL);
     new[0] = '%';
     concat_nbr(relative_pos, order, new, i);
@@ -52,21 +57,12 @@ char *replace_label(char *line, long int abs_pos, long int goal)
 
 bool find_label(char **line, label_t *label, long int pos)
 {
-    long int abs_pos = 0;
-
-    abs_pos = pos + 2;
     for (int i = 1; line[i]; i++) {
-        if (my_strncmp(line[i], "%:", 2) == 0 &&
+        if (my_strncmp(line[i], "%:", 1) == 0 &&
             my_strcmp(&line[i][2], label->name) == 0) {
-            line[i] = replace_label(line[i], abs_pos, label->ad);
+            line[i] = replace_label(line[i], pos, label->ad);
             ASSERT_MALLOC(line[i], false);
         }
-        if (line[i][0] == 'r')
-            abs_pos += REG_SIZE;
-        if (line[i][0] == DIRECT_CHAR)
-            abs_pos += DIR_SIZE;
-        if (line[i][0] >= '0' && line[i][0] <= '9')
-            abs_pos += IND_SIZE;
     }
     return true;
 }
@@ -78,7 +74,7 @@ bool search_in_command(list_t *commands, list_t *labels)
     label_t *label = NULL;
     bool keep = true;
 
-    if (labels->size <= 0) return;
+    if (labels->size <= 0) return true;
     for (node_t *node = commands->head; node && keep; node = node->next) {
         command = node->data;
         for (node_t *node = labels->head; node && keep; node = node->next) {
