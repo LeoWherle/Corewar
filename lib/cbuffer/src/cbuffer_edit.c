@@ -15,9 +15,7 @@ void cbuffer_setb(cbuffer_t *buffer, char data, size_t pos)
 void cbuffer_set(cbuffer_t *buffer, char *data, size_t size, size_t pos)
 {
     size_t i = 0;
-    size_t data_len = 0;
 
-    for (; data[data_len]; data_len++);
     for (; i < size; i++) {
         buffer->data[(pos + i) % buffer->size] = data[i];
     }
