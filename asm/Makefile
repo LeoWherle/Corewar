@@ -86,9 +86,12 @@ fclean: clean
 re: fclean all
 
 debug: CFLAGS += -g3
+debug: CFLAGS += -DDEBUG
 debug: lib_build $(OBJ)
 	@gcc -o $(NAME) $(OBJ) $(LDFLAGS) -g3
 	@echo -e "$(CLEARL)$(YELLOW)⚙️  Debug Mode$(RESET)"
+
+cdebug: fclean debug
 
 gprof: CFLAGS += -pg
 gprof: lib_build $(OBJ)
