@@ -24,15 +24,16 @@ char *get_type(char **arg, int index)
 
     type = malloc(op_tab[index].nbr_args * sizeof(char));
     ASSERT_MALLOC(type, NULL);
+    memset(type, 0, op_tab[index].nbr_args);
     for (int i = 1; arg[i]; i++) {
-        if (arg[i][0] == 'r') {
+        if (arg[i][0] == 'r' && (op_tab[index].type[i] & T_REG)) {
             type[i - 1] = 0b1;
         }
-        if (arg[i][0] == DIRECT_CHAR) {
+        if (arg[i][0] == DIRECT_CHAR && (op_tab[index].type[i] & T_DIR)) {
             type[i - 1] = 0b10;
         }
         if ((arg[i][0] >= '0' && arg[i][0] <= '9') ||
-            arg[i][0] == '-') {
+            arg[i][0] == '-' && (op_tab[index].type[i] & T_IND)) {
             type[i - 1] = 0b11;
         }
     }
@@ -61,13 +62,14 @@ int *get_size(char *type, int index)
     int *size = NULL;
 
     size = malloc(op_tab[index].nbr_args * sizeof(int));
+    ASSERT_MALLOC(size, NULL);
     for (int i = 0; i < op_tab[index].nbr_args; i++) {
-        if (special_cases(index, i) || type[i] == 0b11)
-            type[i] = IND_SIZE;
         if (type[i] == 0b1)
             type[i] = REG_SIZE;
         if (type[i] == 0b10)
             type[i] = DIR_SIZE;
+        if (special_cases(index, i) || type[i] == 0b11)
+            type[i] = IND_SIZE;
     }
     return size;
 }
