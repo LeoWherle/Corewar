@@ -8,7 +8,7 @@
 #ifndef CBUFFER_H_
     #define CBUFFER_H_
 
-    #include <types.h>
+    #include <stddef.h>
 
     typedef struct cbuffer_s {
         char *data;
@@ -22,7 +22,7 @@
     /**
      * @brief Set data in buffer at pos from data
      *
-     * @param buffer the buffer to set data in 
+     * @param buffer the buffer to set data in
      * @param data the data to set
      * @param size the size of data to set (must be <= data len)
      * @param pos the position to set data at
@@ -30,7 +30,7 @@
     void cbuffer_set(cbuffer_t *buffer, char *data, size_t size, size_t pos);
 
     char cbuffer_getb(cbuffer_t *buffer, size_t pos);
-   
+
     /**
      * @brief Get data from buffer at pos and store it in data
      *
