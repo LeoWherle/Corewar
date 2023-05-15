@@ -26,7 +26,9 @@
         champ_arg_t *champions;
     } args_t;
 
+    // main struct with all the infos
     args_t *get_args(int ac, char *av[], args_t *args);
+    void free_args(args_t *args);
 
     // champ
     int count_champions(int ac, char **av);

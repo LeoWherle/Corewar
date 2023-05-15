@@ -24,6 +24,12 @@ static void init_args(args_t *args)
     args->champions = NULL;
 }
 
+void free_args(args_t *args)
+{
+    free(args->champions);
+    free(args);
+}
+
 /**
  * @brief Get the args options and champions
  *
