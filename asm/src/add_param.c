@@ -27,14 +27,16 @@ static void add_int(char *dest, long int nb, int i, int delta)
     order = power_long(2, delta * 8);
     for (int x = i; x < i + delta; x++) {
         for (int y = 0; y < 8; y++) {
+            dest[x] <<= 1;
             cond = (nb & order);
-            dest[x] += cond;
+            dest[x] += (cond) ? 1 : 0;
             nb -= cond;
             order /= 2;
         }
     }
+    dest[i + delta - 1] <<= 1;
     cond = (nb & order);
-    dest[i + delta - 1] += cond;
+    dest[i + delta - 1] += (cond) ? 1 : 0;
 }
 
 int add_register(char *dest, char *arg, int i)
