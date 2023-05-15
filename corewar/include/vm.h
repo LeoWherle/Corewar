@@ -26,7 +26,6 @@
         bool carry;
         // instruction can be NULL if no instruction is running
         command_t instruction;
-        char options[MAX_ARGS_NUMBER]; /* still unclear if necessary */
         // registers
         char registr[REG_NUMBER];
     } process_t;
