@@ -24,7 +24,12 @@ static void init_args(args_t *args)
     args->champions = NULL;
 }
 
-void free_args(args_t *args)
+/**
+ * @brief free the 'args' struct
+ *
+ * @param args args struct for VM
+ */
+void free_args_struct(args_t *args)
 {
     free(args->champions);
     free(args);
