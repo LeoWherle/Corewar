@@ -31,7 +31,6 @@
         int (*ptr)(char *, char *, int, int);
     } arg_type_t;
 
-    int header_parser(header_t *header, FILE *fd);
     int add_register(char *dest, char *arg, int i, int delta);
     int add_direct(char *dest, char *arg, int i, int delta);
     int add_indirect(char *dest, char *arg, int i, int delta);
