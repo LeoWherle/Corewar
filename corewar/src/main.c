@@ -10,26 +10,14 @@
 #include <string.h>
 #include <unistd.h>
 #include "clist.h"
+#include "args.h"
 
-void print_string(any_t data)
+int main(int ac, char *av[])
 {
-    write(1, data, strlen(data));
-}
+    args_t *args = malloc(sizeof(args_t));
 
-void destroy_stack(UNUSED any_t data)
-{
-    return;
-}
-
-int main(void)
-{
-    list_t *list = list_init();
-
-    list->interface->append(list, "Hello");
-    list->interface->append(list, "World");
-    list->interface->append(list, "!");
-    list->interface->print(list, &print_string, " ");
-    write(1, "\n", 1);
-    list->interface->destroy(list, &destroy_stack);
+    args = get_args(ac, av, args);
+    if (args == NULL)
+        return 84;
     return 0;
 }
