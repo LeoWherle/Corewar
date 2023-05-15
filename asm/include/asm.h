@@ -20,18 +20,18 @@
         char code_command;
         char coding_byte;
         char *param_type;
+        int *param_size;
         char *parameters;
-        int param_size;
     } command_t;
 
     typedef struct arg_type {
         int size;
-        int (*ptr)(char *, char *, int);
+        int (*ptr)(char *, char *, int, int);
     } arg_type_t;
 
-    int add_register(char *dest, char *arg, int i);
-    int add_direct(char *dest, char *arg, int i);
-    int add_indirect(char *dest, char *arg, int i);
-    bool line_to_command(command_t *com, int index);
+    int add_register(char *dest, char *arg, int i, int delta);
+    int add_direct(char *dest, char *arg, int i, int delta);
+    int add_indirect(char *dest, char *arg, int i, int delta);
+    bool line_to_command(command_t *com);
 
 #endif /* ASM_H */

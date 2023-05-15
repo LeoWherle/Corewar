@@ -73,6 +73,7 @@ bool search_in_command(list_t *commands, list_t *labels)
     long int command_pos = 0;
     label_t *label = NULL;
     bool keep = true;
+    int size = 0;
 
     if (labels->size <= 0) return true;
     for (node_t *node = commands->head; node && keep; node = node->next) {
@@ -81,7 +82,9 @@ bool search_in_command(list_t *commands, list_t *labels)
             label = node->data;
             keep = find_label(command->line, label, command_pos);
         }
-        command_pos += command->param_size + 2;
+        for (int i = 0; i < op_tab[command->code_command].nbr_args; i++)
+            size += command->param_size[i];
+        command_pos += size + 2;
     }
     return keep;
 }

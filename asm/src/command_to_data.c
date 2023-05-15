@@ -42,39 +42,47 @@ char *get_type(char **arg, int index)
     return type;
 }
 
-char *get_param(int param_size, char *type, char **arg, int index)
+int *get_size(char *type, int index)
+{
+    int *size = NULL;
+
+    size = malloc(op_tab[index].nbr_args * sizeof(int));
+}
+
+char *get_param(int *param_size, char *type, char **arg, int index)
 {
     char *new = NULL;
     int mv = 0;
+    int size = 0;
 
-    new = malloc(param_size * sizeof(char));
+    for (int i = 0; i < op_tab[index].nbr_args; i++)
+        size += param_size[i];
+    new = malloc(size * sizeof(char));
     ASSERT_MALLOC(new, NULL);
     memset(new, 0, param_size);
     for (int i = 0; i < op_tab[index].nbr_args; i++)
-        mv = arg_type[type[i] - 1].ptr(new, arg[i + 1], mv);
+        mv = arg_type[type[i] - 1].ptr(new, arg[i + 1], mv, param_size[i]);
     return new;
 }
 
-void make_coding_byte(command_t *new, char *type, int index)
+void make_coding_byte(command_t *new, char *type)
 {
     new->coding_byte = 0;
-    for (int i = 0; i < op_tab[index].nbr_args; i++) {
+    for (int i = 0; i < op_tab[new->code_command].nbr_args; i++) {
         new->coding_byte <<= 2;
         new->coding_byte += type[i];
     }
-    for (int i = 0; i < MAX_ARGS_NUMBER - op_tab[index].nbr_args; i++)
+    for (int i = 0; i < MAX_ARGS_NUMBER - op_tab[new->code_command].nbr_args;
+        i++) {
         new->coding_byte <<= 2;
+    }
 }
 
-bool line_to_command(command_t *com, int index)
+bool line_to_command(command_t *com)
 {
-    char *type = NULL;
-
-    com->code_command = op_tab[index].code;
-    type = get_type(com->line, index);
-    ASSERT_MALLOC(type, false);
-    make_coding_byte(com, type, index);
-    com->parameters = get_param(com->param_size, type, com->line, index);
+    make_coding_byte(com, com->param_type);
+    com->parameters = get_param(com->param_size, com->param_type,
+                                com->line, com->param_size);
     ASSERT_MALLOC(com->parameters, false);
     return true;
 }
