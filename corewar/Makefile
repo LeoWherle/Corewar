@@ -24,6 +24,11 @@ NAME = corewar
 
 SRC = src/main.c \
 	  src/args/get_args.c \
+	  src/args/args_dump.c \
+	  src/args/args_prog_nb.c \
+	  src/args/args_adress.c \
+	  src/args/args_champ.c \
+	  src/args/args_champ_error.c \
 
 TEST_CRIT	=	\
 

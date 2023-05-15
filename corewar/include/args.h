@@ -26,14 +26,25 @@
         champ_arg_t *champions;
     } args_t;
 
-    /**
-     * @brief Get the args options and champions
-     *
-     * @param ac
-     * @param av
-     * @param args must be malloc before
-     * @return args_t* with all the infos for the vm and NULL on error
-     */
     args_t *get_args(int ac, char *av[], args_t *args);
+
+    // champ
+    int count_champions(int ac, char **av);
+    void init_champion(champ_arg_t *champions, int nb_champions);
+    int fill_champs(champ_arg_t *champions, char *av[]);
+    int check_all_champ(champ_arg_t *champions, int nb_champions);
+    int check_champ_name(champ_arg_t *champion, char *arg);
+
+    // prog nb
+    void fill_empty_pg_nb(champ_arg_t *champions);
+    int handle_prog_nb(champ_arg_t *champions, char *av[],
+    unsigned int index, unsigned int champ);
+
+    // dump
+    int get_dump(args_t *args, char *av[]);
+
+    // adress
+    int handle_prog_address(champ_arg_t *champions, char *av[],
+    unsigned int index, unsigned int champ);
 
 #endif /* !ARGS_H_ */
