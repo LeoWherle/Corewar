@@ -23,6 +23,7 @@ RESET		=	\033[0m
 NAME = corewar
 
 SRC = src/main.c \
+	  src/args/get_args.c \
 
 TEST_CRIT	=	\
 
