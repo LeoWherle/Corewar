@@ -32,9 +32,9 @@ OBJ = 	$(SRC:.c=.o)
 
 MAKE  = make --no-print-directory
 
-LIBS = ../lib/clist ../lib/op ../lib/cbuffer ../lib/mystr
+LIBS = ../lib/clist ../lib/op ../lib/cbuffer ../lib/mystr ../lib/serrorh
 LIBINC = $(addsuffix /include, $(addprefix -I, $(LIBS)))
-LIB_FLAGS = -L../lib -lclist -lop -lcbuffer -lmystr
+LIB_FLAGS = -L../lib -lclist -lop -lcbuffer -lmystr -lserrorh
 
 CFLAGS = -W -Wall -Wextra -Iinclude -I../include $(LIBINC)
 LDFLAGS = $(LIB_FLAGS)
