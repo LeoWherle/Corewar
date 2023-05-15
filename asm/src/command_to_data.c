@@ -34,7 +34,8 @@ char *get_type(char **arg, int index)
         if (arg[i][0] == DIRECT_CHAR) {
             type[i - 1] = 0b10;
         }
-        if (arg[i][0] >= '0' && arg[i][0] <= '9') {
+        if ((arg[i][0] >= '0' && arg[i][0] <= '9') ||
+            arg[i][0] == '-') {
             type[i - 1] = 0b11;
         }
     }
