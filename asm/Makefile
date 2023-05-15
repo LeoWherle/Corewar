@@ -32,9 +32,9 @@ OBJ = 	$(SRC:.c=.o)
 
 MAKE  = make --no-print-directory
 
-LIBS = ../lib/clist ../lib/op ../lib/cbuffer ../lib/mystr
+LIBS = ../lib/clist ../lib/op ../lib/cbuffer ../lib/mystr ../lib/serrorh
 LIBINC = $(addsuffix /include, $(addprefix -I, $(LIBS)))
-LIB_FLAGS = -L../lib -lclist -lop -lcbuffer -lmystr
+LIB_FLAGS = -L../lib -lclist -lop -lcbuffer -lmystr -lserrorh
 
 CFLAGS = -W -Wall -Wextra -Iinclude -I../include $(LIBINC)
 LDFLAGS = $(LIB_FLAGS)
@@ -86,9 +86,12 @@ fclean: clean
 re: fclean all
 
 debug: CFLAGS += -g3
+debug: CFLAGS += -DDEBUG
 debug: lib_build $(OBJ)
 	@gcc -o $(NAME) $(OBJ) $(LDFLAGS) -g3
 	@echo -e "$(CLEARL)$(YELLOW)⚙️  Debug Mode$(RESET)"
+
+cdebug: fclean debug
 
 gprof: CFLAGS += -pg
 gprof: lib_build $(OBJ)
