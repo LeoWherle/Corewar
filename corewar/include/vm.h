@@ -64,14 +64,14 @@
     /*
     ** champions
     */
-   champion_t *champion_create(void);
-   void champion_destroy(void *champion);
+    champion_t *champion_create(void);
+    void champion_destroy(void *champion);
 
     /*
     ** process
     */
-   process_t *process_create(champion_t *champion);
-   void process_destroy(void *process);
+    process_t *process_create(champion_t *champion);
+    void process_destroy(void *process);
 
 
 #endif /* !VM_H_ */
