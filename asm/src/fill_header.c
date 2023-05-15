@@ -7,15 +7,11 @@
 
 #include <stdbool.h>
 #include <stddef.h>
-<<<<<<< HEAD
 #include <stdlib.h>
-=======
->>>>>>> 2f3b66f ([FIX] resolve confilcts)
 #include <stdio.h>
 #include "clist.h"
 #include "mystr.h"
 #include "op.h"
-
 #include <string.h>
 
 static bool get_name(header_t *header, char *line)
@@ -47,14 +43,8 @@ static bool get_comment(header_t *header, char *line)
         return false;
     return true;
 }
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-bool check_instruction(char *line, int got_name, int got_comment)
-=======
 bool check_instruction(char *line, int *got_name, int *got_comment,
                         header_t *header)
->>>>>>> 79edd03 ([FIX] error handling header parser)
 {
     if (line[0] == '\n' || line[0] == COMMENT_CHAR)
         return true;
@@ -93,8 +83,6 @@ char *clear_line(char *line)
     return new_line;
 }
 
-=======
->>>>>>> 2f3b66f ([FIX] resolve confilcts)
 int header_parser(header_t *header, FILE *fd)
 {
     size_t size = 0;
@@ -103,30 +91,12 @@ int header_parser(header_t *header, FILE *fd)
     int got_comment = false;
 
     header->magic = COREWAR_EXEC_MAGIC;
-<<<<<<< HEAD
     while (getline(&line, &size, fd) != -1) {
         line = clear_line(line);
         if (line[0] != COMMENT_CHAR && line[0] != '.' && line[0] != '\n')
             break;
         if (!check_instruction(line, &got_name, &got_comment, header))
             return 84;
-<<<<<<< HEAD
-        if (my_strncmp(line, NAME_CMD_STRING, 4) == 0)
-            got_name = get_name(header, line);
-        if (my_strncmp(line, COMMENT_CMD_STRING, 7) == 0 && got_name)
-=======
-    header->prog_size = 0;
-    while (getline(&line, &size, fd) != -1 && (!got_comment || !got_name)) {
-        if (line[0] != '\n' && line[0] != COMMENT_CHAR && line[0] != '.')
-            return 84;
-        if (strncmp(line, NAME_CMD_STRING, 5) == 0)
-            got_name = get_name(header, line);
-        if (strncmp(line, COMMENT_CMD_STRING, 8) == 0 &&
-            !got_comment && got_name)
->>>>>>> 2f3b66f ([FIX] resolve confilcts)
-            got_comment = get_comment(header, line);
-=======
->>>>>>> 79edd03 ([FIX] error handling header parser)
     }
     if (!got_name || !got_comment)
         return 84;
