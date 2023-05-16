@@ -30,7 +30,7 @@ static void print_helper(void)
 /**
  * @brief detect if the helper flag is present and print the helper
  *
- * @param av arguments list (user inpu)
+ * @param av arguments list (user input)
  * @return int 0 if no helper flag, 1 if helper flag
  */
 int detect_helper_flag(const char *av[])
