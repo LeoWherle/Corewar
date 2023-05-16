@@ -29,6 +29,7 @@ SRC = src/main.c \
 	  src/args/args_adress.c \
 	  src/args/args_champ.c \
 	  src/args/args_champ_error.c \
+	  src/args/args_help.c \
 
 TEST_CRIT	=	\
 

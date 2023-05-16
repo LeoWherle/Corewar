@@ -34,6 +34,8 @@ int main(int ac, const char *av[])
     vm_t *vm = NULL;
     int ret = 0;
 
+    if (detect_helper_flag(av) != 0)
+        return (0);
     ret = init_corewar(vm, ac, av);
     if (ret != 0)
         return (ret);
