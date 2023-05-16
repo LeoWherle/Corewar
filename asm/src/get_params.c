@@ -24,17 +24,18 @@ char *get_type(char **arg, int index)
 
     type = malloc(op_tab[index].nbr_args * sizeof(char));
     ASSERT_MALLOC(type, NULL);
-    memset(type, 0, op_tab[index].nbr_args);
+    for (int i = 0; i < op_tab[index].nbr_args; i++)
+        type[i] = 0;
     for (int i = 1; arg[i]; i++) {
         if (arg[i][0] == 'r' && (op_tab[index].type[i] & T_REG)) {
-            type[i - 1] = 0b1;
+            type[i - 1] = REG_CODE;
         }
         if (arg[i][0] == DIRECT_CHAR && (op_tab[index].type[i] & T_DIR)) {
-            type[i - 1] = 0b10;
+            type[i - 1] = DIR_CODE;
         }
-        if ((arg[i][0] >= '0' && arg[i][0] <= '9') ||
-            arg[i][0] == '-' && (op_tab[index].type[i] & T_IND)) {
-            type[i - 1] = 0b11;
+        if (((arg[i][0] >= '0' && arg[i][0] <= '9') ||
+            arg[i][0] == '-') && (op_tab[index].type[i] & T_IND)) {
+            type[i - 1] = IND_CODE;
         }
     }
     return type;
@@ -64,11 +65,11 @@ int *get_size(char *type, int index)
     size = malloc(op_tab[index].nbr_args * sizeof(int));
     ASSERT_MALLOC(size, NULL);
     for (int i = 0; i < op_tab[index].nbr_args; i++) {
-        if (type[i] == 0b1)
+        if (type[i] == REG_CODE)
             type[i] = REG_SIZE;
-        if (type[i] == 0b10)
+        if (type[i] == DIR_CODE)
             type[i] = DIR_SIZE;
-        if (special_cases(index, i) || type[i] == 0b11)
+        if (special_cases(index, i) || type[i] == IND_CODE)
             type[i] = IND_SIZE;
     }
     return size;
@@ -84,7 +85,8 @@ char *get_param(int *param_size, char *type, char **arg, int index)
         size += param_size[i];
     new = malloc(size * sizeof(char));
     ASSERT_MALLOC(new, NULL);
-    memset(new, 0, size);
+    for (int i = 0; i < size; i++)
+        new[i] = 0;
     for (int i = 0; i < op_tab[index].nbr_args; i++)
         mv = arg_type[type[i] - 1].ptr(new, arg[i + 1], mv, param_size[i]);
     return new;

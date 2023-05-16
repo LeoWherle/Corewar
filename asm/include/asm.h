@@ -10,6 +10,10 @@
 #ifndef ASM_H
     #define ASM_H
 
+    #define REG_CODE 0b1
+    #define DIR_CODE 0b10
+    #define IND_CODE 0b11
+
     typedef struct label {
         char *name;
         long int ad;

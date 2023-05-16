@@ -50,7 +50,7 @@ char *replace_label(char *line, long int abs_pos, long int goal)
     }
     new = malloc((order + neg + 2) * sizeof(char));
     ASSERT_MALLOC(new, NULL);
-    new[0] = '%';
+    new[0] = DIRECT_CHAR;
     concat_nbr(relative_pos, order, new, i);
     return new;
 }
@@ -58,7 +58,7 @@ char *replace_label(char *line, long int abs_pos, long int goal)
 bool find_label(char **line, label_t *label, long int pos)
 {
     for (int i = 1; line[i]; i++) {
-        if (my_strncmp(line[i], "%:", 1) == 0 &&
+        if (line[i][0] == DIRECT_CHAR && line[i][1] == LABEL_CHAR &&
             my_strcmp(&line[i][2], label->name) == 0) {
             line[i] = replace_label(line[i], pos, label->ad);
             ASSERT_MALLOC(line[i], false);
