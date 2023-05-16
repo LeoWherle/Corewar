@@ -17,9 +17,7 @@ at each step -> if failed free memory
 
 # initialisation arena
 
-### set dump-nbr cycle
-
--
+- default
 
 
 # initalisation champions
@@ -45,3 +43,6 @@ at each step -> if failed free memory
 - check if a player is dead (process count == 0) -> free
 - if there is only one player left setwin
 - if nbr_live is >= crr_live decrease cycle_am by cycle_delta
+
+### - Dump
+- if flag print status

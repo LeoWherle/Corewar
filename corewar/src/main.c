@@ -28,7 +28,7 @@ int main(void)
     list->interface->append(list, "Hello");
     list->interface->append(list, "World");
     list->interface->append(list, "!");
-    list->interface->print(list, &print_string, " ");
+    list->interface->print(list, &print_string, "\n\n");
     write(1, "\n", 1);
     list->interface->destroy(list, &destroy_stack);
     return 0;
