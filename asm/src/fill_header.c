@@ -49,18 +49,33 @@ static bool get_comment(header_t *header, char *line)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 bool check_instruction(char *line, int got_name, int got_comment)
+=======
+bool check_instruction(char *line, int *got_name, int *got_comment,
+                        header_t *header)
+>>>>>>> 79edd03 ([FIX] error handling header parser)
 {
     if (line[0] == '\n' || line[0] == COMMENT_CHAR)
         return true;
-    if (my_strncmp(line, NAME_CMD_STRING, 4) == 0 && got_name)
+    if (my_strncmp(line, NAME_CMD_STRING, 4) != 0 && my_strncmp(line,
+        COMMENT_CMD_STRING, 7) != 0)
         return false;
-    if (my_strncmp(line, COMMENT_CMD_STRING, 7) == 0 && got_comment)
-        return false;
-    if (my_strncmp(line, NAME_CMD_STRING, 4) == 0 || my_strncmp(line,
-        COMMENT_CMD_STRING, 7) == 0)
-        return true;
-    return false;
+    if (my_strncmp(line, NAME_CMD_STRING, 4) == 0) {
+        if (*got_name)
+            return false;
+        *got_name = get_name(header, line);
+        if (!*got_name)
+            return false;
+    }
+    if (my_strncmp(line, COMMENT_CMD_STRING, 7) == 0 && *got_name) {
+        if (*got_comment)
+            return false;
+        *got_comment = get_comment(header, line);
+        if (!*got_comment)
+            return false;
+    }
+    return true;
 }
 
 char *clear_line(char *line)
@@ -93,8 +108,9 @@ int header_parser(header_t *header, FILE *fd)
         line = clear_line(line);
         if (line[0] != COMMENT_CHAR && line[0] != '.' && line[0] != '\n')
             break;
-        if (!check_instruction(line, got_name, got_comment))
+        if (!check_instruction(line, &got_name, &got_comment, header))
             return 84;
+<<<<<<< HEAD
         if (my_strncmp(line, NAME_CMD_STRING, 4) == 0)
             got_name = get_name(header, line);
         if (my_strncmp(line, COMMENT_CMD_STRING, 7) == 0 && got_name)
@@ -109,6 +125,8 @@ int header_parser(header_t *header, FILE *fd)
             !got_comment && got_name)
 >>>>>>> 2f3b66f ([FIX] resolve confilcts)
             got_comment = get_comment(header, line);
+=======
+>>>>>>> 79edd03 ([FIX] error handling header parser)
     }
     if (!got_name || !got_comment)
         return 84;
