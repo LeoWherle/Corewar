@@ -32,7 +32,7 @@ void concat_nbr(long int nbr, int order, char *new, int i)
     new[i + hold] = '\0';
 }
 
-char *replace_label(char *line, long int abs_pos, long int goal)
+char *replace_label(long int abs_pos, long int goal)
 {
     long int relative_pos = 0;
     char *new = NULL;
@@ -60,7 +60,7 @@ bool find_label(char **line, label_t *label, long int pos)
     for (int i = 1; line[i]; i++) {
         if (line[i][0] == DIRECT_CHAR && line[i][1] == LABEL_CHAR &&
             my_strcmp(&line[i][2], label->name) == 0) {
-            line[i] = replace_label(line[i], pos, label->ad);
+            line[i] = replace_label(pos, label->ad);
             ASSERT_MALLOC(line[i], false);
         }
     }
@@ -76,10 +76,12 @@ bool search_in_command(list_t *commands, list_t *labels)
     int size = 0;
 
     if (labels->size <= 0) return true;
-    for (node_t *node = commands->head; node && keep; node = node->next) {
-        command = node->data;
-        for (node_t *node = labels->head; node && keep; node = node->next) {
-            label = node->data;
+    for (node_t *node_c = commands->head; node_c && keep;
+        node_c = node_c->next) {
+        command = node_c->data;
+        for (node_t *node_l = labels->head; node_l && keep;
+            node_l = node_l->next) {
+            label = node_l->data;
             keep = find_label(command->line, label, command_pos);
         }
         for (int i = 0; i < op_tab[(int)command->code_command].nbr_args; i++)
