@@ -13,6 +13,9 @@
     #include "cbuffer.h"
     #include "op.h"
 
+    // check if nbr(index) is between index and index + size
+    #define IS_OVERLAPPING(nbr, indx, size) (nbr >= indx && nbr <= indx + size)
+
     typedef void (*command_t)(vm_t *, process_t *self);
 
     typedef struct process_s {
@@ -33,10 +36,15 @@
     typedef struct champion_s {
         // id of the champion (1, 2, 3, 4, etc.)
         size_t id;
-        // name of the champion
-        char *name[PROG_NAME_LENGTH];
+        // header
+        struct header_s header;
         // if the champion is alive => if false kill all children
         bool alive;
+        char *file_path;
+        // if has set adress
+        bool load_address;
+        // if has set adress -> the adress
+        size_t load_address_value;
     } champion_t;
 
     typedef struct vm_s {
