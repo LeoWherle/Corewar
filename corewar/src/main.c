@@ -1,35 +1,44 @@
 /*
 ** EPITECH PROJECT, 2023
-** 42sh [WSL: fedora]
+** Corewar
 ** File description:
 ** main
 */
 
-#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include "clist.h"
+#include "vm.h"
+#include "args.h"
+#include "herror.h"
 
-void print_string(any_t data)
+static void free_corewar(vm_t *vm)
 {
-    write(1, data, strlen(data));
+    free(vm);
 }
 
-void destroy_stack(UNUSED any_t data)
+static int init_corewar(vm_t *vm, int ac, const char *av[])
 {
-    return;
+    args_t *args = NULL;
+
+    args = malloc(sizeof(args_t));
+    ASSERT_MALLOC(args, 84);
+    args = get_args(ac, av, args);
+    ASSERT_PTR(args, 84);
+    vm = malloc(sizeof(vm_t));
+    ASSERT_MALLOC(vm, 84);
+    free_args_struct(args);
+    return (0);
 }
 
-int main(void)
+int main(int ac, const char *av[])
 {
-    list_t *list = list_init();
+    vm_t *vm = NULL;
+    int ret = 0;
 
-    list->interface->append(list, "Hello");
-    list->interface->append(list, "World");
-    list->interface->append(list, "!");
-    list->interface->print(list, &print_string, "\n\n");
-    write(1, "\n", 1);
-    list->interface->destroy(list, &destroy_stack);
-    return 0;
+    if (detect_helper_flag(av) != 0)
+        return (0);
+    ret = init_corewar(vm, ac, av);
+    if (ret != 0)
+        return (ret);
+    free_corewar(vm);
+    return (ret);
 }

@@ -26,6 +26,9 @@
         champ_arg_t *champions;
     } args_t;
 
+    //helper
+    int detect_helper_flag(const char *av[]);
+
     // main struct with all the infos
     args_t *get_args(int ac, const char *av[], args_t *args);
     void free_args_struct(args_t *args);
