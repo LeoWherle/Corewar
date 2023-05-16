@@ -32,7 +32,7 @@ void concat_nbr(long int nbr, int order, char *new, int i)
     new[i + hold] = '\0';
 }
 
-char *replace_label(char *line, long int abs_pos, long int goal)
+char *replace_label(long int abs_pos, long int goal)
 {
     long int relative_pos = 0;
     char *new = NULL;
@@ -60,7 +60,7 @@ bool find_label(char **line, label_t *label, long int pos)
     for (int i = 1; line[i]; i++) {
         if (line[i][0] == DIRECT_CHAR && line[i][1] == LABEL_CHAR &&
             my_strcmp(&line[i][2], label->name) == 0) {
-            line[i] = replace_label(line[i], pos, label->ad);
+            line[i] = replace_label(pos, label->ad);
             ASSERT_MALLOC(line[i], false);
         }
     }
