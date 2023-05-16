@@ -16,7 +16,7 @@
  * @param av argv list (user input)
  * @return int number of champions
  */
-int count_champions(int ac, char **av)
+int count_champions(int ac, char *av[])
 {
     unsigned int nb_champions = 0;
     int i = 1;

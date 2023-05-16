@@ -23,7 +23,7 @@ RESET		=	\033[0m
 NAME = corewar
 
 SRC = src/main.c \
-	  src/args/get_args.c \
+	  src/args/args_init.c \
 	  src/args/args_dump.c \
 	  src/args/args_prog_nb.c \
 	  src/args/args_adress.c \
