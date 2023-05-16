@@ -66,7 +66,7 @@ int *get_size(char *type, int index)
     ASSERT_MALLOC(size, NULL);
     for (int i = 0; i < op_tab[index].nbr_args; i++) {
         if (type[i] == REG_CODE)
-            type[i] = REG_SIZE;
+            type[i] = 1;
         if (type[i] == DIR_CODE)
             type[i] = DIR_SIZE;
         if (special_cases(index, i) || type[i] == IND_CODE)
