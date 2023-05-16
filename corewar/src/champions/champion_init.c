@@ -9,7 +9,7 @@
 #include "vm.h"
 #include "herror.h"
 
-static void champion_init(champion_t *vm)
+DEPRECATED static void champion_init(champion_t *vm)
 {
     return;
 }
