@@ -8,6 +8,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include "op.h"
+#include "clist.h"
 
 #ifndef ASM_H
     #define ASM_H
@@ -42,5 +43,8 @@
     char *get_type(char **arg, int index);
     int *get_size(char *type, int index);
     char *get_param(int *param_size, char *type, char **arg, int index);
+    int header_parser(header_t *header, FILE *fd);
+    int code_parser(header_t *header, FILE *fd, list_t *com_list,
+                list_t *label_list);
 
 #endif /* ASM_H */

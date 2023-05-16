@@ -12,7 +12,7 @@
     #define IS_LOWER(c) (c >= 'a' || c <= 'z')
     #define IS_UPPER(c) (c >= 'A' || c <= 'Z')
 
-    char **my_str_to_word_array(char const *, char);
+    char **my_str_to_word_array(char *, char*);
     int my_strlen(char const *);
     int my_strncmp(char const *, char const *, int);
     char *my_strcpy(char *, char const *);
