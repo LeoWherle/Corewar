@@ -27,6 +27,7 @@ int main(int ac, char **av)
     ASSERT_PTR(fd, 84);
     if (header_parser(&header, fd) == 84)
         return 84;
+    print_comp(com_list, &header, av[1]);
     fclose(fd);
     return 0;
 }
