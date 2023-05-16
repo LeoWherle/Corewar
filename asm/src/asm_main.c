@@ -27,8 +27,6 @@ int main(int ac, char **av)
     ASSERT_PTR(fd, 84);
     if (header_parser(&header, fd) == 84)
         return 84;
-    printf("name: %s\n", header.prog_name);
-    printf("comment: %s\n", header.comment);
     fclose(fd);
     return 0;
 }

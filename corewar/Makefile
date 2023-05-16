@@ -23,6 +23,13 @@ RESET		=	\033[0m
 NAME = corewar
 
 SRC = src/main.c \
+	  src/args/args_init.c \
+	  src/args/args_dump.c \
+	  src/args/args_prog_nb.c \
+	  src/args/args_adress.c \
+	  src/args/args_champ.c \
+	  src/args/args_champ_error.c \
+	  src/args/args_help.c \
 
 TEST_CRIT	=	\
 
@@ -32,9 +39,9 @@ OBJ = 	$(SRC:.c=.o)
 
 MAKE  = make --no-print-directory
 
-LIBS = ../lib/clist ../lib/op ../lib/cbuffer ../lib/mystr
+LIBS = ../lib/clist ../lib/op ../lib/cbuffer ../lib/mystr ../lib/serrorh
 LIBINC = $(addsuffix /include, $(addprefix -I, $(LIBS)))
-LIB_FLAGS = -L../lib -lclist -lop -lcbuffer -lmystr
+LIB_FLAGS = -L../lib -lclist -lop -lcbuffer -lmystr -lserrorh
 
 CFLAGS = -W -Wall -Wextra -Iinclude -I../include $(LIBINC)
 LDFLAGS = $(LIB_FLAGS)
@@ -86,9 +93,12 @@ fclean: clean
 re: fclean all
 
 debug: CFLAGS += -g3
+debug: CFLAGS += -DDEBUG
 debug: lib_build $(OBJ)
 	@gcc -o $(NAME) $(OBJ) $(LDFLAGS) -g3
 	@echo -e "$(CLEARL)$(YELLOW)⚙️  Debug Mode$(RESET)"
+
+cdebug: fclean debug
 
 gprof: CFLAGS += -pg
 gprof: lib_build $(OBJ)

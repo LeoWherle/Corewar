@@ -19,24 +19,12 @@ WHITE		=	\033[1;37m
 
 RESET		=	\033[0m
 
-NAME = libmystr.a
+NAME = libserrorh.a
 LIBDIR = ../
 
-SRC 	=	src/matrix_len.c \
-			src/my_getnbr.c \
-			src/my_str_copy_cat.c \
-			src/my_str_isalphanum.c \
-			src/my_str_isnum.c \
-			src/my_str_to_word_array.c \
-			src/my_strcat.c \
-			src/my_strcmp.c \
-			src/my_strcpy.c \
-			src/my_strncmp.c \
-			src/my_strlen.c \
-			src/fprintf/my_fprintf.c \
-			src/fprintf/my_fputchar.c \
-			src/fprintf/my_fputstr.c \
-			src/fprintf/my_fputnbr.c \
+SRC 	=	src/err_print.c \
+			src/err_put.c \
+
 
 CRIT_LIST	=	\
 

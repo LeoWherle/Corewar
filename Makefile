@@ -24,9 +24,9 @@ NAME = both
 
 MAKE  = make --no-print-directory
 
-LIBS = lib/clist lib/op lib/cbuffer lib/mystr
+LIBS = lib/clist lib/op lib/cbuffer lib/mystr lib/serrorh
 LIBINC = $(addsuffix /include, $(addprefix -I, $(LIBS)))
-LIB_FLAGS = -Llib -lclist -lop -lcbuffer -lmystr
+LIB_FLAGS = -Llib -lclist -lop -lcbuffer -lmystr -lserrorh
 
 CFLAGS = -W -Wall -Wextra -Iinclude $(LIBINC)
 LDFLAGS = $(LIB_FLAGS)
@@ -51,7 +51,10 @@ fclean: clean
 
 re: fclean all
 
+cdebug: fclean debug
+
 debug: CFLAGS += -g3
+debug: CFLAGS += -DDEBUG
 debug: lib_build $(OBJ)
 	@$(MAKE) -C corewar debug
 	@$(MAKE) -C asm debug
