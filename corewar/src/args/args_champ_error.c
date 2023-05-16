@@ -44,7 +44,7 @@ int check_all_champ(champ_arg_t *champions, int nb_champions)
  * @param arg potential name of the champion
  * @return int 0 on success, 84 on failure
  */
-int check_champ_name(champ_arg_t *champion, char *arg)
+int check_champ_name(champ_arg_t *champion, const char *arg)
 {
     int fd = 0;
 

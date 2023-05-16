@@ -18,7 +18,7 @@
  * @param index argv position
  * @return int 0 on success, 84 on failure
  */
-static int check_dump_error(args_t *args, char *av[], int index)
+static int check_dump_error(args_t *args, const char *av[], int index)
 {
     if (my_strcmp(av[index], "-dump") == 0) {
         if (args->dump == true) {
@@ -46,7 +46,7 @@ static int check_dump_error(args_t *args, char *av[], int index)
  * @param av argv list (user input)
  * @return int 0 on success, 84 on failure
  */
-int get_dump(args_t *args, char *av[])
+int get_dump(args_t *args, const char *av[])
 {
     int index = 0;
 

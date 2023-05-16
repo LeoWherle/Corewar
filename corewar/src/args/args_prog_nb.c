@@ -59,7 +59,7 @@ void fill_empty_pg_nb(champ_arg_t *champions)
  * @param champ current champ index
  * @return int 0 on success, 84 on failure
  */
-int handle_prog_nb(champ_arg_t *champions, char *av[], unsigned int index,
+int handle_prog_nb(champ_arg_t *champions, const char *av[], unsigned int index,
 unsigned int champ)
 {
     if (av[index + 1] != NULL && av[index + 1][0] != '-'

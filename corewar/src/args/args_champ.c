@@ -16,7 +16,7 @@
  * @param av argv list (user input)
  * @return int number of champions
  */
-int count_champions(int ac, char *av[])
+int count_champions(int ac, const char *av[])
 {
     unsigned int nb_champions = 0;
     int i = 1;
@@ -57,7 +57,7 @@ void init_champion(champ_arg_t *champions, int nb_champions)
  * @param champ current champ index
  * @return int 0 on success, 84 on failure and 1 if no option is found
  */
-int fill_champs_options(champ_arg_t *champions, char *av[],
+int fill_champs_options(champ_arg_t *champions, const char *av[],
 unsigned int old_index, unsigned int champ)
 {
     int error = 1;
@@ -78,7 +78,7 @@ unsigned int old_index, unsigned int champ)
  * @param av argv list (user input)
  * @return int 0 on success, 84 on failure
  */
-int fill_champs(champ_arg_t *champions, char *av[])
+int fill_champs(champ_arg_t *champions, const char *av[])
 {
     unsigned int index = 1;
     unsigned int champ = 0;

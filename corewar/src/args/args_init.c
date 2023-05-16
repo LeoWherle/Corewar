@@ -43,7 +43,7 @@ void free_args_struct(args_t *args)
  * @param args must be malloc before
  * @return args_t* with all the infos for the vm and NULL on error
  */
-args_t *get_args(int ac, char *av[], args_t *args)
+args_t *get_args(int ac, const char *av[], args_t *args)
 {
     init_args(args);
     args->nb_champions = count_champions(ac, av);
