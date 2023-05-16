@@ -10,17 +10,17 @@
 
 ## Language : C
 
-## Authorised functions:
-  - open
-  - read
-  - lseek
-  - write
-  - close
+## Authorized functions:
+  - f(open)
+  - f(read)
+  - f(write)
+  - f(close)
   - malloc
-  - realloc
   - free
-  - perror
-  - strerror
+  - realloc
+  - getline
+  - lseek
+  - fseek
   - exit
 
 ## Requirements :
