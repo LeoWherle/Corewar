@@ -27,7 +27,6 @@ static int load_champion(vm_t *vm, champion_t *champion, size_t pos)
 {
     FILE *filestream = NULL;
     char *buffer = NULL;
-    header_t tmp_header;
 
     filestream = fopen(champion->file_path, "r");
     if (filestream == NULL) {
@@ -36,7 +35,7 @@ static int load_champion(vm_t *vm, champion_t *champion, size_t pos)
     }
     buffer = malloc(sizeof(typeof(*buffer)) * champion->header.prog_size);
     ASSERT_MALLOC(buffer, 1);
-    fread(&tmp_header, sizeof(header_t), 1, filestream);
+    fseek(filestream, sizeof(header_t), SEEK_SET);
     fread(buffer, sizeof(char), champion->header.prog_size, filestream);
     cbuffer_set(vm->arena, buffer, champion->header.prog_size, pos);
     free(buffer);
