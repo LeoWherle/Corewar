@@ -27,6 +27,7 @@ SRC =	src/asm_main.c	\
 		src/command_to_data.c	\
 		src/add_param.c	\
 		src/replace_label.c	\
+		src/get_params.c	\
 
 TEST_CRIT	=	\
 
