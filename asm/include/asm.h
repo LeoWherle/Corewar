@@ -42,5 +42,6 @@
     char *get_type(char **arg, int index);
     int *get_size(char *type, int index);
     char *get_param(int *param_size, char *type, char **arg, int index);
+    int header_parser(header_t *header, FILE *fd);
 
 #endif /* ASM_H */
