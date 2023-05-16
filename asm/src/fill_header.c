@@ -43,6 +43,7 @@ static bool get_comment(header_t *header, char *line)
         return false;
     return true;
 }
+
 bool check_instruction(char *line, int *got_name, int *got_comment,
                         header_t *header)
 {
