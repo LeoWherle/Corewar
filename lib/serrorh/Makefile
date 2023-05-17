@@ -23,6 +23,7 @@ NAME = libserrorh.a
 LIBDIR = ../
 
 SRC 	=	src/err_print.c \
+			src/err_print_types.c \
 			src/err_put.c \
 
 
