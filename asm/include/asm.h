@@ -13,9 +13,11 @@
 #ifndef ASM_H
     #define ASM_H
 
-    #define REG_CODE 0b1
+    #define REG_CODE 0b01
     #define DIR_CODE 0b10
     #define IND_CODE 0b11
+    #define SWAP_INT32(x) (((x) >> 24) | (((x) << 8) & 0x00FF0000) \
+| (((x) >> 8) & 0x0000FF00) | ((x) << 24))
 
     typedef struct label {
         char *name;

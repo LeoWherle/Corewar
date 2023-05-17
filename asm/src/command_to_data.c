@@ -19,7 +19,7 @@ void make_coding_byte(command_t *new, char *type)
 {
     new->coding_byte = 0;
     for (int i = 0; i < op_tab[new->code_command - 1].nbr_args; i++) {
-        new->coding_byte <<= 2; 
+        new->coding_byte <<= 2;
         new->coding_byte += type[i];
     }
     for (int i = 0; i < MAX_ARGS_NUMBER -

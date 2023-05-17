@@ -47,13 +47,15 @@ zjump / fork / lfork 1rst
 sti first two
 ldi / lldi last two
 */
-static bool special_cases(int index, int i)
+static bool special_cases(int index, int i, char type)
 {
+    if (type == REG_CODE)
+        return false;
     if ((index == 8 || index == 11 || index == 14) && i == 0)
         return true;
-    if (index == 10 && (i == 0 || i == 1))
+    if (index == 10 && (i == 1 || i == 2))
         return true;
-    if ((index == 9 || index == 13) && (i == 1 || i == 2))
+    if ((index == 9 || index == 13) && (i == 0 || i == 1))
         return true;
     return false;
 }
@@ -69,7 +71,7 @@ int *get_size(char *type, int index)
             size[i] = 1;
         if (type[i] == DIR_CODE)
             size[i] = DIR_SIZE;
-        if (special_cases(index, i) || type[i] == IND_CODE)
+        if (special_cases(index, i, type[i]) || type[i] == IND_CODE)
             size[i] = IND_SIZE;
     }
     return size;
@@ -87,7 +89,8 @@ char *get_param(int *param_size, char *type, char **arg, int index)
     ASSERT_MALLOC(new, NULL);
     for (int i = 0; i < size; i++)
         new[i] = 0;
-    for (int i = 0; i < op_tab[index].nbr_args; i++)
+    for (int i = 0; i < op_tab[index].nbr_args; i++) {
         mv = arg_type[type[i] - 1].ptr(new, arg[i + 1], mv, param_size[i]);
+    }
     return new;
 }
