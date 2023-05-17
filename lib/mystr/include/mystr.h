@@ -17,6 +17,7 @@
     int my_strncmp(char const *, char const *, int);
     char *my_strcpy(char *, char const *);
     char *my_strcat(char *, const char *);
+    char *my_strdup(char const *);
     int my_strcmp(char const *, char const *);
     int my_str_isnum(char const *);
     void free_matrix(char **);

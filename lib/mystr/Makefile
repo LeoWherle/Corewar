@@ -33,6 +33,7 @@ SRC 	=	src/matrix_len.c \
 			src/my_strcpy.c \
 			src/my_strncmp.c \
 			src/my_strlen.c \
+			src/my_strdup.c \
 			src/fprintf/my_fprintf.c \
 			src/fprintf/my_fputchar.c \
 			src/fprintf/my_fputstr.c \
