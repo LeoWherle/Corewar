@@ -27,14 +27,14 @@ char *get_type(char **arg, int index)
     for (int i = 0; i < op_tab[index].nbr_args; i++)
         type[i] = 0;
     for (int i = 1; arg[i]; i++) {
-        if (arg[i][0] == 'r' && (op_tab[index].type[i] & T_REG)) {
+        if (arg[i][0] == 'r' && (op_tab[index].type[i - 1] & T_REG)) {
             type[i - 1] = REG_CODE;
         }
-        if (arg[i][0] == DIRECT_CHAR && (op_tab[index].type[i] & T_DIR)) {
+        if (arg[i][0] == DIRECT_CHAR && (op_tab[index].type[i - 1] & T_DIR)) {
             type[i - 1] = DIR_CODE;
         }
         if (((arg[i][0] >= '0' && arg[i][0] <= '9') ||
-            arg[i][0] == '-') && (op_tab[index].type[i] & T_IND)) {
+            arg[i][0] == '-') && (op_tab[index].type[i - 1] & T_IND)) {
             type[i - 1] = IND_CODE;
         }
     }
