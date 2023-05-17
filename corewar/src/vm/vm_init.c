@@ -36,6 +36,7 @@ WUR vm_t *vm_create(void)
     ASSERT_PTR(vm->arena, NULL);
     vm->process = list_init();
     ASSERT_PTR(vm->process, NULL);
+    cbuffer_fill(vm->arena, 0);
     return vm;
 }
 
