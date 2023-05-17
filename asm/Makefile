@@ -22,7 +22,13 @@ RESET		=	\033[0m
 
 NAME = asm
 
-SRC = src/main.c \
+SRC =	src/asm_main.c	\
+		src/fill_header.c	\
+		src/command_to_data.c	\
+		src/add_param.c	\
+		src/replace_label.c	\
+		src/get_params.c	\
+		src/print_compile_code.c	\
 
 TEST_CRIT	=	\
 
