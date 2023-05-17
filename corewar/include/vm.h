@@ -17,7 +17,7 @@
     // check if nbr(index) is between index and index + size
     #define TRUE_MAGIC      -209458688
     #define SWAP_INT32(x) (((x) >> 24) | (((x) << 8) & 0x00FF0000) \
-                            | (((x) >> 8) & 0x0000FF00) | ((x) << 24))
+| (((x) >> 8) & 0x0000FF00) | ((x) << 24))
 
     #define IS_OVERLAPPING(nbr, indx, size) (nbr >= indx && nbr < indx + size)
 

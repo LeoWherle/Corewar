@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2023
-** µ
+** corewar [WSL: fedora]
 ** File description:
 ** champion_list_create
 */
@@ -22,7 +22,7 @@ static int is_valid_cor(champion_t *champion)
     if (champion->header.prog_size < 0
         || champion->header.prog_size > MEM_SIZE) {
         err_print("Error: File %s, champion size is invalid\n",
-                   champion->file_path);
+        champion->file_path);
         return 0;
     }
     return 1;

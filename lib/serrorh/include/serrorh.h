@@ -23,7 +23,7 @@
     #endif /* !ERRORHANDLING_H_ */
 
     #define IS_FLAG(c) (c == 'c' || c == 's' || c == 'd' \
-                        || c == 'u' || c == 'l')
+|| c == 'u' || c == 'l')
 
     struct flag_s {
         char flag;

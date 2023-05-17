@@ -8,7 +8,8 @@
 #include "mystr.h"
 #include "vm.h"
 
-static void print_byte_as_hex(char byte) {
+static void print_byte_as_hex(char byte)
+{
     const char hex_digits[] = "0123456789ABCDEF";
     char hex[3];
 
