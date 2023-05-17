@@ -82,9 +82,7 @@ int arena_load(vm_t *vm, args_t *args)
     node = vm->champions->head;
     for (int i; i < vm->champions->size; i++) {
         champion = node->data;
-        if (champion->load_address)
-            pos = champion->load_address_value;
-        else
+        if (!champion->load_address)
             pos = i * (MEM_SIZE / vm->champions->size);
         champion->load_address_value = pos;
         if (!is_valid_pos(vm, champion, pos))

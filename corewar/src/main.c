@@ -15,13 +15,17 @@ static void free_corewar(vm_t *vm)
     free(vm);
 }
 
-// missing arguments
-DEPRECATED static champion_t *arg_champt_to_championt(champ_arg_t argchamp)
+static champion_t *arg_champt_to_championt(champ_arg_t argchamp)
 {
     champion_t *new_champ = NULL;
 
     new_champ = champion_create();
     ASSERT_PTR(new_champ, NULL);
+    if (argchamp.prog_number)
+        new_champ->id = argchamp.prog_number_value;
+    if (argchamp.load_address)
+        new_champ->load_address = argchamp.load_address_value;
+    new_champ->file_path = argchamp.name;
     return new_champ;
 }
 

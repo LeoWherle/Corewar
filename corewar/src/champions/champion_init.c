@@ -9,7 +9,7 @@
 #include "vm.h"
 #include "herror.h"
 
-DEPRECATED static void champion_init(champion_t *champion)
+static void champion_init(champion_t *champion)
 {
     champion->id = 0;
     champion->alive = false;
