@@ -55,6 +55,18 @@ char *replace_label(long int abs_pos, long int goal)
     return new;
 }
 
+int com_size(command_t *command)
+{
+    int size = 0;
+
+    for (int i = 0; i < op_tab[(int)command->code_command].nbr_args; i++)
+        size += command->param_size[i];
+    if (op_tab[command->code_command - 1].nbr_args != 1 ||
+        command->code_command - 1 == 15)
+        return size + 2;
+    return size + 1;
+}
+
 bool find_label(char **line, label_t *label, long int pos)
 {
     for (int i = 1; line[i]; i++) {
@@ -84,9 +96,7 @@ bool search_in_command(list_t *commands, list_t *labels)
             label = node_l->data;
             keep = find_label(command->line, label, command_pos);
         }
-        for (int i = 0; i < op_tab[(int)command->code_command].nbr_args; i++)
-            size += command->param_size[i];
-        command_pos += size + 2;
+        command_pos += com_size(command);
     }
     return keep;
 }

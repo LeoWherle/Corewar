@@ -33,7 +33,8 @@ static void print_command(int fd, command_t *com)
     int size = 0;
 
     write(fd, &com->code_command, 1);
-    if (op_tab[com->code_command - 1].nbr_args != 1 || com->code_command - 1 == 15)
+    if (op_tab[com->code_command - 1].nbr_args != 1 ||
+        com->code_command - 1 == 15)
         write(fd, &com->coding_byte, 1);
     size = 0;
     for (int i = 0; i < op_tab[com->code_command - 1].nbr_args; i++)
