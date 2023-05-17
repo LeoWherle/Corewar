@@ -11,17 +11,19 @@
 char *my_strdup(char const *src)
 {
     char *dest = NULL;
+    char *temp = NULL;
 
     if (!src)
         return NULL;
     dest = malloc(sizeof(char) * (my_strlen(src) + 1));
     if (!dest)
         return NULL;
+    temp = dest;
     while (*src) {
-        *dest = *src;
-        dest++;
-        src++;
+        *temp = *src;
+        ++temp;
+        ++src;
     }
-    *dest = '\0';
+    *temp = '\0';
     return dest;
 }
