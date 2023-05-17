@@ -36,5 +36,6 @@ void champion_destroy(void *champ)
 {
     champion_t *champion = champ;
 
+    free(champion->file_path);
     free(champion);
 }

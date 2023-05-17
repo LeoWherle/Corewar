@@ -7,6 +7,7 @@
 
 #include <stdlib.h>
 #include "vm.h"
+#include "mystr.h"
 #include "args.h"
 #include "herror.h"
 
@@ -25,19 +26,20 @@ static champion_t *arg_champt_to_championt(champ_arg_t argchamp)
         new_champ->id = argchamp.prog_number_value;
     if (argchamp.load_address)
         new_champ->load_address = argchamp.load_address_value;
-    new_champ->file_path = argchamp.name;
+    new_champ->file_path = my_strdup(argchamp.name);
+    ASSERT_PTR(new_champ->file_path, NULL);
     return new_champ;
 }
 
 static int init_champs_into_vm(args_t *args, vm_t *vm)
 {
     champion_t *new_champ = NULL;
-    unsigned int i = 0;
+    int i = 0;
 
     while (i < args->nb_champions) {
         new_champ = arg_champt_to_championt(args->champions[i]);
         ASSERT_PTR(new_champ, 1);
-        list_append(vm->champions, new_champ);
+        node_append(vm->champions, new_champ);
         i++;
     }
     return 0;

@@ -6,6 +6,7 @@
 */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "vm.h"
 #include "args.h"
 #include "herror.h"
@@ -17,10 +18,11 @@ static unsigned int get_sum_prg_size(vm_t const *vm)
     node_t *node = NULL;
 
     node = vm->champions->head;
-    for (int i; i < vm->champions->size; i++) {
+    for (int i = 0; i < vm->champions->size; i++) {
         sumofsize += ((champion_t *)node->data)->header.prog_size;
         node = node->next;
     }
+    return sumofsize;
 }
 
 static int load_champion(vm_t *vm, champion_t *champion, size_t pos)
@@ -43,6 +45,7 @@ static int load_champion(vm_t *vm, champion_t *champion, size_t pos)
     cbuffer_set(vm->arena, buffer, champion->header.prog_size, pos);
     free(buffer);
     fclose(filestream);
+    return 0;
 }
 
 // check if the champion is overlapping all other champions
@@ -80,7 +83,7 @@ int arena_load(vm_t *vm, args_t *args)
     size_t pos = 0;
 
     node = vm->champions->head;
-    for (int i; i < vm->champions->size; i++) {
+    for (int i = 0; i < vm->champions->size; i++) {
         champion = node->data;
         if (!champion->load_address)
             pos = i * (MEM_SIZE / vm->champions->size);
