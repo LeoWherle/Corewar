@@ -66,11 +66,11 @@ int *get_size(char *type, int index)
     ASSERT_MALLOC(size, NULL);
     for (int i = 0; i < op_tab[index].nbr_args; i++) {
         if (type[i] == REG_CODE)
-            type[i] = 1;
+            size[i] = 1;
         if (type[i] == DIR_CODE)
-            type[i] = DIR_SIZE;
+            size[i] = DIR_SIZE;
         if (special_cases(index, i) || type[i] == IND_CODE)
-            type[i] = IND_SIZE;
+            size[i] = IND_SIZE;
     }
     return size;
 }
@@ -82,7 +82,7 @@ char *get_param(int *param_size, char *type, char **arg, int index)
     int size = 0;
 
     for (int i = 0; i < op_tab[index].nbr_args; i++)
-        size += param_size[i];
+        size = size + param_size[i];
     new = malloc(size * sizeof(char));
     ASSERT_MALLOC(new, NULL);
     for (int i = 0; i < size; i++)
