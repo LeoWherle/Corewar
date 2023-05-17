@@ -37,6 +37,8 @@
         bool load_address;
         // if has set adress -> the adress
         size_t load_address_value;
+        // registers
+        char registr[REG_NUMBER];
     } champion_t;
 
     typedef struct process_s {
@@ -50,8 +52,6 @@
         bool carry;
         // instruction can be NULL if no instruction is running
         command_t instruction;
-        // registers
-        char registr[REG_NUMBER];
     } process_t;
 
     typedef struct vm_s {
