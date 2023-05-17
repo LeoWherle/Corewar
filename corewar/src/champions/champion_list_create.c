@@ -13,6 +13,21 @@
 #include "args.h"
 #include "vm.h"
 
+static int is_valid_cor(champion_t *champion)
+{
+    if (champion->header.magic != TRUE_MAGIC) {
+        err_print("Error: File %s, not valid .cor\n", champion->file_path);
+        return 0;
+    }
+    if (champion->header.prog_size < 0
+        || champion->header.prog_size > MEM_SIZE) {
+        err_print("Error: File %s, champion size is invalid\n",
+                   champion->file_path);
+        return 0;
+    }
+    return 1;
+}
+
 static champion_t *load_header_into_champion(champion_t *champion,
     const char *file_path)
 {
@@ -24,8 +39,8 @@ static champion_t *load_header_into_champion(champion_t *champion,
         close(fd);
         return NULL;
     }
-    if (champion->header.magic != TRUE_MAGIC) {
-        err_print("Error: File %s, not valid .cor\n", file_path);
+    champion->header.prog_size = SWAP_INT32(champion->header.prog_size);
+    if (!is_valid_cor(champion)) {
         close(fd);
         return NULL;
     }
