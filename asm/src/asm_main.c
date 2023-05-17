@@ -25,7 +25,11 @@ int main(int ac, char **av)
         return 84;
     fd = fopen(av[1], "r");
     ASSERT_PTR(fd, 84);
+    header.magic = COREWAR_EXEC_MAGIC;
+    header.prog_size = 0;
     if (header_parser(&header, fd) == 84)
+        return 84;
+    if (code_parser(&header, fd, com_list, label_list) == 84)
         return 84;
     fclose(fd);
     print_comp(com_list, &header, av[1]);

@@ -28,6 +28,8 @@ SRC =	src/asm_main.c	\
 		src/add_param.c	\
 		src/replace_label.c	\
 		src/get_params.c	\
+		src/code_parser.c \
+		src/put_info_to_list.c 		\
 		src/print_compile_code.c	\
 
 TEST_CRIT	=	\
