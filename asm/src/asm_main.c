@@ -28,5 +28,6 @@ int main(int ac, char **av)
     if (header_parser(&header, fd) == 84)
         return 84;
     fclose(fd);
+    print_comp(com_list, &header, av[1]);
     return 0;
 }
