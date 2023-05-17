@@ -16,7 +16,10 @@
 
     // check if nbr(index) is between index and index + size
     #define TRUE_MAGIC      -209458688
-    #define IS_OVERLAPPING(nbr, indx, size) (nbr >= indx && nbr <= indx + size)
+    #define SWAP_INT32(x) (((x) >> 24) | (((x) << 8) & 0x00FF0000) \
+                            | (((x) >> 8) & 0x0000FF00) | ((x) << 24))
+
+    #define IS_OVERLAPPING(nbr, indx, size) (nbr >= indx && nbr < indx + size)
 
     typedef struct vm_s vm_t;
     typedef struct process_s process_t;
@@ -68,7 +71,7 @@
     /*
     ** corewar specific functions
     */
-    int champion_load_into_arena(vm_t *vm);
+    int champion_load_into_arena(vm_t *vm, args_t *args);
     int init_champs_into_vm(args_t *args, vm_t *vm);
 
     /*

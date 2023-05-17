@@ -28,7 +28,7 @@ static int init_corewar(vm_t **vm, int ac, const char *av[])
     ASSERT_MALLOC(*vm, 84);
     if (init_champs_into_vm(args, *vm))
         return (84);
-    if (champion_load_into_arena(*vm))
+    if (champion_load_into_arena(*vm, args))
         return (84);
     free_args_struct(args);
     return (0);
