@@ -20,47 +20,21 @@ WHITE		=	\033[1;37m
 
 RESET		=	\033[0m
 
-NAME = 42sh
-
-SRC = src/main.c \
-
-TEST_CRIT	=	\
-
-SRC_CRIT = $(SRC)
-
-OBJ = 	$(SRC:.c=.o)
+NAME = both
 
 MAKE  = make --no-print-directory
 
-LIBS = lib/clist
+LIBS = lib/clist lib/op lib/cbuffer lib/mystr lib/serrorh
 LIBINC = $(addsuffix /include, $(addprefix -I, $(LIBS)))
-LIB_FLAGS = -Llib -lclist
+LIB_FLAGS = -Llib -lclist -lop -lcbuffer -lmystr -lserrorh
 
 CFLAGS = -W -Wall -Wextra -Iinclude $(LIBINC)
 LDFLAGS = $(LIB_FLAGS)
 CRITFLAGS = -lcriterion --coverage
 
-FILE_AMOUNT = $(shell echo $(SRC) | wc -w | sed -e 's/ //g')
-CURRENT_FILES = $(shell find src/ -type f -name "*.o" | wc -l | sed -e 's/ //g')
-CURRENT_FILE = $(shell echo "$$(( $(CURRENT_FILES) + 1 ))")
-PERCENT = $(shell echo "$$(( $(CURRENT_FILE) * 10 / $(FILE_AMOUNT) ))")
-PERCENT_LEFT = $(shell echo "$$(( 10 - $(PERCENT) ))")
-
-%.o: %.c
-	@$(CC) $(CFLAGS) $^ -c -o $@
-	@echo -en "$(CLEARL)$(BLUE)building$(RESET): [$(GREEN)"
-	@for i in `seq 1 $(PERCENT)`; do \
-		echo -n "█"; \
-	done
-	@for i in `seq 1 $(PERCENT_LEFT)`; do \
-		echo -n " "; \
-	done
-	@echo -en  "$(RESET)] ($(CURRENT_FILE)/$(FILE_AMOUNT))"
-	@echo -e " [$(CYAN)$(notdir $^)$(RESET)]$(BEGINL)"
-
 $(NAME): lib_build	$(OBJ)
-	@gcc -o $(NAME) $(OBJ) $(LDFLAGS)
-	@echo -e "$(CLEARL)$(GREEN)✓ Compiled $(NAME)$(RESET)$(COL_END)"
+	@$(MAKE) -C corewar
+	@$(MAKE) -C asm
 
 all:	$(NAME)
 
@@ -68,51 +42,34 @@ lib_build:
 	@for i in $(LIBS); do $(MAKE) -C $$i ; done
 
 clean:
-	@rm -f $(OBJ)
-	@rm -f unit-tests
-	@rm -f *~
-	@rm -f #*#
-	@rm -f *.gcno*
-	@rm -f *.gcda*
-	@for i in $(LIBS); do $(MAKE) -C $$i clean; done
-	@echo -e "$(CLEARL)$(YELLOW)♻️  Cleaned$(RESET)$(COL_END)"
+	@$(MAKE) -C corewar clean
+	@$(MAKE) -C asm clean
 
 fclean: clean
-	@rm -f $(NAME)
-	@rm -f unit-tests
-	@for i in $(LIBS); do $(MAKE) -C $$i fclean; done
-	@echo -e "$(CLEARL)$(CLEAR_COL)$(YELLOW)♻️  Fcleaned$(RESET)"
+	@$(MAKE) -C corewar fclean
+	@$(MAKE) -C asm fclean
 
 re: fclean all
 
+cdebug: fclean debug
+
 debug: CFLAGS += -g3
+debug: CFLAGS += -DDEBUG
 debug: lib_build $(OBJ)
-	@gcc -o $(NAME) $(OBJ) $(LDFLAGS) -g3
-	@echo -e "$(CLEARL)$(YELLOW)⚙️  Debug Mode$(RESET)"
+	@$(MAKE) -C corewar debug
+	@$(MAKE) -C asm debug
 
 gprof: CFLAGS += -pg
 gprof: lib_build $(OBJ)
-	@rm -f gmon.out gprof.txt
-	@gcc -o $(NAME) $(OBJ) $(LDFLAGS) -pg
-	@echo -e "$(CLEARL)$(YELLOW)⚙️  Gprof Mode$(RESET)"
-#	@./$(NAME)
-#	@gprof $(NAME) gmon.out > gprof.txt
-#	@cat gprof.txt
+	@$(MAKE) -C corewar gprof
+	@$(MAKE) -C asm gprof
 
 perf: CFLAGS += -O3
 perf: lib_build $(OBJ)
-	@gcc -o $(NAME) $(OBJ) $(LDFLAGS) -O3
-	@echo -e "$(CLEARL)$(BLUE)⚙️  Performance Mode$(RESET)"
-	@bash -c "time ./$(NAME)"
+	@$(MAKE) -C corewar perf
+	@$(MAKE) -C asm perf
 
 tests_run:
 	@for i in $(LIBS); do $(MAKE) -C $$i tests_run; done
-#	@gcc -o unit-tests $(SRC_CRIT) $(TEST_CRIT) $(CFLAGS) $(CRITFLAGS)
-#	@echo -e [$(GREEN)Launch $(NAME) tests$(RESET)]
-#	@./unit-tests
 
-binary_tests_run: $(NAME)
-	@cp $(NAME) tests/binary/mysh
-	@cd tests/binary && ./tester.sh
-
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re debug gprof perf tests_run lib_build
