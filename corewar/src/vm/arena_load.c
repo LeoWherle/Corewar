@@ -62,7 +62,7 @@ static int is_valid_pos(vm_t *vm, champion_t *champion, size_t pos)
             return 1;
         load_address = chm->load_address_value;
         if (IS_OVERLAPPING(pos, load_address, chm->header.prog_size)) {
-            err_print("Champion %s is overlapping champion %d\n",
+            err_print("Champion %s is overlapping champion %s\n",
                 champion->header.prog_name, chm->header.prog_name);
             return 0;
         }
@@ -76,7 +76,7 @@ static int is_valid_pos(vm_t *vm, champion_t *champion, size_t pos)
  * @return return 1 or error else 0;
  */
 // need to check if the champion is overlapping another champion
-int arena_load(vm_t *vm, args_t *args)
+int champion_load_into_arena(vm_t *vm)
 {
     node_t *node = NULL;
     champion_t *champion = NULL;

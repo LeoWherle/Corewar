@@ -16,22 +16,19 @@
 static champion_t *load_header_into_champion(champion_t *champion,
     const char *file_path)
 {
-    header_t header;
     int fd = 0;
 
     fd = open(file_path, O_RDONLY);
-    ASSERT(fd != -1, NULL);
-    if (read(fd, &header, sizeof(header_t)) != sizeof(header_t)) {
-        err_put("Error: File not valid or failed to read\n");
+    if (read(fd, &champion->header, sizeof(header_t)) != sizeof(header_t)) {
+        err_print("Error: Failed to read %s\n", file_path);
         close(fd);
         return NULL;
     }
-    if (header.magic != COREWAR_EXEC_MAGIC) {
-        err_put("Error: File not valid\n");
+    if (champion->header.magic != TRUE_MAGIC) {
+        err_print("Error: File %s, not valid .cor\n", file_path);
         close(fd);
         return NULL;
     }
-    champion->header = header;
     close(fd);
     return champion;
 }

@@ -11,9 +11,11 @@
     #include <stdbool.h>
     #include "clist.h"
     #include "cbuffer.h"
+    #include "args.h"
     #include "op.h"
 
     // check if nbr(index) is between index and index + size
+    #define TRUE_MAGIC      -209458688
     #define IS_OVERLAPPING(nbr, indx, size) (nbr >= indx && nbr <= indx + size)
 
     typedef struct vm_s vm_t;
@@ -63,6 +65,11 @@
         unsigned int curr_period;
     } vm_t;
 
+    /*
+    ** corewar specific functions
+    */
+    int champion_load_into_arena(vm_t *vm);
+    int init_champs_into_vm(args_t *args, vm_t *vm);
 
     /*
     ** vm
