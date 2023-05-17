@@ -25,11 +25,11 @@
     void err_print(const char *fmt, ...);
     void expr_assert(int expr, const char *fmt, ...);
 
-    #ifdef DDEBUG
+    #ifdef DEBUG
         #include <stdio.h>
-        #define DEBUG(fmt, ...) err_print(fmt, __VA_ARGS__)
+        #define DEBUGF(fmt, ...) err_print(fmt, __VA_ARGS__)
     #else
-        #define DEBUG(fmt, ...)
+        #define DEBUGF(fmt, ...)
     #endif /* !DDEBUG */
 
 #endif /* !SERRORH_H_ */
