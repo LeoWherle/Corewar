@@ -34,9 +34,9 @@
         bool alive;
         char *file_path;
         // if has set adress
-        bool load_address;
+        bool has_adress;
         // if has set adress -> the adress
-        size_t load_address_value;
+        size_t laddress_value;
         // registers
         char registr[REG_NUMBER];
     } champion_t;
@@ -73,6 +73,11 @@
     */
     int champion_load_into_arena(vm_t *vm, args_t *args);
     int init_champs_into_vm(args_t *args, vm_t *vm);
+
+    /*
+    ** Display functions
+    */
+    void print_string_byte_per_byte(char *str, size_t size);
 
     /*
     ** vm

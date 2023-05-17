@@ -56,10 +56,11 @@ static champion_t *arg_champt_to_championt(champ_arg_t argchamp)
     ASSERT_PTR(new_champ, NULL);
     new_champ = load_header_into_champion(new_champ, argchamp.name);
     ASSERT_PTR(new_champ, NULL);
-    if (argchamp.prog_number)
-        new_champ->id = argchamp.prog_number_value;
-    if (argchamp.load_address)
-        new_champ->load_address = argchamp.load_address_value;
+    new_champ->id = argchamp.prog_number_value;
+    new_champ->has_adress = argchamp.load_address;
+    if (new_champ->has_adress) {
+        new_champ->laddress_value = argchamp.load_address_value % (MEM_SIZE);
+    }
     new_champ->file_path = my_strdup(argchamp.name);
     ASSERT_PTR(new_champ->file_path, NULL);
     return new_champ;

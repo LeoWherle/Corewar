@@ -33,6 +33,7 @@ SRC = src/main.c \
 	  src/champions/champion_init.c \
 	  src/champions/champion_list_create.c \
 	  src/processes/process_init.c \
+	  src/display/term_bff_print.c \
 	  src/vm/arena_load.c \
 	  src/vm/vm_init.c \
 

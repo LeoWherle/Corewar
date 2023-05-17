@@ -11,6 +11,7 @@
 #include "args.h"
 #include "herror.h"
 #include "serrorh.h"
+#include "ansi_colors.h"
 #include "mystr.h"
 
 static int load_champion(vm_t *vm, champion_t *champion, size_t pos)
@@ -46,7 +47,7 @@ static bool is_valid_pos(vm_t *vm, champion_t *champion, size_t pos, int ch_am)
     node = vm->champions->head;
     for (int i = 0; i < ch_am; i++) {
         chm = node->data;
-        load_address = chm->load_address_value;
+        load_address = chm->laddress_value;
         if (IS_OVERLAPPING(pos, load_address, chm->header.prog_size)) {
             err_print("Champion %s is overlapping champion %s\n",
                 champion->header.prog_name, chm->header.prog_name);
@@ -57,24 +58,16 @@ static bool is_valid_pos(vm_t *vm, champion_t *champion, size_t pos, int ch_am)
     return true;
 }
 
-static void print_byte_as_hex(char byte) {
-    const char hex_digits[] = "0123456789ABCDEF";
-    char hex[3];
-
-    hex[0] = hex_digits[(byte >> 4) & 0x0F];
-    hex[1] = hex_digits[byte & 0x0F];
-    hex[2] = '\0';
-    my_fprintf(1, "%s ", hex);
-}
-
-static void print_string_byte_per_byte(char *str, size_t size)
+static void champ_asign_address(args_t *arg, champion_t *champion, int i)
 {
-    for (size_t i = 0; i < size; i++) {
-        if (i % 32 == 0)
-            my_fprintf(1, "\n");
-        print_byte_as_hex(str[i]);
+    size_t pos = 0;
+
+    if (!champion->has_adress) {
+        pos = i * ((MEM_SIZE) / arg->nb_champions);
+        champion->laddress_value = pos;
     }
-    my_fprintf(1, "\n");
+    DEBUGF(WHT"Champion "BLU"%s"WHT" is loaded at "GRN"%d"CRESET"\n",
+        champion->header.prog_name, champion->laddress_value);
 }
 
 /**
@@ -85,17 +78,14 @@ int champion_load_into_arena(vm_t *vm, args_t *args)
 {
     node_t *node = NULL;
     champion_t *champion = NULL;
-    size_t pos = 0;
 
     node = vm->champions->head;
     for (int i = 0; i < vm->champions->size; i++) {
         champion = node->data;
-        if (!champion->load_address)
-            pos = i * (MEM_SIZE / args->nb_champions);
-        champion->load_address_value = pos;
-        if (!is_valid_pos(vm, champion, pos, i))
+        champ_asign_address(args, champion, i);
+        if (!is_valid_pos(vm, champion, champion->laddress_value, i))
             return 1;
-        if (load_champion(vm, champion, pos))
+        if (load_champion(vm, champion, champion->laddress_value))
             return 1;
         node = node->next;
     }
