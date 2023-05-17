@@ -50,5 +50,6 @@
                 list_t *label_list);
     int check_valid_line(char **args, list_t *com_list, header_t *header);
     int put_label_in_list(char **args, list_t *label_list, int prog_size);
+    bool print_comp(list_t *command, header_t *head, char *name);
 
 #endif /* ASM_H */

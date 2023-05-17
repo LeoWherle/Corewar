@@ -32,5 +32,6 @@ int main(int ac, char **av)
     if (code_parser(&header, fd, com_list, label_list) == 84)
         return 84;
     fclose(fd);
+    print_comp(com_list, &header, av[1]);
     return 0;
 }
