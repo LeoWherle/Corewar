@@ -14,6 +14,7 @@
     // used to get the instruction from the bytecode
     typedef struct instruction_s {
         command_t command;
+        int cycles;
     } instruction_t;
 
     /*

@@ -30,6 +30,12 @@ SRC = src/main.c \
 	  src/args/args_champ.c \
 	  src/args/args_champ_error.c \
 	  src/args/args_help.c \
+	  src/champions/champion_init.c \
+	  src/champions/champion_list_create.c \
+	  src/processes/process_init.c \
+	  src/display/term_bff_print.c \
+	  src/vm/arena_load.c \
+	  src/vm/vm_init.c \
 
 TEST_CRIT	=	\
 
