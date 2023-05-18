@@ -19,6 +19,11 @@
     #define SWAP_INT32(x) (((x) >> 24) | (((x) << 8) & 0x00FF0000) \
 | (((x) >> 8) & 0x0000FF00) | ((x) << 24))
 
+    #define SWAP_INT32_SAFE(x) (((x & 0xFF000000) >> 24) \
+| ((x & 0x00FF0000) >> 8) \
+| ((x & 0x0000FF00) << 8) \
+| ((x & 0x000000FF) << 24))
+
     #define IS_OVERLAPPING(nbr, indx, size) (nbr >= indx && nbr < indx + size)
 
     typedef struct vm_s vm_t;

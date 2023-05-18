@@ -15,8 +15,9 @@
 
 static int is_valid_cor(champion_t *champion)
 {
-    if (champion->header.magic != TRUE_MAGIC) {
+    if (champion->header.magic != (int)SWAP_INT32_SAFE(COREWAR_EXEC_MAGIC)) {
         err_print("Error: File %s, not valid .cor\n", champion->file_path);
+        err_print("Magic number: %d\n", SWAP_INT32_SAFE(COREWAR_EXEC_MAGIC));
         return 0;
     }
     if (champion->header.prog_size < 0
