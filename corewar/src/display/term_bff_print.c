@@ -5,26 +5,34 @@
 ** term_bff_print
 */
 
+#include <unistd.h>
 #include "mystr.h"
+#include "serrorh.h"
 #include "vm.h"
 
-static void print_byte_as_hex(char byte)
+static void put_byte_as_hex(char byte, char *arena)
 {
     const char hex_digits[] = "0123456789ABCDEF";
-    char hex[3];
 
-    hex[0] = hex_digits[(byte >> 4) & 0x0F];
-    hex[1] = hex_digits[byte & 0x0F];
-    hex[2] = '\0';
-    my_fprintf(1, "%s ", hex);
+    arena[0] = hex_digits[(byte >> 4) & 0x0F];
+    arena[1] = hex_digits[byte & 0x0F];
+    arena[2] = ' ';
 }
 
 void print_string_byte_per_byte(char *str, size_t size)
 {
+    char arena[(MEM_SIZE * 3) + (MEM_SIZE / 32) + 1];
+    char *arena_ptr = NULL;
+
+    arena_ptr = arena;
     for (size_t i = 0; i < size; i++) {
-        if (i % 32 == 0 && i != 0)
-            my_fprintf(1, "\n");
-        print_byte_as_hex(str[i]);
+        if (i % 32 == 0 && i != 0) {
+            *arena_ptr++ = '\n';
+        }
+        put_byte_as_hex(*str++, arena_ptr);
+        arena_ptr += 3;
     }
-    my_fprintf(1, "\n");
+    *arena_ptr++ = '\n';
+    *arena_ptr = '\0';
+    write(1, arena, sizeof(arena));
 }
