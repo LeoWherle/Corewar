@@ -78,6 +78,7 @@
     */
     int champion_load_into_arena(vm_t *vm, args_t *args);
     int init_champs_into_vm(args_t *args, vm_t *vm);
+    int init_champion_processes(vm_t *vm);
 
     /*
     ** Display functions
