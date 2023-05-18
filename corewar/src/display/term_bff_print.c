@@ -21,12 +21,12 @@ static void put_byte_as_hex(char byte, char *arena)
 
 void print_string_byte_per_byte(char *str, size_t size)
 {
-    char arena[(MEM_SIZE * 3) + (MEM_SIZE / 64) + 1];
+    char arena[(MEM_SIZE * 3) + (MEM_SIZE / 32) + 1];
     char *arena_ptr = NULL;
 
     arena_ptr = arena;
     for (size_t i = 0; i < size; i++) {
-        if (i % 64 == 0 && i != 0) {
+        if (i % 32 == 0 && i != 0) {
             *arena_ptr++ = '\n';
         }
         put_byte_as_hex(*str++, arena_ptr);
