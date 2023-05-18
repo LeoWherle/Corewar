@@ -33,17 +33,19 @@
     typedef struct champion_s {
         // id of the champion (1, 2, 3, 4, etc.)
         size_t id;
-        // header
-        struct header_s header;
-        // if the champion is alive => if false kill all children
+        // amount of process
+        int process_count;
+        // if the champion is alive
         bool alive;
-        char *file_path;
         // if has set adress
         bool has_adress;
         // if has set adress -> the adress
         size_t laddress_value;
         // registers
         char registr[REG_NUMBER];
+        char *file_path;
+        // header
+        struct header_s header;
     } champion_t;
 
     typedef struct process_s {
