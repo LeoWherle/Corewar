@@ -11,14 +11,11 @@ int my_getnbr(char const *str)
 {
     int nb = 0;
     int o = 0;
-    int firste = 0;
 
     for (o = o; str[o] == '-'; o++);
-    for (o = o; str[o] != '\0'; o++) {
-        if (IS_NUM(str[o]) && firste < 2)
-            nb = (nb * 10) + (str[o] - '0');
-        else
-            break;
+    for (o = o; IS_NUM(str[o]); o++) {
+        nb *= 10;
+        nb += str[o] - '0';
     }
     if (str[0] == '-')
         nb = nb * (-1);

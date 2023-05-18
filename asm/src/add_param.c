@@ -22,21 +22,22 @@ long int power_long(long int base, long int exp)
 static void add_int(char *dest, long int nb, int i, int delta)
 {
     long int order = 0;
-    int cond = 0;
 
     order = power_long(2, delta * 8);
     for (int x = i; x < i + delta; x++) {
         for (int y = 0; y < 8; y++) {
             dest[x] <<= 1;
-            cond = (nb & order);
-            dest[x] += (cond) ? 1 : 0;
-            nb -= cond;
+            dest[x] += (nb & order) ? 1 : 0;
+            nb -= (nb & order) ? order : 0;
             order /= 2;
         }
     }
     dest[i + delta - 1] <<= 1;
-    cond = (nb & order);
-    dest[i + delta - 1] += (cond) ? 1 : 0;
+    if (nb >= order) {
+        dest[i + delta - 1] += 1;
+        nb -= order;
+        order /= 2;
+    }
 }
 
 int add_register(char *dest, char *arg, int i, int delta)

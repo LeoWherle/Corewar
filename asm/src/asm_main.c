@@ -14,6 +14,19 @@
 #include "op.h"
 #include "asm.h"
 
+int compile_and_print(list_t *com_list, list_t *label_list,
+                    header_t *header, char **av)
+{
+    if (!search_in_command(com_list, label_list))
+        return 84;
+    for (node_t *node = com_list->head; node; node = node->next)
+        if (!line_to_command(node->data))
+            return 84;
+    if (!print_comp(com_list, header, av[1]))
+        return 84;
+    return 0;
+}
+
 int main(int ac, char **av)
 {
     list_t *com_list = list_init();
@@ -32,6 +45,5 @@ int main(int ac, char **av)
     if (code_parser(&header, fd, com_list, label_list) == 84)
         return 84;
     fclose(fd);
-    print_comp(com_list, &header, av[1]);
-    return 0;
+    return compile_and_print(com_list, label_list, &header, av);
 }
