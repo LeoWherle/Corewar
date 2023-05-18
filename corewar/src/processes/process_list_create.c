@@ -6,8 +6,25 @@
 */
 
 #include "vm.h"
+#include "serrorh.h"
+#include "ansi_colors.h"
 
 int init_champion_processes(vm_t *vm)
 {
-    /* create vm from champions */
+    process_t *new_process = NULL;
+
+    for (node_t *node = vm->champions->head; node != NULL; node = node->next) {
+        new_process = process_create(node->data);
+        if (new_process == NULL)
+            return (84);
+        new_process->champion = node->data;
+        new_process->index = ((champion_t *)(node->data))->laddress_value;
+        new_process->cycle_to_wait = 0;
+        for (int i = 0; i < REG_NUMBER; i++)
+            new_process->champion->registr[i] = 0;
+        node_append(vm->process, new_process);
+        DEBUGF(WHT"new Process for champion "BLU"%s"WHT" at "GRN"%d"CRESET"\n",
+            ((champion_t *)(node->data))->header.prog_name, new_process->index);
+    }
+    return (0);
 }
