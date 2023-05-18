@@ -13,7 +13,7 @@
 
 static void free_corewar(vm_t *vm)
 {
-    free(vm);
+    vm_destroy(vm);
 }
 
 static int init_corewar(vm_t **vm, int ac, const char *av[])
@@ -29,6 +29,8 @@ static int init_corewar(vm_t **vm, int ac, const char *av[])
     if (init_champs_into_vm(args, *vm))
         return (84);
     if (champion_load_into_arena(*vm, args))
+        return (84);
+    if (init_champion_processes(*vm))
         return (84);
     free_args_struct(args);
     return (0);
