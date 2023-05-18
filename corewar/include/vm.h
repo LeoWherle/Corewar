@@ -73,6 +73,10 @@
         unsigned int local_live;
         // number of decreased CYCLES_TO_DIE by CYCLE_DELTA
         unsigned int curr_period;
+        // cycles in the current period
+        unsigned int cycle_amount;
+        // number of cycles since the beginning
+        unsigned int total_cycle;
     } vm_t;
 
     /*

@@ -35,7 +35,6 @@ static void instruction_exec_process(any_t data, void *vm_ptr, UNUSED void *non)
     }
 }
 
-
 void instruction_exec(vm_t *vm)
 {
     list_foreach_wargs(vm->process, &instruction_exec_process, vm, NULL);

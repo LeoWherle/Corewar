@@ -48,22 +48,23 @@ static int core_end(vm_t *vm)
     return (0);
 }
 
-int core_loop(vm_t *vm)
+void core_loop(vm_t *vm)
 {
-    int ret = 0;
-
-    while (vm->curr_period < vm->cycle_to_die) {
+    while (vm->cycle_to_die > 0) {
         instruction_get(vm);
         instruction_exec(vm);
-        vm->curr_period++;
-
-        if (core_end(vm))
-            break;
-        if (vm->curr_period % vm->cycle_to_die == 0) {
+        vm->cycle_amount++;
+        vm->total_cycle++;
+        if (vm->cycle_amount >= vm->cycle_to_die) {
+            vm->cycle_amount = 0;
+            vm->curr_period++;
+            vm->local_live = 0;
+        }
+        if (vm->local_live >= NBR_LIVE) {
             vm->cycle_to_die -= CYCLE_DELTA;
             vm->local_live = 0;
         }
-        instruction_update(vm);
+        if (core_end(vm))
+            return;
     }
-    return (ret);
 }
