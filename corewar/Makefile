@@ -37,6 +37,7 @@ SRC = src/main.c \
 	  src/display/term_bff_print.c \
 	  src/vm/arena_load.c \
 	  src/vm/vm_init.c \
+	  src/instructions/instruction_live.c \
 
 TEST_CRIT	=	\
 
