@@ -25,10 +25,6 @@ int check_all_champ(champ_arg_t *champions, int nb_champions)
         write(2, "Error: 2 champions minimum are required.\n", 41);
         return (84);
     }
-    if (nb_champions > 4) {
-        write(2, "Error: 4 champions maximum are required.\n", 41);
-        return (84);
-    }
     for (;champions[index].name != NULL; index++);
     if (champions[index].load_address || champions[index].prog_number) {
         write(2, "Error: missing champion name.\n", 30);
