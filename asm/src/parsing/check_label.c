@@ -34,6 +34,15 @@ int is_valid_label(char *label)
     return 1;
 }
 
+int is_label_matrix(char **args)
+{
+    for (int i = 0; args[i]; i++) {
+        if (args[i][0] == DIRECT_CHAR && args[i][1] == LABEL_CHAR)
+            return 0;
+    }
+    return 1;
+}
+
 int put_label_in_list(char **args, list_t *label_list, int prog_size)
 {
     label_t *lab = NULL;
