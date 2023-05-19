@@ -41,5 +41,6 @@ void process_destroy(void *self)
 
 void kill_process(process_t *process, vm_t *vm)
 {
+    process->champion->process_count--;
     node_delete(vm->process, process, process_destroy);
 }
