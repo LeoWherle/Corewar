@@ -31,8 +31,6 @@ static int print_is_alive(list_t *champions, int champion_id)
 void cmd_live(vm_t *vm, process_t *process)
 {
     int champion_id = 0;
-    node_t *tmp = NULL;
-    champion_t *champion = NULL;
 
     process->index++;
     champion_id = read_int(vm, process->index);
