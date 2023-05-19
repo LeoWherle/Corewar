@@ -45,6 +45,31 @@ command_t *get_command_struct(int inst_in, char *type, int *size, char **args)
     return new;
 }
 
+bool check_valid_reg(char *type, char **args, int i)
+{
+    int reg = 0;
+
+    if (type[i] == REG_CODE) {
+        reg = my_getnbr(args[i] + 1);
+        if (reg < 1 || reg > REG_NUMBER)
+            return 0;
+    }
+    return 1;
+}
+
+bool check_valid_type(char **args, char *type, int inst_in)
+{
+    int reg = 0;
+
+    for (int i = 0; i < op_tab[inst_in].nbr_args; i++) {
+        if (!check_valid_reg(type, args, i))
+            return 0;
+        if (type[i] == 0)
+            return 0;
+    }
+    return 1;
+}
+
 int check_valid_line(char **args, list_t *com_list, header_t *header)
 {
     int inst_in = get_instrucion(args[0]);
@@ -54,9 +79,8 @@ int check_valid_line(char **args, list_t *com_list, header_t *header)
 
     ASSERT_MALLOC(type, 84);
     ASSERT_MALLOC(size, 84);
-    for (int i = 0; i < op_tab[inst_in].nbr_args; i++)
-        if (type[i] == 0)
-            return 84;
+    if (!check_valid_type(args, type, inst_in))
+        return 84;
     for (int i = 0; i < op_tab[inst_in].nbr_args ; i++)
         header->prog_size += size[i];
     header->prog_size +=
