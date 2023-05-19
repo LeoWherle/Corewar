@@ -77,6 +77,8 @@
         unsigned int cycle_amount;
         // number of cycles since the beginning
         unsigned int total_cycle;
+        bool has_dump;
+        unsigned int dump_cycle;
     } vm_t;
 
     /*

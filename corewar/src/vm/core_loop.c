@@ -76,13 +76,17 @@ static void champion_reset_live(any_t data, void *vm_ptr)
     champion->alive = false;
 }
 
-static void core_check(vm_t *vm)
+static int core_check(vm_t *vm)
 {
     vm->cycle_amount++;
     vm->total_cycle++;
     if (vm->cycle_amount >= vm->cycle_to_die) {
         vm->cycle_amount = 0;
         vm->curr_period++;
+        if (vm->has_dump && vm->total_cycle >= vm->dump_cycle) {
+            print_string_byte_per_byte(vm->arena, vm->arena->size);
+            return 1;
+        }
         if (vm->local_live >= NBR_LIVE) {
             vm->cycle_to_die -= CYCLE_DELTA;
             vm->local_live = 0;
@@ -90,6 +94,7 @@ static void core_check(vm_t *vm)
 
         }
     }
+    return 0;
 }
 
 void core_loop(vm_t *vm)
@@ -97,7 +102,8 @@ void core_loop(vm_t *vm)
     while (vm->cycle_to_die > 0) {
         instruction_get(vm);
         instruction_exec(vm);
-        core_check(vm);
+        if (core_check(vm))
+            return;
         if (core_end(vm))
             return;
     }
