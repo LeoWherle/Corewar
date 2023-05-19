@@ -37,6 +37,7 @@ int check_syntax(char *line, char *instruction)
     nb_args = matrix_len(comma_args);
     if (nb_args != op_tab[inst_in].nbr_args)
         return 84;
+    free_matrix(comma_args);
     return 0;
 }
 
@@ -54,27 +55,33 @@ bool parse_line(char *line, int shift, char **args)
     return true;
 }
 
+static void free_linarg(char *line, char **args)
+{
+    free(line);
+    free_matrix(args);
+}
+
 int code_parser(header_t *header, FILE *fd, list_t *com_list,
                 list_t *label_list)
 {
-    char *line = NULL;
-    char **args = NULL;
+    char *line = NULL, **args = NULL;
     size_t len = 0;
     int shift = 0;
-    fseek(fd, 0, SEEK_SET);
     while (getline(&line, &len, fd) != -1) {
         line = clear_line(line);
         args = my_str_to_word_array(line, " \t,");
         ASSERT_MALLOC(args, 84);
         if (line[0] == '\0' || line[0] == '\n' || line[0] == '.') {
-            free(line);
+            free_linarg(line, args);
             line = NULL;
             continue;
         }
         shift = put_label_in_list(args, label_list, header->prog_size);
         if (!parse_line(line, shift, args)) return 84;
         if (check_valid_line(args + shift, com_list, header) == 84) return 84;
+        free_matrix(args);
         line = NULL;
     }
+    free(line);
     return 0;
 }

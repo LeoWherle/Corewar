@@ -60,5 +60,7 @@ bool print_comp(list_t *command, header_t *head, char *name)
         com = node->data;
         print_command(fd, com);
     }
+    close(fd);
+    free(new_name);
     return true;
 }
