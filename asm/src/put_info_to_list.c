@@ -24,6 +24,7 @@ int put_label_in_list(char **args, list_t *label_list, int prog_size)
         lab->name = malloc(sizeof(char) * my_strlen(args[0]) + 1);
         ASSERT_MALLOC(lab->name, 84);
         lab->name[0] = '\0';
+        args[0][my_strlen(args[0]) - 1] = '\0';
         my_strcpy(lab->name, args[0]);
         lab->ad = prog_size;
         node_append(label_list, lab);
@@ -35,13 +36,21 @@ int put_label_in_list(char **args, list_t *label_list, int prog_size)
 command_t *get_command_struct(int inst_in, char *type, int *size, char **args)
 {
     command_t *new = NULL;
+    int len = 0;
 
     new = malloc(sizeof(command_t));
     ASSERT_MALLOC(new, NULL);
     new->code_command = inst_in + 1;
     new->param_type = type;
     new->param_size = size;
-    new->line = args;
+    len = matrix_len(args);
+    new->line = malloc((len + 1) * sizeof(char *));
+    ASSERT_MALLOC(new->line, NULL);
+    for (int i = 0; i < len; i++) {
+        new->line[i] = my_strdup(args[i]);
+        ASSERT_MALLOC(new->line[i], NULL);
+    }
+    new->line[len] = NULL;
     return new;
 }
 

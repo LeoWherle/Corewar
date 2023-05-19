@@ -114,7 +114,7 @@ int header_parser(header_t *header, FILE *fd)
         free(line);
         line = NULL;
     }
-    if (!got_name || !got_comment)
-        return 84;
+    free(line);
+    if (!got_name || !got_comment) return 84;
     return 0;
 }

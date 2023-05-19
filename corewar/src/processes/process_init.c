@@ -11,6 +11,11 @@
 
 static void process_init(process_t *self)
 {
+    self->champion = NULL;
+    self->index = 0;
+    self->cycle_to_wait = 0;
+    self->carry = false;
+    self->instruction = NULL;
     return;
 }
 
