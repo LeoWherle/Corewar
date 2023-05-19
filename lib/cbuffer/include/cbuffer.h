@@ -30,6 +30,8 @@
     void cbuffer_set(cbuffer_t *buffer, char *data, size_t size, size_t pos);
 
     char cbuffer_getb(cbuffer_t *buffer, size_t pos);
+    short cbuffer_gets(cbuffer_t *buffer, size_t pos);
+    int cbuffer_geti(cbuffer_t *buffer, size_t pos);
 
     /**
      * @brief Get data from buffer at pos and store it in data
