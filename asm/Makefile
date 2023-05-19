@@ -23,14 +23,15 @@ RESET		=	\033[0m
 NAME = asm
 
 SRC =	src/asm_main.c	\
-		src/fill_header.c	\
-		src/command_to_data.c	\
-		src/add_param.c	\
-		src/replace_label.c	\
-		src/get_params.c	\
-		src/code_parser.c \
-		src/put_info_to_list.c 		\
-		src/print_compile_code.c	\
+		src/compiler/command_to_data.c	\
+		src/compiler/add_param.c	\
+		src/compiler/replace_label.c	\
+		src/compiler/get_params.c	\
+		src/compiler/print_compile_code.c	\
+		src/parsing/code_parser.c \
+		src/parsing/put_info_to_list.c 		\
+		src/parsing/fill_header.c	\
+		src/parsing/check_label.c	\
 
 TEST_CRIT	=	\
 

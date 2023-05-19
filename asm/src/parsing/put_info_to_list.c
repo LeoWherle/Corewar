@@ -14,25 +14,6 @@
 #include "op.h"
 #include "asm.h"
 
-int put_label_in_list(char **args, list_t *label_list, int prog_size)
-{
-    label_t *lab = NULL;
-
-    if (args[0][my_strlen(args[0]) - 1] == LABEL_CHAR) {
-        lab = malloc(sizeof(label_t));
-        ASSERT_MALLOC(lab, 84);
-        lab->name = malloc(sizeof(char) * my_strlen(args[0]) + 1);
-        ASSERT_MALLOC(lab->name, 84);
-        lab->name[0] = '\0';
-        args[0][my_strlen(args[0]) - 1] = '\0';
-        my_strcpy(lab->name, args[0]);
-        lab->ad = prog_size;
-        node_append(label_list, lab);
-        return 1;
-    }
-    return 0;
-}
-
 command_t *get_command_struct(int inst_in, char *type, int *size, char **args)
 {
     command_t *new = NULL;
@@ -59,8 +40,8 @@ bool check_valid_reg(char *type, char **args, int i)
     int reg = 0;
 
     if (type[i] == REG_CODE) {
-        reg = my_getnbr(args[i] + 1);
-        if (reg < 1 || reg > REG_NUMBER)
+        reg = my_getnbr(args[i + 1] + 1);
+        if (reg < 1 || reg > REG_NUMBER || !my_str_isnum(args[i + 1] + 1))
             return 0;
     }
     return 1;
@@ -68,8 +49,6 @@ bool check_valid_reg(char *type, char **args, int i)
 
 bool check_valid_type(char **args, char *type, int inst_in)
 {
-    int reg = 0;
-
     for (int i = 0; i < op_tab[inst_in].nbr_args; i++) {
         if (!check_valid_reg(type, args, i))
             return 0;
