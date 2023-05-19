@@ -24,6 +24,7 @@ int put_label_in_list(char **args, list_t *label_list, int prog_size)
         lab->name = malloc(sizeof(char) * my_strlen(args[0]) + 1);
         ASSERT_MALLOC(lab->name, 84);
         lab->name[0] = '\0';
+        args[0][my_strlen(args[0]) - 1] = '\0';
         my_strcpy(lab->name, args[0]);
         lab->ad = prog_size;
         node_append(label_list, lab);

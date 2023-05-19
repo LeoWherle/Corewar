@@ -49,14 +49,16 @@ bool print_comp(list_t *command, header_t *head, char *name)
     char *new_name = NULL;
 
     new_name = get_cor(name);
-    ASSERT_MALLOC(new_name, true);
+    ASSERT_MALLOC(new_name, false);
     fd = open(new_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
     if (fd == -1)
-        return true;
+        return false;
+    head->prog_size = SWAP_INT32(head->prog_size);
+    head->magic = SWAP_INT32(head->magic);
     write(fd, head, sizeof(header_t));
     for (node_t *node = command->head; node; node = node->next) {
         com = node->data;
         print_command(fd, com);
     }
-    return false;
+    return true;
 }

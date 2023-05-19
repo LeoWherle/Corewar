@@ -9,14 +9,28 @@
 #include <stdarg.h>
 #include "serrorh.h"
 
+static const struct flag_s flags[] = {
+    {'s', &err_printstr},
+    {'d', &err_printnbr},
+    {'c', &err_printchar},
+    {'u', &err_printnbr_u},
+    {'l', &err_printnbr_l},
+};
+
+static void varg_print_arg(const char *fmt, va_list ap)
+{
+    for (unsigned int i = 0; i < sizeof(flags) / sizeof(struct flag_s); i++) {
+        if (*(fmt + 1) == flags[i].flag) {
+            flags[i].fptr(ap);
+        }
+    }
+}
+
 static void varg_print(const char *fmt, va_list ap)
 {
-    char *tmp = NULL;
-
     while (*fmt) {
-        if (*fmt == '%' && *(fmt + 1) == 's') {
-            tmp = va_arg(ap, char *);
-            err_put(tmp);
+        if (*fmt == '%' && IS_FLAG(*(fmt + 1))) {
+            varg_print_arg(fmt, ap);
             fmt++;
         } else {
             write(2, fmt, 1);

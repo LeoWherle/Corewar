@@ -59,7 +59,7 @@ int com_size(command_t *command)
 {
     int size = 0;
 
-    for (int i = 0; i < op_tab[(int)command->code_command].nbr_args; i++)
+    for (int i = 0; i < op_tab[command->code_command - 1].nbr_args; i++)
         size += command->param_size[i];
     if (op_tab[command->code_command - 1].nbr_args != 1 ||
         command->code_command - 1 == 15)
@@ -85,7 +85,6 @@ bool search_in_command(list_t *commands, list_t *labels)
     long int command_pos = 0;
     label_t *label = NULL;
     bool keep = true;
-    int size = 0;
 
     if (labels->size <= 0) return true;
     for (node_t *node_c = commands->head; node_c && keep;
