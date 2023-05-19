@@ -38,3 +38,8 @@ void process_destroy(void *self)
     process_t *process = self;
     free(process);
 }
+
+void kill_process(process_t *process, vm_t *vm)
+{
+    node_delete(vm->process, process, process_destroy);
+}

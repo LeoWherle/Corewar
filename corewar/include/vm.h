@@ -102,6 +102,7 @@
     */
     process_t *process_create(champion_t *champion);
     void process_destroy(void *process);
+    void kill_process(process_t *process, vm_t *vm);
 
 
 #endif /* !VM_H_ */

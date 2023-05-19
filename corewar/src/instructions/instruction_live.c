@@ -36,7 +36,7 @@ void cmd_live(vm_t *vm, process_t *process)
     champion_id = read_int(vm, process->index);
     process->index += 4;
     if (!print_is_alive(vm->champions, champion_id))
-        kill_process(process);
+        kill_process(process, vm);
     else {
         vm->local_live++;
         process->champion->alive = true;
