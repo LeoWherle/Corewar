@@ -41,8 +41,6 @@
         bool has_adress;
         // if has set adress -> the adress
         size_t laddress_value;
-        // registers
-        char registr[REG_NUMBER];
         char *file_path;
         // header
         struct header_s header;
@@ -59,6 +57,8 @@
         bool carry;
         // instruction can be NULL if no instruction is running
         command_t instruction;
+        // registers
+        char registr[REG_NUMBER];
     } process_t;
 
     typedef struct vm_s {
@@ -86,6 +86,12 @@
     int init_champs_into_vm(args_t *args, vm_t *vm);
     int init_champion_processes(vm_t *vm);
 
+    /*
+    ** game loop
+    */
+    void core_loop(vm_t *vm);
+    void instruction_exec(vm_t *vm);
+    void instruction_get(vm_t *vm);
     /*
     ** Display functions
     */
