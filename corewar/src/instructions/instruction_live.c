@@ -33,7 +33,7 @@ void cmd_live(vm_t *vm, process_t *process)
     int champion_id = 0;
 
     process->index++;
-    champion_id = read_int(vm, process->index);
+    champion_id = cbuffer_geti(vm->arena, process->index);
     process->index += 4;
     if (!print_is_alive(vm->champions, champion_id))
         kill_process(process, vm);
