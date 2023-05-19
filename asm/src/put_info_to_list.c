@@ -36,13 +36,21 @@ int put_label_in_list(char **args, list_t *label_list, int prog_size)
 command_t *get_command_struct(int inst_in, char *type, int *size, char **args)
 {
     command_t *new = NULL;
+    int len = 0;
 
     new = malloc(sizeof(command_t));
     ASSERT_MALLOC(new, NULL);
     new->code_command = inst_in + 1;
     new->param_type = type;
     new->param_size = size;
-    new->line = args;
+    len = matrix_len(args);
+    new->line = malloc((len + 1) * sizeof(char *));
+    ASSERT_MALLOC(new->line, NULL);
+    for (int i = 0; i < len; i++) {
+        new->line[i] = my_strdup(args[i]);
+        ASSERT_MALLOC(new->line[i], NULL);
+    }
+    new->line[len] = NULL;
     return new;
 }
 

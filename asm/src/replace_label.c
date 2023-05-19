@@ -72,6 +72,7 @@ bool find_label(char **line, label_t *label, long int pos)
     for (int i = 1; line[i]; i++) {
         if (line[i][0] == DIRECT_CHAR && line[i][1] == LABEL_CHAR &&
             my_strcmp(&line[i][2], label->name) == 0) {
+            free(line[i]);
             line[i] = replace_label(pos, label->ad);
             ASSERT_MALLOC(line[i], false);
         }
