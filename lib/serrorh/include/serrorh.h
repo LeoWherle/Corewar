@@ -8,6 +8,7 @@
 #ifndef SERRORH_H_
     #define SERRORH_H_
     #include <stddef.h>
+    #include <stdarg.h>
 
     #ifndef ERRORHANDLING_H_
         #define ERROR 84
@@ -21,15 +22,28 @@
         #define ASSERT_PTR(ptr, retrn) if (ptr == NULL) return retrn;
     #endif /* !ERRORHANDLING_H_ */
 
+    #define IS_FLAG(c) (c == 'c' || c == 's' || c == 'd' \
+|| c == 'u' || c == 'l')
+
+    struct flag_s {
+        char flag;
+        void (*fptr)(va_list);
+    };
+
+    void err_printchar(va_list ap);
+    void err_printstr(va_list ap);
+    void err_printnbr(va_list ap);
+    void err_printnbr_u(va_list ap);
+    void err_printnbr_l(va_list ap);
     void err_put(const char *fmt);
     void err_print(const char *fmt, ...);
     void expr_assert(int expr, const char *fmt, ...);
 
-    #ifdef DDEBUG
+    #ifdef DEBUG
         #include <stdio.h>
-        #define DEBUG(fmt, ...) err_print(fmt, __VA_ARGS__)
+        #define DEBUGF(fmt, ...) err_print(fmt, __VA_ARGS__)
     #else
-        #define DEBUG(fmt, ...)
+        #define DEBUGF(fmt, ...)
     #endif /* !DDEBUG */
 
 #endif /* !SERRORH_H_ */

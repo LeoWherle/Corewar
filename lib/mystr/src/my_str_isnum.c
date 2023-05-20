@@ -11,8 +11,7 @@ int my_str_isnum(char const *str)
 {
     int i = 0;
 
-    for (i = i; str[i] == '-'; i++);
-    for (i = i; str[i] != '\0'; i++)
+    for (i = i; str[i] != '\0' && str[i] != '\n'; i++)
         if (str[i] < '0' || str[i] > '9')
             return (0);
     return (1);

@@ -13,9 +13,11 @@
 #ifndef ASM_H
     #define ASM_H
 
-    #define REG_CODE 0b1
+    #define REG_CODE 0b01
     #define DIR_CODE 0b10
     #define IND_CODE 0b11
+    #define SWAP_INT32(x) (((x) >> 24) | (((x) << 8) & 0x00FF0000) \
+| (((x) >> 8) & 0x0000FF00) | ((x) << 24))
 
     typedef struct label {
         char *name;
@@ -49,7 +51,9 @@
     int code_parser(header_t *header, FILE *fd, list_t *com_list,
                 list_t *label_list);
     int check_valid_line(char **args, list_t *com_list, header_t *header);
+    int is_label_matrix(char **args);
     int put_label_in_list(char **args, list_t *label_list, int prog_size);
     bool print_comp(list_t *command, header_t *head, char *name);
+    bool search_in_command(list_t *commands, list_t *labels);
 
 #endif /* ASM_H */

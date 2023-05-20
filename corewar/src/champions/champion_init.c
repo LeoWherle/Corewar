@@ -9,8 +9,13 @@
 #include "vm.h"
 #include "herror.h"
 
-static void champion_init(champion_t *vm)
+static void champion_init(champion_t *champion)
 {
+    champion->id = 0;
+    champion->alive = false;
+    champion->file_path = NULL;
+    champion->has_adress = 0;
+    champion->laddress_value = 0;
     return;
 }
 
@@ -31,5 +36,6 @@ void champion_destroy(void *champ)
 {
     champion_t *champion = champ;
 
+    free(champion->file_path);
     free(champion);
 }

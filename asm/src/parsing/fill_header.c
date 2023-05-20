@@ -17,13 +17,16 @@
 static bool get_name(header_t *header, char *line)
 {
     int i = 0;
+    int j = 0;
 
     for (i = 0; line[i] != '"' && line[i]; i++);
     if (line[i] == '\0')
         return false;
     i++;
-    for (int j = 0; line[i] != '"'; i++, j++)
+    for (j = 0; line[i] != '"'; i++, j++)
         header->prog_name[j] = line[i];
+    if (j > PROG_NAME_LENGTH)
+        return false;
     if (line[i] != '"')
         return false;
     return true;
@@ -32,13 +35,16 @@ static bool get_name(header_t *header, char *line)
 static bool get_comment(header_t *header, char *line)
 {
     int i = 0;
+    int j = 0;
 
     for (i = 0; line[i] != '"' && line[i]; i++);
     if (line[i] == '\0')
         return false;
     i++;
-    for (int j = 0; line[i] != '"' && line[i]; i++, j++)
+    for (j = 0; line[i] != '"' && line[i]; i++, j++)
         header->comment[j] = line[i];
+    if (j > COMMENT_LENGTH)
+        return false;
     if (line[i] != '"')
         return false;
     return true;
@@ -108,7 +114,7 @@ int header_parser(header_t *header, FILE *fd)
         free(line);
         line = NULL;
     }
-    if (!got_name || !got_comment)
-        return 84;
+    free(line);
+    if (!got_name || !got_comment) return 84;
     return 0;
 }

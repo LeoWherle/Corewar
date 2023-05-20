@@ -59,7 +59,7 @@ int com_size(command_t *command)
 {
     int size = 0;
 
-    for (int i = 0; i < op_tab[(int)command->code_command].nbr_args; i++)
+    for (int i = 0; i < op_tab[command->code_command - 1].nbr_args; i++)
         size += command->param_size[i];
     if (op_tab[command->code_command - 1].nbr_args != 1 ||
         command->code_command - 1 == 15)
@@ -72,6 +72,7 @@ bool find_label(char **line, label_t *label, long int pos)
     for (int i = 1; line[i]; i++) {
         if (line[i][0] == DIRECT_CHAR && line[i][1] == LABEL_CHAR &&
             my_strcmp(&line[i][2], label->name) == 0) {
+            free(line[i]);
             line[i] = replace_label(pos, label->ad);
             ASSERT_MALLOC(line[i], false);
         }
@@ -85,7 +86,6 @@ bool search_in_command(list_t *commands, list_t *labels)
     long int command_pos = 0;
     label_t *label = NULL;
     bool keep = true;
-    int size = 0;
 
     if (labels->size <= 0) return true;
     for (node_t *node_c = commands->head; node_c && keep;
@@ -96,6 +96,8 @@ bool search_in_command(list_t *commands, list_t *labels)
             label = node_l->data;
             keep = find_label(command->line, label, command_pos);
         }
+        if (!is_label_matrix(command->line))
+            return false;
         command_pos += com_size(command);
     }
     return keep;

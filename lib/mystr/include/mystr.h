@@ -8,15 +8,16 @@
 #ifndef MYSTR_H_
     #define MYSTR_H_
 
-    #define IS_NUM(c) (c >= '0' || c <= '9')
-    #define IS_LOWER(c) (c >= 'a' || c <= 'z')
-    #define IS_UPPER(c) (c >= 'A' || c <= 'Z')
+    #define IS_NUM(c) (c >= '0' && c <= '9')
+    #define IS_LOWER(c) (c >= 'a' && c <= 'z')
+    #define IS_UPPER(c) (c >= 'A' && c <= 'Z')
 
     char **my_str_to_word_array(char *, char*);
     int my_strlen(char const *);
     int my_strncmp(char const *, char const *, int);
     char *my_strcpy(char *, char const *);
     char *my_strcat(char *, const char *);
+    char *my_strdup(char const *);
     int my_strcmp(char const *, char const *);
     int my_str_isnum(char const *);
     void free_matrix(char **);
