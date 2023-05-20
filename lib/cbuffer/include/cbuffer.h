@@ -27,7 +27,7 @@
      * @param size the size of data to set (must be <= data len)
      * @param pos the position to set data at
      */
-    void cbuffer_set(cbuffer_t *buffer, char *data, size_t size, size_t pos);
+    void cbuffer_set(cbuffer_t *buffer, void *data, size_t size, size_t pos);
 
     char cbuffer_getb(cbuffer_t *buffer, size_t pos);
     short cbuffer_gets(cbuffer_t *buffer, size_t pos);
