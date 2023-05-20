@@ -69,7 +69,7 @@ int code_parser(header_t *header, FILE *fd, list_t *com_list,
     int shift = 0;
     while (getline(&line, &len, fd) != -1) {
         line = clear_line(line);
-        args = my_str_to_word_array(line, " \t,");
+        args = my_str_to_word_array(line, " \t,\n");
         ASSERT_MALLOC(args, 84);
         if (line[0] == '\0' || line[0] == '\n' || line[0] == '.') {
             free_linarg(line, args);

@@ -96,6 +96,8 @@ bool search_in_command(list_t *commands, list_t *labels)
             label = node_l->data;
             keep = find_label(command->line, label, command_pos);
         }
+        if (!is_label_matrix(command->line))
+            return false;
         command_pos += com_size(command);
     }
     return keep;
