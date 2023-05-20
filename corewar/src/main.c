@@ -13,6 +13,7 @@
 
 static void free_corewar(vm_t *vm)
 {
+    free(vm->champions->interface);
     vm_destroy(vm);
 }
 
@@ -26,6 +27,8 @@ static int init_corewar(vm_t **vm, int ac, const char *av[])
     ASSERT_PTR(args, 84);
     *vm = vm_create();
     ASSERT_MALLOC(*vm, 84);
+    (*vm)->has_dump = args->dump;
+    (*vm)->dump_cycle = args->dump_cycle;
     if (init_champs_into_vm(args, *vm))
         return (84);
     if (champion_load_into_arena(*vm, args))
@@ -46,6 +49,7 @@ int main(int ac, const char *av[])
     ret = init_corewar(&vm, ac, av);
     if (ret != 0)
         return (ret);
+    //core_loop(vm);
     free_corewar(vm);
     return (ret);
 }

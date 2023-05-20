@@ -33,17 +33,17 @@
     typedef struct champion_s {
         // id of the champion (1, 2, 3, 4, etc.)
         size_t id;
-        // header
-        struct header_s header;
-        // if the champion is alive => if false kill all children
+        // amount of process
+        int process_count;
+        // if the champion is alive
         bool alive;
-        char *file_path;
         // if has set adress
         bool has_adress;
         // if has set adress -> the adress
         size_t laddress_value;
-        // registers
-        char registr[REG_NUMBER];
+        char *file_path;
+        // header
+        struct header_s header;
     } champion_t;
 
     typedef struct process_s {
@@ -57,6 +57,8 @@
         bool carry;
         // instruction can be NULL if no instruction is running
         command_t instruction;
+        // registers
+        char registr[REG_NUMBER];
     } process_t;
 
     typedef struct vm_s {
@@ -71,6 +73,12 @@
         unsigned int local_live;
         // number of decreased CYCLES_TO_DIE by CYCLE_DELTA
         unsigned int curr_period;
+        // cycles in the current period
+        unsigned int cycle_amount;
+        // number of cycles since the beginning
+        unsigned int total_cycle;
+        bool has_dump;
+        unsigned int dump_cycle;
     } vm_t;
 
     /*
@@ -80,6 +88,12 @@
     int init_champs_into_vm(args_t *args, vm_t *vm);
     int init_champion_processes(vm_t *vm);
 
+    /*
+    ** game loop
+    */
+    void core_loop(vm_t *vm);
+    void instruction_exec(vm_t *vm);
+    void instruction_get(vm_t *vm);
     /*
     ** Display functions
     */
@@ -102,6 +116,7 @@
     */
     process_t *process_create(champion_t *champion);
     void process_destroy(void *process);
+    void kill_process(process_t *process, vm_t *vm);
 
 
 #endif /* !VM_H_ */
