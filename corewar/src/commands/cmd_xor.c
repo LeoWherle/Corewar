@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2023
 ** Corewar
 ** File description:
-** instruction live for the VM
+** instruction xor for the VM
 */
 
 #include "vm.h"
@@ -11,7 +11,7 @@
 /*
 Similar to and, but performing a binary XOR (exclusive OR).
 */
-int xor_to_reg(vm_t *vm, process_t *process, char *type, int *size)
+static int xor_to_reg(vm_t *vm, process_t *process, char *type, int *size)
 {
     int first = 0;
     int second = 0;
@@ -40,7 +40,7 @@ void cmd_xor(vm_t *vm, process_t *process)
     if (command != 4 || !param_checker(type, command - 1)) {
         kill_process(process, vm);
     } else {
-        add_to_reg(vm, process, type, size);
+        xor_to_reg(vm, process, type, size);
     }
     free(type);
     free(size);
