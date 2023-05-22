@@ -37,6 +37,8 @@ SRC = src/main.c \
 	  src/display/term_bff_print.c \
 	  src/vm/arena_load.c \
 	  src/vm/vm_init.c \
+	  src/get_arg/get_coding_byte.c	\
+	  src/get_arg/param_getter.c	\
 
 TEST_CRIT	=	\
 

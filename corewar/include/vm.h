@@ -24,6 +24,11 @@
 | ((x & 0x0000FF00) << 8) \
 | ((x & 0x000000FF) << 24))
 
+    //coding byte code of each type of argument
+    #define REG_CODE 0b01
+    #define DIR_CODE 0b10
+    #define IND_CODE 0b11
+
     #define IS_OVERLAPPING(nbr, indx, size) (nbr >= indx && nbr < indx + size)
 
     typedef struct vm_s vm_t;
@@ -103,5 +108,11 @@
     process_t *process_create(champion_t *champion);
     void process_destroy(void *process);
 
+    /*
+    **parameters
+    */
+    int param_getter(process_t *process, vm_t *vm, char type, int size);
+    int *get_size(char *type, int index);
+    char *get_coding_byte(char coding_byte);
 
 #endif /* !VM_H_ */
