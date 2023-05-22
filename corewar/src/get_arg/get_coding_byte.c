@@ -25,6 +25,14 @@ static bool special_cases(int index, int i, char type)
     return false;
 }
 
+/**
+ * @brief Get the size of all parameters
+ * 
+ * @param type type of all the parameters
+ * (can be acquired with get_coding_byte)
+ * @param index the index of the function in op_tab
+ * @return int* 
+ */
 int *get_size(char *type, int index)
 {
     int *size = NULL;
@@ -42,6 +50,12 @@ int *get_size(char *type, int index)
     return size;
 }
 
+/**
+ * @brief Get the type of all of the arugments
+ * 
+ * @param coding_byte 
+ * @return char* 
+ */
 char *get_coding_byte(char coding_byte)
 {
     char *type = NULL;
@@ -55,6 +69,14 @@ char *get_coding_byte(char coding_byte)
     return type;
 }
 
+/**
+ * @brief check if the parameter type are valid
+ * 
+ * @param type the type of the parameters
+ * @param index the index of the function in op_tab
+ * @return true if parameters are valid
+ * @return false if parameters aren't valid
+ */
 bool param_checker(char *type, int index)
 {
     for (int i = 0; i < op_tab[index].nbr_args; i++) {
