@@ -24,6 +24,11 @@
 | ((x & 0x0000FF00) << 8) \
 | ((x & 0x000000FF) << 24))
 
+    //coding byte code of each type of argument
+    #define REG_CODE 0b01
+    #define DIR_CODE 0b10
+    #define IND_CODE 0b11
+
     #define IS_OVERLAPPING(nbr, indx, size) (nbr >= indx && nbr < indx + size)
 
     typedef struct vm_s vm_t;
@@ -58,7 +63,7 @@
         // instruction can be NULL if no instruction is running
         command_t instruction;
         // registers
-        char registr[REG_NUMBER];
+        int registr[REG_NUMBER];
     } process_t;
 
     typedef struct vm_s {
@@ -118,5 +123,14 @@
     void process_destroy(void *process);
     void kill_process(process_t *process, vm_t *vm);
 
+    /*
+    **parameters
+    */
+    int param_getter(process_t *process, vm_t *vm, char type, int size);
+    int *get_size(char *type, int index);
+    char *get_coding_byte(char coding_byte);
+    bool param_checker(char *type, int index);
+    void set_reg(process_t *process, vm_t *vm, int new);
+    void set_mem(vm_t *vm, int pos, int new, int size);
 
 #endif /* !VM_H_ */

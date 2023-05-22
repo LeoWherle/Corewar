@@ -37,7 +37,11 @@ SRC = src/main.c \
 	  src/display/term_bff_print.c \
 	  src/vm/arena_load.c \
 	  src/vm/vm_init.c \
-	  src/instructions/instruction_live.c \
+	  src/get_arg/get_coding_byte.c	\
+	  src/get_arg/param_getter.c	\
+	  src/get_arg/param_setter.c	\
+	  src/instructions/instruction_live.c	\
+	  src/commands/cmd_add.c	\
 
 TEST_CRIT	=	\
 
