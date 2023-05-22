@@ -20,8 +20,7 @@
     /*
     ** HANDLERS
     */
-    // get the instruction from the bytecode (static const instructions _t i[])
-    void get_cmd(process_t *process, char bytecode);
+    void instruction_get(vm_t *vm);
 
     /*
     **  INSTRUCTIONS

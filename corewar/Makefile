@@ -39,6 +39,7 @@ SRC = src/main.c \
 	  src/vm/vm_init.c \
 	  src/get_arg/get_coding_byte.c	\
 	  src/get_arg/param_getter.c	\
+	  src/instructions/instruction_live.c \
 
 TEST_CRIT	=	\
 
