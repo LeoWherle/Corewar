@@ -54,3 +54,16 @@ char *get_coding_byte(char coding_byte)
     }
     return type;
 }
+
+bool param_checker(char *type, int index)
+{
+    for (int i = 0; i < op_tab[index].nbr_args; i++) {
+        if (!(type[i] & op_tab[index].type[i]))
+            return false;
+    }
+    for (int i = op_tab[index].nbr_args; i < MAX_ARGS_NUMBER; i++) {
+        if (type[i] != 0)
+            return false;
+    }
+    return true;
+}

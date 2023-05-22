@@ -129,5 +129,6 @@
     int param_getter(process_t *process, vm_t *vm, char type, int size);
     int *get_size(char *type, int index);
     char *get_coding_byte(char coding_byte);
+    bool param_checker(char *type, int index);
 
 #endif /* !VM_H_ */
