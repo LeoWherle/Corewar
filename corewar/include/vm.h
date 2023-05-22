@@ -63,7 +63,7 @@
         // instruction can be NULL if no instruction is running
         command_t instruction;
         // registers
-        char registr[REG_NUMBER];
+        int registr[REG_NUMBER];
     } process_t;
 
     typedef struct vm_s {
