@@ -28,6 +28,10 @@ static int print_is_alive(list_t *champions, int champion_id)
     return (false);
 }
 
+/*
+takes 1 parameter: 4 bytes that represent the player’s number.
+It indicates that the player is alive.
+*/
 void cmd_live(vm_t *vm, process_t *process)
 {
     int champion_id = 0;
