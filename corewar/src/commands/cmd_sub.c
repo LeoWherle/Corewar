@@ -37,7 +37,7 @@ void cmd_sub(vm_t *vm, process_t *process)
     if (command != 4 || !param_checker(type, command - 1)) {
         kill_process(process, vm);
     } else {
-        add_to_reg(vm, process, type, size);
+        sub_to_reg(vm, process, type, size);
     }
     free(type);
     free(size);
