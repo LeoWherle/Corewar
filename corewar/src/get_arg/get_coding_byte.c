@@ -27,11 +27,11 @@ static bool special_cases(int index, int i, char type)
 
 /**
  * @brief Get the size of all parameters
- * 
+ *
  * @param type type of all the parameters
  * (can be acquired with get_coding_byte)
  * @param index the index of the function in op_tab
- * @return int* 
+ * @return int*
  */
 int *get_size(char *type, int index)
 {
@@ -52,9 +52,9 @@ int *get_size(char *type, int index)
 
 /**
  * @brief Get the type of all of the arugments
- * 
- * @param coding_byte 
- * @return char* 
+ *
+ * @param coding_byte
+ * @return char*
  */
 char *get_coding_byte(char coding_byte)
 {
@@ -71,7 +71,7 @@ char *get_coding_byte(char coding_byte)
 
 /**
  * @brief check if the parameter type are valid
- * 
+ *
  * @param type the type of the parameters
  * @param index the index of the function in op_tab
  * @return true if parameters are valid

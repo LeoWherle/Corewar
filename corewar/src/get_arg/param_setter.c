@@ -8,11 +8,11 @@
 #include "vm.h"
 
 /**
- * @brief Set the new value to the register 
+ * @brief Set the new value to the register
  * that is at the actual index of the process
- * 
+ *
  * @param process the acutal process
- * @param vm 
+ * @param vm
  * @param new the value to set to the register
  */
 void set_reg(process_t *process, vm_t *vm, int new)
@@ -27,8 +27,8 @@ void set_reg(process_t *process, vm_t *vm, int new)
 /**
  * @brief Set new value at the position pos of the cbuffer of the vm
  * on size byte
- * 
- * @param vm 
+ *
+ * @param vm
  * @param pos the adress to write
  * @param new the value to write
  * @param size the size of the write

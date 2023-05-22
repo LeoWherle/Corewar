@@ -40,9 +40,9 @@ static int get_dir_ind(process_t *process, vm_t *vm, int size)
  * if it is a register it returns the value inside the register
  * else the raw value of the parameter.
  * Increment the process index by the size of the arg
- * 
- * @param process 
- * @param vm 
+ *
+ * @param process
+ * @param vm
  * @param type the type of the next parameter
  * @param size the size of the next parameter
  * @return int
