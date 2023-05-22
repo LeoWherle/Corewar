@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include "vm.h"
 
-int sub_to_reg(vm_t *vm, process_t *process, char *type, int *size)
+static int sub_to_reg(vm_t *vm, process_t *process, char *type, int *size)
 {
     int first = 0;
     int second = 0;
