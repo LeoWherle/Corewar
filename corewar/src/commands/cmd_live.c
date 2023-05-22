@@ -9,12 +9,13 @@
 #include "vm.h"
 #include "mystr.h"
 
-static int print_is_alive(list_t *champions, int champion_id)
+static int print_is_alive(list_t *champions, size_t champion_id)
 {
     node_t *tmp = NULL;
     champion_t *champion = NULL;
     char *name = NULL;
 
+    tmp = champions->head;
     while (tmp != NULL) {
         champion = tmp->data;
         if (champion->id == champion_id) {
@@ -28,9 +29,13 @@ static int print_is_alive(list_t *champions, int champion_id)
     return (false);
 }
 
+/*
+takes 1 parameter: 4 bytes that represent the player’s number.
+It indicates that the player is alive.
+*/
 void cmd_live(vm_t *vm, process_t *process)
 {
-    int champion_id = 0;
+    size_t champion_id = 0;
 
     process->index++;
     champion_id = cbuffer_geti(vm->arena, process->index);
