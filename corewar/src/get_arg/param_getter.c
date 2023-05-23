@@ -15,7 +15,7 @@ static int get_reg(process_t *process, vm_t *vm)
 
     cbuffer_get(vm->arena, &r, sizeof(char), process->index);
     process->index++;
-    return process->registr[r - 1];
+    return r;
 }
 
 static int get_dir_ind(process_t *process, vm_t *vm, int size)
