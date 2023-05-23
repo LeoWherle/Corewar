@@ -24,9 +24,7 @@ int lld_to_reg(vm_t *vm, process_t *process, char *type, int *size)
         tot = pos + value;
         value = cbuffer_geti(vm->arena, tot);
     }
-    if (value != 0) {
-        process->carry = 1;
-    }
+    process->carry = (tot == 0) ? 1 : 0;
     set_reg(process, vm, value);
     return value;
 }
@@ -45,9 +43,8 @@ void cmd_lld(vm_t *vm, process_t *process)
     if (command != 13 || !param_checker(type, command - 1)) {
         kill_process(process, vm);
     } else {
-        ld_to_reg(vm, process, type, size);
+        lld_to_reg(vm, process, type, size);
     }
     free(type);
     free(size);
 }
-

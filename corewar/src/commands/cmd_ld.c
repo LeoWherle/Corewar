@@ -29,9 +29,7 @@ int ld_to_reg(vm_t *vm, process_t *process, char *type, int *size)
         tot = pos + value % IDX_MOD;
         value = cbuffer_geti(vm->arena, tot);
     }
-    if (value != 0) {
-        process->carry = 1;
-    }
+    process->carry = (value == 0) ? 1 : 0;
     set_reg(process, vm, value);
     return value;
 }
