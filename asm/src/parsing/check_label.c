@@ -37,7 +37,7 @@ int is_valid_label(char *label)
 int is_label_matrix(char **args)
 {
     for (int i = 0; args[i]; i++) {
-        if (args[i][0] == DIRECT_CHAR && args[i][1] == LABEL_CHAR)
+        if (args[i][0] == LABEL_CHAR || args[i][1] == LABEL_CHAR)
             return 0;
     }
     return 1;
