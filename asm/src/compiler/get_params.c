@@ -34,7 +34,8 @@ char *get_type(char **arg, int index)
             type[i - 1] = DIR_CODE;
         }
         if (((arg[i][0] >= '0' && arg[i][0] <= '9') ||
-            arg[i][0] == '-') && (op_tab[index].type[i - 1] & T_IND)) {
+            arg[i][0] == LABEL_CHAR || arg[i][0] == '-') &&
+            (op_tab[index].type[i - 1] & T_IND)) {
             type[i - 1] = IND_CODE;
         }
     }
