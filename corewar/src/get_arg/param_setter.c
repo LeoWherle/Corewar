@@ -14,14 +14,20 @@
  * @param process the acutal process
  * @param vm
  * @param new the value to set to the register
+ * @return int 0 if ok -1 if ko
  */
-void set_reg(process_t *process, vm_t *vm, int new)
+int set_reg(process_t *process, vm_t *vm, int new)
 {
     char reg = '\0';
 
     reg = cbuffer_getb(vm->arena, process->index);
+    if (reg < 1 || reg > REG_NUMBER) {
+        kill_process(process, vm);
+        return -1;
+    }
     process->registr[reg - 1] = new;
     process->index++;
+    return 0;
 }
 
 /**
