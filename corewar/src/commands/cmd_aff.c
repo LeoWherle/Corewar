@@ -15,7 +15,6 @@ the character whose ASCII code is the content of the register (in base 10).
 A 256 modulo is applied to this ASCII code.
 aff r3 displays ’*’ if r3 contains 42.
 */
-
 static void print_reg(vm_t *vm, process_t *process, char *type, int *size)
 {
     int reg_nb = 0;
