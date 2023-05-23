@@ -18,7 +18,6 @@ void cmd_lfork(vm_t *vm, process_t *process)
     process_t *child = NULL;
     int new_index = 0;
 
-    command = cbuffer_getb(vm->arena, process->index);
     process->index++;
     param = param_getter(process, vm, IND_CODE, IND_SIZE);
     new_index = process->index + (param - (1 + IND_SIZE));
