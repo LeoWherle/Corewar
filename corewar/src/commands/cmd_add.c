@@ -6,7 +6,7 @@
 */
 
 #include <stdlib.h>
-#include "vm.h"
+#include "instructions.h"
 
 static int add_to_reg(vm_t *vm, process_t *process, char *type, int *size)
 {
