@@ -37,7 +37,7 @@ static int core_end(vm_t *vm)
         my_fputstr(1, "No winner\n");
         return (1);
     }
-    if (vm->champions->size == 1) {
+    if (count_champion_alive(vm) == 1) {
         my_fputstr(1, "The player ");
         my_fputnbr(1, ((champion_t *)vm->champions->head)->id);
         my_fputstr(1, "(");

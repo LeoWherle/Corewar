@@ -115,6 +115,7 @@
     */
     champion_t *champion_create(void);
     void champion_destroy(void *champion);
+    int count_champion_alive(vm_t *vm);
 
     /*
     ** process
