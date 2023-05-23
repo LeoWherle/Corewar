@@ -65,8 +65,7 @@ int code_parser(header_t *header, FILE *fd, list_t *com_list,
                 list_t *label_list)
 {
     char *line = NULL, **args = NULL;
-    size_t len = 0;
-    int shift = 0;
+    int len = 0, shift = 0;
     while (getline(&line, &len, fd) != -1) {
         line = clear_line(line);
         args = my_str_to_word_array(line, " \t,\n");
@@ -77,6 +76,7 @@ int code_parser(header_t *header, FILE *fd, list_t *com_list,
             continue;
         }
         shift = put_label_in_list(args, label_list, header->prog_size);
+        if (matrix_len(args) == shift) continue;
         if (!parse_line(line, shift, args)) return 84;
         if (check_valid_line(args + shift, com_list, header) == 84) return 84;
         free_matrix(args);
