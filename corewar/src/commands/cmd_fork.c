@@ -26,5 +26,5 @@ void cmd_fork(vm_t *vm, process_t *process)
     if (!child)
         kill_process(process, vm);
     else
-        node_append(child, vm->process);
+        node_append(vm->process, child);
 }
