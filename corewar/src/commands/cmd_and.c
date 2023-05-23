@@ -47,7 +47,6 @@ void cmd_and(vm_t *vm, process_t *process)
     char *type = NULL;
     int *size = NULL;
 
-    process->index++;
     coding_byte = cbuffer_getb(vm->arena, process->index + 1);
     type = get_coding_byte(coding_byte);
     size = get_size(type, command - 1);
