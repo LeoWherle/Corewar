@@ -36,11 +36,13 @@ It indicates that the player is alive.
 void cmd_live(vm_t *vm, process_t *process)
 {
     size_t champion_id = 0;
+    char command = '\0';
 
+    command = cbuffer_getb(vm->arena, process->index);
     process->index++;
     champion_id = cbuffer_geti(vm->arena, process->index);
     process->index += 4;
-    if (!print_is_alive(vm->champions, champion_id))
+    if (command != 1 || !print_is_alive(vm->champions, champion_id))
         kill_process(process, vm);
     else {
         vm->local_live++;
