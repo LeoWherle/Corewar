@@ -40,11 +40,10 @@ static void sti_to_reg(vm_t *vm, process_t *process, char *type, int *size)
 void cmd_sti(vm_t *vm, process_t *process)
 {
     char coding_byte = '\0';
-    char command = '\0';
+    char command = 11;
     char *type = NULL;
     int *size = NULL;
 
-    command = cbuffer_getb(vm->arena, process->index);
     coding_byte = cbuffer_getb(vm->arena, process->index + 1);
     type = get_coding_byte(coding_byte);
     size = get_size(type, command - 1);
