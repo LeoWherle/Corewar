@@ -99,6 +99,7 @@
     void core_loop(vm_t *vm);
     void instruction_exec(vm_t *vm);
     void instruction_get(vm_t *vm);
+    void core_cleanup(vm_t *vm);
     /*
     ** Display functions
     */
