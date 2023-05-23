@@ -18,18 +18,12 @@ aff r3 displays ’*’ if r3 contains 42.
 
 static void print_reg(vm_t *vm, process_t *process, char *type, int *size)
 {
-    int reg_nb = 0;
-    int tmp = 0;
+    int nb = 0;
     char c = '\0';
 
     process->index++;
-    reg_nb = param_getter(process, vm, type[0], size[0]);
-    if (reg_nb < 1 || reg_nb > REG_NUMBER) {
-        kill_process(process, vm);
-        return;
-    }
-    tmp = process->registr[reg_nb - 1];
-    c = tmp % 256;
+    nb = param_getter(process, vm, type[0], size[0]);
+    c = nb % 256;
     write(1, &c, 1);
 }
 
