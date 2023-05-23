@@ -102,7 +102,7 @@ int header_parser(header_t *header, FILE *fd)
     int got_name = false;
     int got_comment = false;
 
-    while (getline(&line, &size, fd) != -1) {
+    while (getline(&line, &size, fd) != -1 && line[0] != '\0') {
         if (line[0] == COMMENT_CHAR)
             continue;
         line = clear_line(line);
