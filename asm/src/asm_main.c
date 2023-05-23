@@ -14,35 +14,6 @@
 #include "op.h"
 #include "asm.h"
 
-void free_label(void *ptr)
-{
-    label_t *label = NULL;
-
-    label = ptr;
-    free(label->name);
-    free(label);
-}
-
-void free_command(void *ptr)
-{
-    command_t *command = NULL;
-
-    command = ptr;
-    free_matrix(command->line);
-    free(command->param_type);
-    free(command->param_size);
-    free(command->parameters);
-    free(command);
-}
-
-static int free_list(list_t *com_list, list_t *label_list, int r)
-{
-    free(label_list->interface);
-    list_destroy(label_list, free_label);
-    list_destroy(com_list, free_command);
-    return r;
-}
-
 int compile_and_print(list_t *com_list, list_t *label_list,
                     header_t *header, char **av)
 {
@@ -60,20 +31,34 @@ int compile_and_print(list_t *com_list, list_t *label_list,
     return free_list(com_list, label_list, 0);
 }
 
+FILE *open_file(char *name, header_t *header)
+{
+    FILE *fd = NULL;
+
+    fd = fopen(name, "r");
+    if (!fd)
+        return NULL;
+    if (my_strcmp(name + my_strlen(name) - 2, ".s") != 0)
+        return NULL;
+    header->magic = COREWAR_EXEC_MAGIC;
+    header->prog_size = 0;
+    return fd;
+}
+
 int main(int ac, char **av)
 {
-    list_t *com_list = list_init();
-    list_t *label_list = list_init();
+    list_t *com_list = NULL;
+    list_t *label_list = NULL;
     header_t header = {0};
     FILE *fd = NULL;
 
     if (ac != 2)
-        return free_list(com_list, label_list, 84);
-    fd = fopen(av[1], "r");
+        return 84;
+    fd = open_file(av[1], &header);
     if (!fd)
-        return free_list(com_list, label_list, 84);
-    header.magic = COREWAR_EXEC_MAGIC;
-    header.prog_size = 0;
+        return 84;
+    com_list = list_init();
+    label_list = list_init();
     if (header_parser(&header, fd) == 84)
         return free_list(com_list, label_list, 84);
     fseek(fd, 0, SEEK_SET);

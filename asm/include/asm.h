@@ -38,13 +38,25 @@
         int (*ptr)(char *, char *, int, int);
     } arg_type_t;
 
+    typedef struct parser_s {
+        char *line;
+        char **args;
+        size_t len;
+        int shift;
+    } parser_t;
+
+    //add functions
     int add_register(char *dest, char *arg, int i, int delta);
     int add_direct(char *dest, char *arg, int i, int delta);
     int add_indirect(char *dest, char *arg, int i, int delta);
     bool line_to_command(command_t *com);
+
+    //getter functions
     char *get_type(char **arg, int index);
     int *get_size(char *type, int index);
     char *get_param(int *param_size, char *type, char **arg, int index);
+
+    //parser funcitions
     char *clear_line(char *line);
     int header_parser(header_t *header, FILE *fd);
     int get_instrucion(char *instruction);
@@ -55,5 +67,6 @@
     int put_label_in_list(char **args, list_t *label_list, int prog_size);
     bool print_comp(list_t *command, header_t *head, char *name);
     bool search_in_command(list_t *commands, list_t *labels);
+    int free_list(list_t *com_list, list_t *label_list, int r);
 
 #endif /* ASM_H */

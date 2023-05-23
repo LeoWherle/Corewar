@@ -23,6 +23,7 @@ RESET		=	\033[0m
 NAME = asm
 
 SRC =	src/asm_main.c	\
+		src/free_lists.c	\
 		src/compiler/command_to_data.c	\
 		src/compiler/add_param.c	\
 		src/compiler/replace_label.c	\
