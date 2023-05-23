@@ -22,6 +22,7 @@ static int print_is_alive(list_t *champions, size_t champion_id)
             name = champion->header.prog_name;
             my_fprintf(1, "The champion %d (%s) is alive.\n",
             champion_id, name);
+            champion->alive = true;
             return (true);
         }
         tmp = tmp->next;
@@ -46,6 +47,5 @@ void cmd_live(vm_t *vm, process_t *process)
         kill_process(process, vm);
     else {
         vm->local_live++;
-        process->champion->alive = true;
     }
 }
