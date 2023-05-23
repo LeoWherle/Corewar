@@ -57,3 +57,23 @@ void instruction_get(vm_t *vm)
 {
     list_foreach_wargs(vm->process, &instruction_get_process, vm, NULL);
 }
+
+/**
+ * @brief return false if the reg is not valid
+ *
+ * @param process process to handle
+ * @param vm vm to handle
+ * @param type type of the param
+ * @param size size of the param
+ * @return int
+ */
+bool get_param_value(process_t *process, char type, int *param)
+{
+    if (type == REG_CODE && *param == -1) {
+        return false;
+    }
+    if (type == REG_CODE) {
+        *param = process->registr[*param - 1];
+    }
+    return true;
+}
