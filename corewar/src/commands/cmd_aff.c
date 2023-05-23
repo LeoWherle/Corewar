@@ -35,16 +35,15 @@ static void print_reg(vm_t *vm, process_t *process, char *type, int *size)
 void cmd_aff(vm_t *vm, process_t *process)
 {
     char coding_byte = '\0';
-    char command = '\0';
+    char command = 16;
     char *type = NULL;
     int *size = NULL;
 
-    command = cbuffer_getb(vm->arena, process->index);
     process->index++;
     coding_byte = cbuffer_getb(vm->arena, process->index);
     type = get_coding_byte(coding_byte);
     size = get_size(type, command - 1);
-    if (command != 16 || !param_checker(type, command - 1)) {
+    if (!param_checker(type, command - 1)) {
         kill_process(process, vm);
     } else {
         print_reg(vm, process, type, size);
