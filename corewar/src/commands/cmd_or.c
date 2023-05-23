@@ -11,7 +11,7 @@
 /*
 Similar to and, but performing a binary OR.
 */
-static int or_to_reg(vm_t *vm, process_t *process, char *type, int *size)
+static void or_to_reg(vm_t *vm, process_t *process, char *type, int *size)
 {
     int first = 0;
     int second = 0;
@@ -22,17 +22,17 @@ static int or_to_reg(vm_t *vm, process_t *process, char *type, int *size)
     first = param_getter(process, vm, type[0], size[0]);
     second = param_getter(process, vm, type[1], size[1]);
     if (type[0] == REG_CODE) {
-        if (first < 1 || first > REG_NUMBER) return 1;
+        if (first < 1 || first > REG_NUMBER) return;
         first = process->registr[first - 1];
     } else if (type[0] == IND_CODE)
         first = cbuffer_gets(vm->arena, pos + first);
     if (type[1] == REG_CODE) {
-        if (second < 1 || second > REG_NUMBER) return 1;
+        if (second < 1 || second > REG_NUMBER) return;
         second = process->registr[second - 1];
     } else if (type[1] == IND_CODE)
         second = cbuffer_gets(vm->arena, pos + second);
-    set_reg(process, vm, first | second);
-    return first | second;
+    if (set_reg(process, vm, first | second) == -1) return;
+    process->carry = (first | second) ? 0 : 1;
 }
 
 void cmd_or(vm_t *vm, process_t *process)
@@ -50,7 +50,7 @@ void cmd_or(vm_t *vm, process_t *process)
     if (command != 4 || !param_checker(type, command - 1)) {
         kill_process(process, vm);
     } else {
-        process->carry = (!or_to_reg(vm, process, type, size)) ? 1 : 0;
+        or_to_reg(vm, process, type, size);
     }
     free(type);
     free(size);

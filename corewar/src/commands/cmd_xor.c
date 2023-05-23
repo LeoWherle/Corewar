@@ -31,8 +31,8 @@ static void xor_to_reg(vm_t *vm, process_t *process, char *type, int *size)
         second = process->registr[second - 1];
     } else if (type[1] == IND_CODE)
         second = cbuffer_gets(vm->arena, pos + second);
-    if (set_reg(process, vm, first | second) == -1) return;
-    process->carry = (first | second) ? 0 : 1;
+    if (set_reg(process, vm, first ^ second) == -1) return;
+    process->carry = (first ^ second) ? 0 : 1;
 }
 
 void cmd_xor(vm_t *vm, process_t *process)
