@@ -5,7 +5,7 @@
 ** instruction or for the VM
 */
 
-#include "vm.h"
+#include <stdlib.h>
 #include "instructions.h"
 
 /*

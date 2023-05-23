@@ -2,13 +2,13 @@
 ** EPITECH PROJECT, 2023
 ** corewar
 ** File description:
-** add
+** instruction add for the VM
 */
 
 #include <stdlib.h>
-#include "vm.h"
+#include "instructions.h"
 
-int add_to_reg(vm_t *vm, process_t *process, char *type, int *size)
+static int add_to_reg(vm_t *vm, process_t *process, char *type, int *size)
 {
     int first = 0;
     int second = 0;

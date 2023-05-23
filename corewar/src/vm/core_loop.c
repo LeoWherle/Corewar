@@ -33,11 +33,14 @@
 
 static int core_end(vm_t *vm)
 {
-    if (vm->champions->size == 0) {
-        my_putstr("No winner\n");
+    int champion_alive = 0;
+
+    champion_alive = count_champion_alive(vm);
+    if (champion_alive == 0) {
+        my_fputstr(1, "No winner\n");
         return (1);
     }
-    if (vm->champions->size == 1) {
+    if (champion_alive == 1) {
         my_fputstr(1, "The player ");
         my_fputnbr(1, ((champion_t *)vm->champions->head)->id);
         my_fputstr(1, "(");
@@ -52,7 +55,6 @@ static void kill_champion_processes(vm_t *vm, champion_t *champion)
 {
     node_t *node = vm->process->head;
     process_t *process = NULL;
-    process_t *temp = NULL;
 
     while (node != NULL) {
         process = node->data;
@@ -63,7 +65,7 @@ static void kill_champion_processes(vm_t *vm, champion_t *champion)
     }
 }
 
-static void champion_reset_live(any_t data, void *vm_ptr)
+static void champion_reset_live(any_t data, void *vm_ptr, UNUSED void *none)
 {
     champion_t *champion = data;
     vm_t *vm = vm_ptr;
@@ -84,14 +86,13 @@ static int core_check(vm_t *vm)
         vm->cycle_amount = 0;
         vm->curr_period++;
         if (vm->has_dump && vm->total_cycle >= vm->dump_cycle) {
-            print_string_byte_per_byte(vm->arena, vm->arena->size);
+            print_string_byte_per_byte(vm->arena->data, vm->arena->size);
             return 1;
         }
         if (vm->local_live >= NBR_LIVE) {
             vm->cycle_to_die -= CYCLE_DELTA;
             vm->local_live = 0;
-            list_foreach(vm->champions, &champion_reset_live);
-
+            list_foreach_wargs(vm->champions, &champion_reset_live, vm, NULL);
         }
     }
     return 0;
