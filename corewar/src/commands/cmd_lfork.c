@@ -28,7 +28,9 @@ void cmd_lfork(vm_t *vm, process_t *process)
         child = process_duplicate(process->champion, new_index);
         if (!child)
             kill_process(process, vm);
-        else
+        else {
             node_append(child, vm->process);
+            process->champion->process_count++;
+        }
     }
 }
