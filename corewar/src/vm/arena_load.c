@@ -91,6 +91,5 @@ int champion_load_into_arena(vm_t *vm, args_t *args)
             return 1;
         node = node->next;
     }
-    print_string_byte_per_byte(vm->arena->data, vm->arena->size);
     return 0;
 }
