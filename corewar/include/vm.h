@@ -102,7 +102,9 @@
     /*
     ** Display functions
     */
+    void put_byte_as_hex(char byte, char *arena);
     void print_string_byte_per_byte(char *str, size_t size);
+    void debug_print_process_status(vm_t *vm);
 
     /*
     ** vm

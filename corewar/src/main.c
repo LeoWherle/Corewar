@@ -49,6 +49,8 @@ int main(int ac, const char *av[])
     ret = init_corewar(&vm, ac, av);
     if (ret != 0)
         return (ret);
+    core_loop(vm);
+    debug_print_process_status(vm);
     free_corewar(vm);
     return (ret);
 }
