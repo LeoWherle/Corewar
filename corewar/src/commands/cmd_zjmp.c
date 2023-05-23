@@ -16,5 +16,11 @@ zjmp %23 puts, if carry equals 1, PC + 23 % IDX_MOD into the PC.
 */
 void cmd_zjmp(vm_t *vm, process_t *process)
 {
+    int param = 0;
 
+    process->index++;
+    if (process->carry == 1){
+        param = param_getter(process, vm, IND_CODE, IND_SIZE);
+        process->index += (param % IDX_MOD - (1 + IND_SIZE));
+    }
 }
