@@ -55,4 +55,3 @@ void cmd_sti(vm_t *vm, process_t *process)
     free(type);
     free(size);
 }
-
