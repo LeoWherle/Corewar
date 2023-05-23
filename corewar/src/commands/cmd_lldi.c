@@ -13,26 +13,26 @@ Similar to ldi without the % IDX_MOD. This operation modifies the carry.
 */
 int lldi_to_reg(vm_t *vm, process_t *process, char *type, int *size)
 {
-    int value = 0;
-    int s = 0;
-    int pos = 0;
-    int to_add = 0;
-    int tot = 0;
+    ldi_t ldi = {0, 0, 0, 0, 0};
 
-    pos = process->index;
+    ldi.pos = process->index;
     process->index += 2;
-    value = param_getter(process, vm, type[0], size[0]);
-    to_add = param_getter(process, vm, type[1], size[1]);
+    ldi.value = param_getter(process, vm, type[0], size[0]);
+    if (!get_param_value(process, type[0], &ldi.value))
+        return 0;
+    ldi.to_add = param_getter(process, vm, type[1], size[1]);
+    if (!get_param_value(process, type[1], &ldi.to_add))
+        return 0;
     if (type[0] == IND_CODE) {
-        tot = pos + value;
-        s = cbuffer_gets(vm->arena, tot);
+        ldi.tot = ldi.pos + ldi.value;
+        ldi.s = cbuffer_gets(vm->arena, ldi.tot);
     }
-    s += to_add;
-    tot = pos + s;
-    value = cbuffer_geti(vm->arena, tot);
-    process->carry = (value == 0) ? 1 : 0;
-    set_reg(process, vm, value);
-    return value;
+    ldi.s += ldi.to_add;
+    ldi.tot = ldi.pos + ldi.s;
+    ldi.value = cbuffer_geti(vm->arena, ldi.tot);
+    process->carry = (ldi.value == 0) ? 1 : 0;
+    set_reg(process, vm, ldi.value);
+    return ldi.value;
 }
 
 void cmd_lldi(vm_t *vm, process_t *process)
@@ -49,7 +49,7 @@ void cmd_lldi(vm_t *vm, process_t *process)
     if (command != 10 || !param_checker(type, command - 1)) {
         kill_process(process, vm);
     } else {
-        ldi_to_reg(vm, process, type, size);
+        lldi_to_reg(vm, process, type, size);
     }
     free(type);
     free(size);

@@ -19,17 +19,21 @@ static void sti_to_reg(vm_t *vm, process_t *process, char *type, int *size)
     int first = 0;
     int second = 0;
     int tot = 0;
-    int pos = 0;
+    int pos = process->index;
     int reg = 0;
 
-    pos = process->index;
     process->index += 2;
     reg = param_getter(process, vm, type[0], size[0]);
+    if (!get_param_value(process, type[0], &reg))
+        return;
     first = param_getter(process, vm, type[1], size[1]);
+    if (!get_param_value(process, type[1], &first))
+        return;
     second = param_getter(process, vm, type[2], size[2]);
-    if (type[1] == IND_CODE) {
+    if (!get_param_value(process, type[2], &second))
+        return;
+    if (type[1] == IND_CODE)
         first = cbuffer_geti(vm->arena, pos + first % IDX_MOD);
-    }
     set_mem(vm, pos + (first + second) % IDX_MOD,
     SWAP_INT32_SAFE(reg), REG_SIZE);
 }

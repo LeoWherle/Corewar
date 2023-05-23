@@ -25,6 +25,8 @@ int ld_to_reg(vm_t *vm, process_t *process, char *type, int *size)
     pos = process->index;
     process->index += 2;
     value = param_getter(process, vm, type[0], size[0]);
+    if (!get_param_value(process, type[0], &value))
+        return 0;
     if (type[0] == IND_CODE) {
         tot = pos + value % IDX_MOD;
         value = cbuffer_geti(vm->arena, tot);
