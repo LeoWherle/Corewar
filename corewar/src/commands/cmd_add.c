@@ -26,6 +26,7 @@ static int add_to_reg(vm_t *vm, process_t *process, char *type, int *size)
     second = process->registr[tmp_reg - 1];
     tot = first + second;
     set_reg(process, vm, tot);
+    process->carry = tot == 0 ? 1 : 0;
     return tot;
 }
 

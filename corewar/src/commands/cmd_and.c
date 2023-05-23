@@ -27,6 +27,7 @@ static int and_to_reg(vm_t *vm, process_t *process, char *type, int *size)
     second = param_getter(process, vm, type[1], size[1]);
     tot = first & second;
     set_reg(process, vm, tot);
+    process->carry = (tot == 0) ? 1 : 0;
     return tot;
 }
 
@@ -42,7 +43,7 @@ void cmd_and(vm_t *vm, process_t *process)
     coding_byte = cbuffer_getb(vm->arena, process->index);
     type = get_coding_byte(coding_byte);
     size = get_size(type, command - 1);
-    if (command != 4 || !param_checker(type, command - 1)) {
+    if (command != 6 || !param_checker(type, command - 1)) {
         kill_process(process, vm);
     } else {
         and_to_reg(vm, process, type, size);
