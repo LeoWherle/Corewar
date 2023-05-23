@@ -60,12 +60,12 @@ void instruction_get(vm_t *vm)
 
 /**
  * @brief return false if the reg is not valid
- * 
- * @param process 
- * @param vm 
- * @param type 
- * @param size 
- * @return int 
+ *
+ * @param process process to handle
+ * @param vm vm to handle
+ * @param type type of the param
+ * @param size size of the param
+ * @return int
  */
 bool get_param_value(process_t *process, char type, int *param)
 {
