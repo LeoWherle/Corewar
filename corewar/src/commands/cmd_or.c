@@ -38,11 +38,10 @@ static void or_to_reg(vm_t *vm, process_t *process, char *type, int *size)
 void cmd_or(vm_t *vm, process_t *process)
 {
     char coding_byte = '\0';
-    char command = '\0';
+    char command = 7;
     char *type = NULL;
     int *size = NULL;
 
-    command = cbuffer_getb(vm->arena, process->index);
     process->index++;
     coding_byte = cbuffer_getb(vm->arena, process->index);
     type = get_coding_byte(coding_byte);
