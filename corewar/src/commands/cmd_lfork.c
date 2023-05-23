@@ -13,7 +13,6 @@ Similar to fork without the % IDX_MOD.
 */
 void cmd_lfork(vm_t *vm, process_t *process)
 {
-    char command = 15;
     int param = 0;
     process_t *child = NULL;
     int new_index = 0;

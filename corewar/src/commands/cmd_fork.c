@@ -15,7 +15,6 @@ This program is executed at the address PC + first parameter % IDX_MOD.
 */
 void cmd_fork(vm_t *vm, process_t *process)
 {
-    char command = 12;
     int param = 0;
     process_t *child = NULL;
     int new_index = 0;
