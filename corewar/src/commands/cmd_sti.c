@@ -18,7 +18,6 @@ static void sti_to_reg(vm_t *vm, process_t *process, char *type, int *size)
 {
     int first = 0;
     int second = 0;
-    int tot = 0;
     int pos = process->index;
     int reg = 0;
 
@@ -49,10 +48,10 @@ void cmd_sti(vm_t *vm, process_t *process)
     coding_byte = cbuffer_getb(vm->arena, process->index + 1);
     type = get_coding_byte(coding_byte);
     size = get_size(type, command - 1);
-    if (command != 11 || !param_checker(type, command - 1)) {
+    if (!param_checker(type, command - 1)) {
         kill_process(process, vm);
     } else {
-        st_to_reg(vm, process, type, size);
+        sti_to_reg(vm, process, type, size);
     }
     free(type);
     free(size);

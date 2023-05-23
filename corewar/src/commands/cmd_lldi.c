@@ -46,7 +46,7 @@ void cmd_lldi(vm_t *vm, process_t *process)
     coding_byte = cbuffer_getb(vm->arena, process->index + 1);
     type = get_coding_byte(coding_byte);
     size = get_size(type, command - 1);
-    if (command != 10 || !param_checker(type, command - 1)) {
+    if (!param_checker(type, command - 1)) {
         kill_process(process, vm);
     } else {
         lldi_to_reg(vm, process, type, size);
