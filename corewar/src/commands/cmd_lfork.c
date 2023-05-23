@@ -13,7 +13,6 @@ Similar to fork without the % IDX_MOD.
 */
 void cmd_lfork(vm_t *vm, process_t *process)
 {
-    char command = 15;
     int param = 0;
     process_t *child = NULL;
     int new_index = 0;
@@ -21,9 +20,9 @@ void cmd_lfork(vm_t *vm, process_t *process)
     process->index++;
     param = param_getter(process, vm, IND_CODE, IND_SIZE);
     new_index = process->index + (param - (1 + IND_SIZE));
-    child = process_duplicate(process->champion, new_index);
+    child = process_duplicate(process, new_index);
     if (!child)
         kill_process(process, vm);
     else
-        node_append(child, vm->process);
+        node_append(vm->process, child);
 }
