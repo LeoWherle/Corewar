@@ -65,7 +65,7 @@ int code_parser(header_t *header, FILE *fd, list_t *com_list,
                 list_t *label_list)
 {
     char *line = NULL, **args = NULL;
-    int len = 0, shift = 0;
+    size_t len = 0; int shift = 0;
     while (getline(&line, &len, fd) != -1) {
         line = clear_line(line);
         args = my_str_to_word_array(line, " \t,\n");
