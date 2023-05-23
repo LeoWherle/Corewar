@@ -30,6 +30,7 @@
 #include "serrorh.h"
 #include "instructions.h"
 #include "mystr.h"
+#include "ansi_colors.h"
 
 static int core_end(vm_t *vm)
 {
@@ -103,9 +104,9 @@ void core_loop(vm_t *vm)
     while (vm->cycle_to_die > 0) {
         instruction_get(vm);
         instruction_exec(vm);
-        if (core_check(vm))
-            return;
         if (core_end(vm))
+            return;
+        if (core_check(vm))
             return;
         core_cleanup(vm);
     }
