@@ -6,7 +6,7 @@
 */
 
 #include <unistd.h>
-#include "vm.h"
+#include "instructions.h"
 #include "mystr.h"
 
 static int print_is_alive(list_t *champions, size_t champion_id)
