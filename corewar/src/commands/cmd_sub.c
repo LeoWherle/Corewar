@@ -19,10 +19,7 @@ static int sub_to_reg(vm_t *vm, process_t *process, char *type, int *size)
     second = param_getter(process, vm, type[1], size[1]);
     tot = first - second;
     set_reg(process, vm, tot);
-    if (tot == 0)
-        process->carry = 1;
-    else
-        process->carry = 0;
+    process->carry = (tot == 0) ? 1 : 0;
     return tot;
 }
 
