@@ -66,8 +66,10 @@ static void champ_asign_address(args_t *arg, champion_t *champion, int i)
         pos = i * ((MEM_SIZE) / arg->nb_champions);
         champion->laddress_value = pos;
     }
-    DEBUGF(WHT"Champion "BLU"%s"WHT" is loaded at "GRN"%d"CRESET"\n",
+    DEBUGF("Champion "BLU"%s"CRESET" is loaded at "CYN"%d"CRESET,
         champion->header.prog_name, champion->laddress_value);
+    DEBUGF(" with id "GRN"%d"CRESET" and size "YEL"%d"CRESET"\n",
+        champion->id, champion->header.prog_size);
 }
 
 /**

@@ -36,7 +36,29 @@ SRC = src/main.c \
 	  src/processes/process_list_create.c \
 	  src/display/term_bff_print.c \
 	  src/vm/arena_load.c \
+	  src/vm/core_loop.c \
 	  src/vm/vm_init.c \
+	  src/get_arg/get_coding_byte.c	\
+	  src/get_arg/param_getter.c	\
+	  src/get_arg/param_setter.c	\
+	  src/instructions/instruction_exec.c \
+	  src/instructions/instruction_getter.c \
+	  src/commands/cmd_add.c	\
+	  src/commands/cmd_aff.c \
+	  src/commands/cmd_and.c \
+	  src/commands/cmd_fork.c \
+	  src/commands/cmd_ld.c \
+	  src/commands/cmd_ldi.c \
+	  src/commands/cmd_lfork.c \
+	  src/commands/cmd_live.c \
+	  src/commands/cmd_lld.c \
+	  src/commands/cmd_lldi.c \
+	  src/commands/cmd_or.c \
+	  src/commands/cmd_st.c \
+	  src/commands/cmd_sti.c \
+	  src/commands/cmd_sub.c \
+	  src/commands/cmd_xor.c \
+	  src/commands/cmd_zjmp.c \
 
 TEST_CRIT	=	\
 
