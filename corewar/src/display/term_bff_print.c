@@ -7,10 +7,11 @@
 
 #include <unistd.h>
 #include "mystr.h"
+#include "ansi_colors.h"
 #include "serrorh.h"
 #include "vm.h"
 
-static void put_byte_as_hex(char byte, char *arena)
+void put_byte_as_hex(char byte, char *arena)
 {
     const char hex_digits[] = "0123456789ABCDEF";
 
@@ -21,7 +22,7 @@ static void put_byte_as_hex(char byte, char *arena)
 
 void print_string_byte_per_byte(char *str, size_t size)
 {
-    char arena[(MEM_SIZE * 3) + (MEM_SIZE / 32) + 1];
+    char arena[(MEM_SIZE * 3) + (MEM_SIZE / 32)];
     char *arena_ptr = NULL;
 
     arena_ptr = arena;
@@ -33,6 +34,5 @@ void print_string_byte_per_byte(char *str, size_t size)
         arena_ptr += 3;
     }
     *arena_ptr++ = '\n';
-    *arena_ptr = '\0';
     write(1, arena, sizeof(arena));
 }

@@ -35,8 +35,10 @@ SRC = src/main.c \
 	  src/processes/process_init.c \
 	  src/processes/process_list_create.c \
 	  src/display/term_bff_print.c \
+	  src/display/debug_print_all.c \
 	  src/vm/arena_load.c \
 	  src/vm/core_loop.c \
+	  src/vm/core_cleanup.c \
 	  src/vm/vm_init.c \
 	  src/get_arg/get_coding_byte.c	\
 	  src/get_arg/param_getter.c	\

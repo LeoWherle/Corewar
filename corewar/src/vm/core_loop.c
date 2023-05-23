@@ -33,11 +33,14 @@
 
 static int core_end(vm_t *vm)
 {
-    if (vm->champions->size == 0) {
+    int champion_alive = 0;
+
+    champion_alive = count_champion_alive(vm);
+    if (champion_alive == 0) {
         my_fputstr(1, "No winner\n");
         return (1);
     }
-    if (vm->champions->size == 1) {
+    if (champion_alive == 1) {
         my_fputstr(1, "The player ");
         my_fputnbr(1, ((champion_t *)vm->champions->head)->id);
         my_fputstr(1, "(");
@@ -104,5 +107,6 @@ void core_loop(vm_t *vm)
             return;
         if (core_end(vm))
             return;
+        core_cleanup(vm);
     }
 }

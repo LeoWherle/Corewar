@@ -32,6 +32,21 @@ WUR champion_t *champion_create(void)
     return champion;
 }
 
+int count_champion_alive(vm_t *vm)
+{
+    int count = 0;
+    node_t *node = vm->champions->head;
+    champion_t *champion = NULL;
+
+    while (node != NULL) {
+        champion = node->data;
+        if (champion->alive)
+            count++;
+        node = node->next;
+    }
+    return count;
+}
+
 void champion_destroy(void *champ)
 {
     champion_t *champion = champ;

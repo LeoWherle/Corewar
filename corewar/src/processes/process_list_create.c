@@ -22,6 +22,7 @@ int init_champion_processes(vm_t *vm)
         new_process->cycle_to_wait = 0;
         for (int i = 0; i < REG_NUMBER; i++)
             new_process->registr[i] = 0;
+        new_process->registr[0] = ((champion_t *)(node->data))->id;
         node_append(vm->process, new_process);
         DEBUGF(WHT"new Process for champion "BLU"%s"WHT" at "GRN"%d"CRESET"\n",
             ((champion_t *)(node->data))->header.prog_name, new_process->index);
