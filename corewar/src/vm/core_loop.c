@@ -107,5 +107,6 @@ void core_loop(vm_t *vm)
             return;
         if (core_end(vm))
             return;
+        core_cleanup(vm);
     }
 }

@@ -38,6 +38,7 @@ SRC = src/main.c \
 	  src/display/debug_print_all.c \
 	  src/vm/arena_load.c \
 	  src/vm/core_loop.c \
+	  src/vm/core_cleanup.c \
 	  src/vm/vm_init.c \
 	  src/get_arg/get_coding_byte.c	\
 	  src/get_arg/param_getter.c	\
