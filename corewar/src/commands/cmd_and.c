@@ -6,7 +6,7 @@
 */
 
 #include <stdlib.h>
-#include "vm.h"
+#include "instructions.h"
 
 /*
 takes 3 parameters.
