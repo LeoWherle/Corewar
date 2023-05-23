@@ -6,7 +6,7 @@
 */
 
 #include <stdlib.h>
-#include "vm.h"
+#include "instructions.h"
 
 static int sub_to_reg(vm_t *vm, process_t *process, char *type, int *size)
 {

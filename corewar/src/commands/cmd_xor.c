@@ -6,7 +6,7 @@
 */
 
 #include <stdlib.h>
-#include "vm.h"
+#include "instructions.h"
 
 /*
 Similar to and, but performing a binary XOR (exclusive OR).
