@@ -44,3 +44,16 @@ void kill_process(process_t *process, vm_t *vm)
     process->champion->process_count--;
     node_delete(vm->process, process, process_destroy);
 }
+
+process_t *process_duplicate(process_t *process, int index)
+{
+    process_t *new = NULL;
+
+    new = process_create(process->champion);
+    ASSERT_MALLOC(new, NULL);
+    new->carry = process->carry;
+    new->index = index;
+    for (int i = 0; i < REG_NUMBER; i++)
+        new->registr[i] = process->registr[i];
+    return new;
+}
