@@ -7,6 +7,7 @@
 
 #include <stdlib.h>
 #include "vm.h"
+#include "serrorh.h"
 #include "herror.h"
 
 static void champion_init(champion_t *champion)
@@ -47,6 +48,21 @@ int count_champion_alive(vm_t *vm)
         node = node->next;
     }
     return count;
+}
+
+champion_t *get_champion_alive(list_t *champions)
+{
+    node_t *node = NULL;
+    champion_t *champion = NULL;
+
+    node = champions->head;
+    while (node != NULL) {
+        champion = node->data;
+        if (champion->alive)
+            return champion;
+        node = node->next;
+    }
+    return NULL;
 }
 
 void champion_destroy(void *champ)
