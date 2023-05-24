@@ -35,18 +35,17 @@
 static int core_end(vm_t *vm)
 {
     int champion_alive = 0;
+    champion_t *champion = NULL;
 
     champion_alive = count_champion_alive(vm);
     if (champion_alive == 0) {
         my_fputstr(1, "No winner\n");
         return (1);
     }
-    if (champion_alive == 1) {
-        my_fputstr(1, "The player ");
-        my_fputnbr(1, ((champion_t *)vm->champions->head)->id);
-        my_fputstr(1, "(");
-        my_fputstr(1, ((champion_t *)vm->champions->head)->header.prog_name);
-        my_fputstr(1, ")has won.\n");
+    champion = get_champion_alive(vm->champions);
+    if (champion_alive == 1 && champion != NULL) {
+        my_fprintf(1, "The player %d(%s) has won.\n",
+            champion->id, champion->header.prog_name);
         return (1);
     }
     return (0);
