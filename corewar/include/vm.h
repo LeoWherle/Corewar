@@ -49,6 +49,7 @@
         char *file_path;
         // header
         struct header_s header;
+        bool dead;
     } champion_t;
 
     typedef struct process_s {
@@ -93,6 +94,8 @@
     int champion_load_into_arena(vm_t *vm, args_t *args);
     int init_champs_into_vm(args_t *args, vm_t *vm);
     int init_champion_processes(vm_t *vm);
+    void champion_reset_live(any_t data, UNUSED void *vm_ptr,
+    UNUSED void *none);
 
     /*
     ** game loop
