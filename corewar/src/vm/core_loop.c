@@ -86,10 +86,6 @@ static int core_check(vm_t *vm)
     if (vm->cycle_amount >= vm->cycle_to_die) {
         vm->cycle_amount = 0;
         vm->curr_period++;
-        if (vm->has_dump && vm->total_cycle >= vm->dump_cycle) {
-            print_string_byte_per_byte(vm->arena->data, vm->arena->size);
-            return 1;
-        }
         if (vm->local_live >= NBR_LIVE) {
             vm->cycle_to_die -= CYCLE_DELTA;
             vm->local_live = 0;
@@ -98,6 +94,10 @@ static int core_check(vm_t *vm)
         if (core_end(vm))
             return 1;
         list_foreach_wargs(vm->champions, &champion_reset_live, vm, NULL);
+    }
+    if (vm->has_dump && vm->total_cycle >= vm->dump_cycle) {
+        print_string_byte_per_byte(vm->arena->data, vm->arena->size);
+        return 1;
     }
     return 0;
 }
