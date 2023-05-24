@@ -56,9 +56,9 @@
     */
     int param_getter(process_t *process, vm_t *vm, char type, int size);
     bool get_param_value(process_t *process, char type, int *param);
-    int *get_size(char *type, int index);
-    char *get_coding_byte(char coding_byte);
-    bool param_checker(char *type, int index);
+    int *get_size(unsigned char *type, int index);
+    unsigned char *get_coding_byte(unsigned char coding_byte);
+    bool param_checker(unsigned char *type, int index);
     int set_reg(process_t *process, vm_t *vm, int new);
     void set_mem(vm_t *vm, int pos, int new, int size);
 

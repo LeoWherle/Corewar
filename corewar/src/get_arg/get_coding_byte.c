@@ -33,7 +33,7 @@ static bool special_cases(int index, int i, char type)
  * @param index the index of the function in op_tab
  * @return int*
  */
-int *get_size(char *type, int index)
+int *get_size(unsigned char *type, int index)
 {
     int *size = NULL;
 
@@ -57,9 +57,9 @@ int *get_size(char *type, int index)
  * @param coding_byte
  * @return char*
  */
-char *get_coding_byte(char coding_byte)
+unsigned char *get_coding_byte(unsigned char coding_byte)
 {
-    char *type = NULL;
+    unsigned char *type = NULL;
 
     type = malloc(MAX_ARGS_NUMBER * sizeof(char));
     ASSERT_MALLOC(type, NULL);
@@ -78,7 +78,7 @@ char *get_coding_byte(char coding_byte)
  * @return true if parameters are valid
  * @return false if parameters aren't valid
  */
-bool param_checker(char *type, int index)
+bool param_checker(unsigned char *type, int index)
 {
     for (int i = 0; i < op_tab[index].nbr_args; i++) {
         if (type[i] == REG_CODE && !(T_REG & op_tab[index].type[i]))

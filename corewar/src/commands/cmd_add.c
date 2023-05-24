@@ -8,7 +8,8 @@
 #include <stdlib.h>
 #include "instructions.h"
 
-static int add_to_reg(vm_t *vm, process_t *process, char *type, int *size)
+static int add_to_reg(vm_t *vm, process_t *process, unsigned char *type,
+                    int *size)
 {
     int tmp_reg = 0;
     int first = 0;
@@ -32,9 +33,9 @@ static int add_to_reg(vm_t *vm, process_t *process, char *type, int *size)
 
 void cmd_add(vm_t *vm, process_t *process)
 {
-    char coding_byte = '\0';
+    unsigned char coding_byte = '\0';
     char command = 4;
-    char *type = NULL;
+    unsigned char *type = NULL;
     int *size = NULL;
 
     process->index++;
