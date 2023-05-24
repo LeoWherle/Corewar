@@ -93,9 +93,10 @@ static int core_check(vm_t *vm)
         if (vm->local_live >= NBR_LIVE) {
             vm->cycle_to_die -= CYCLE_DELTA;
             vm->local_live = 0;
-            list_foreach_wargs(vm->champions, &champion_reset_live, vm, NULL);
-            return (core_end(vm));
         }
+        if (core_end(vm))
+            return 1;
+        list_foreach_wargs(vm->champions, &champion_reset_live, vm, NULL);
     }
     return 0;
 }
