@@ -45,15 +45,15 @@ FILE *open_file(char *name, header_t *header)
     return fd;
 }
 
-int parsing_main(header_t header, list_t *com_list,
+int parsing_main(header_t *header, list_t *com_list,
                     list_t *label_list, FILE *fd)
 {
-    if (header_parser(&header, fd) == 84) {
+    if (header_parser(header, fd) == 84) {
         fclose(fd);
         return 84;
     }
     fseek(fd, 0, SEEK_SET);
-    if (code_parser(&header, fd, com_list, label_list) == 84) {
+    if (code_parser(header, fd, com_list, label_list) == 84) {
         fclose(fd);
         return 84;
     }
@@ -77,7 +77,7 @@ int main(int ac, char **av)
     label_list = list_init();
     if (!com_list || !label_list)
         return 84;
-    if (parsing_main(header, com_list, label_list, fd) == 84)
+    if (parsing_main(&header, com_list, label_list, fd) == 84)
         return free_list(com_list, label_list, 84);
     return compile_and_print(com_list, label_list, &header, av);
 }
