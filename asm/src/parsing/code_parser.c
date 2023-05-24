@@ -32,11 +32,15 @@ static int check_syntax(char *line, char *instruction)
     if (!comma_args)
         return 84;
     inst_in = get_instrucion(instruction);
-    if (inst_in == -1)
+    if (inst_in == -1) {
+        free_matrix(comma_args);
         return 84;
+    }
     nb_args = matrix_len(comma_args);
-    if (nb_args != op_tab[inst_in].nbr_args)
+    if (nb_args != op_tab[inst_in].nbr_args) {
+        free_matrix(comma_args);
         return 84;
+    }
     free_matrix(comma_args);
     return 0;
 }
@@ -56,15 +60,13 @@ static int edge_cases(parser_t *pars, list_t *label_list, header_t *header)
 {
     if (pars->line[0] == '\0' || pars->line[0] == '.' ||
     pars->line[0] == '\n') {
-        free(pars->line);
-        free_matrix(pars->args);
+        free_line_args(pars);
         pars->line = NULL;
         return 1;
     }
     pars->shift = put_label_in_list(pars->args, label_list, header->prog_size);
     if (matrix_len(pars->args) == pars->shift) {
-        free(pars->line);
-        free_matrix(pars->args);
+        free_line_args(pars);
         pars->line = NULL;
         return 1;
     }
@@ -77,19 +79,19 @@ int code_parser(header_t *header, FILE *fd, list_t *com_list,
     parser_t pars = {NULL, NULL, 0, 0};
 
     while (getline(&pars.line, &pars.len, fd) != -1) {
+        if (pars.line[0] == COMMENT_CHAR)
+            continue;
         pars.line = clear_line(pars.line);
         ASSERT_PTR(pars.line, 84);
         pars.args = my_str_to_word_array(pars.line, " \t,\n");
         ASSERT_PTR(pars.args, 84);
-        if (edge_cases(&pars, label_list, header)) {
-            pars.line = NULL;
+        if (edge_cases(&pars, label_list, header))
             continue;
-        }
         if (line_parsing(&pars, header, com_list) == 84) {
-            free(pars.line);
-            free_matrix(pars.args);
+            free_line_args(&pars);
             return 84;
         }
+        free_line_args(&pars);
         pars.line = NULL;
     }
     free(pars.line);

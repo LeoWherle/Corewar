@@ -52,6 +52,8 @@ int put_label_in_list(char **args, list_t *label_list, int prog_size)
             return 84;
         lab = malloc(sizeof(label_t));
         ASSERT_MALLOC(lab, 84);
+        lab->name = NULL;
+        lab->ad = 0;
         lab->name = malloc(sizeof(char) * my_strlen(args[0]) + 1);
         ASSERT_MALLOC(lab->name, 84);
         lab->name[0] = '\0';
