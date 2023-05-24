@@ -26,13 +26,18 @@ static int get_dir_ind(process_t *process, vm_t *vm, int size)
 {
     char *buffer = NULL;
     int r = 0;
+    int pow = 128;
 
     buffer = malloc(sizeof(char) * size);
     ASSERT_MALLOC(buffer, 0);
     cbuffer_get(vm->arena, buffer, size, process->index);
     for (int i = 0; i < size; i++) {
-        r <<= 8;
-        r += buffer[i];
+        for (int j = 0; j < 8; j++) {
+            r <<= 1;
+            r += (buffer[i] & pow) ? 1 : 0;
+            pow >>= 1;
+        }
+        pow = 128;
     }
     free(buffer);
     process->index += size;
