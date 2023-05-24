@@ -39,7 +39,7 @@ int ld_to_reg(vm_t *vm, process_t *process, char *type, int *size)
 void cmd_ld(vm_t *vm, process_t *process)
 {
     char coding_byte = '\0';
-    char command = 1;
+    char command = 2;
     char *type = NULL;
     int *size = NULL;
 

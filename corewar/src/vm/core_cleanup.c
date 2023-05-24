@@ -14,5 +14,11 @@ void p_clean_all(vm_t *vm, process_t *process, UNUSED void *none)
 
 void core_cleanup(vm_t *vm)
 {
-    list_foreach_wargs(vm->process, (fun_foreach_wargs)p_clean_all, vm, NULL);
+    node_t *node = NULL;
+
+    node = vm->process->head;
+    while (node) {
+        p_clean_all(vm, node->data, NULL);
+        node = node->next;
+    }
 }

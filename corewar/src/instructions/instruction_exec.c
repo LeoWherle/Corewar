@@ -18,17 +18,15 @@
  * @param data the process to handle(execute) the instruction
  * @param vm a pointer to the vm
  */
-static void instruction_exec_process(any_t data, void *vm_ptr, UNUSED void *non)
+static void instruction_exec_process(process_t *process, vm_t *vm)
 {
-    vm_t *vm = vm_ptr;
-    process_t *process = data;
-
     if (process->instruction == NULL) {
         process->champion->process_count--;
         node_pop(vm->process, process);
         return;
     }
     if (process->cycle_to_wait == 0) {
+        process->exec = true;
         process->instruction(vm, process);
     } else {
         process->cycle_to_wait--;
@@ -37,5 +35,15 @@ static void instruction_exec_process(any_t data, void *vm_ptr, UNUSED void *non)
 
 void instruction_exec(vm_t *vm)
 {
-    list_foreach_wargs(vm->process, &instruction_exec_process, vm, NULL);
+    node_t *node = NULL;
+    node_t *next = NULL;
+    process_t *process = NULL;
+
+    node = vm->process->head;
+    while (node) {
+        next = node->next;
+        process = node->data;
+        instruction_exec_process(process, vm);
+        node = next;
+    }
 }

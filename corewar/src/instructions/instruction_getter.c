@@ -49,8 +49,11 @@ static void instruction_get_process(any_t data, void *vm_ptr, UNUSED void *none)
         process->cycle_to_wait = 0;
         return;
     }
-    process->instruction = instructions[instruction_byte - 1].command;
-    process->cycle_to_wait = instructions[instruction_byte - 1].cycles;
+    if (process->exec == true) {
+        process->instruction = instructions[instruction_byte - 1].command;
+        process->cycle_to_wait = instructions[instruction_byte - 1].cycles;
+        process->exec = false;
+    }
 }
 
 void instruction_get(vm_t *vm)

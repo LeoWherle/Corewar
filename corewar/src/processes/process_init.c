@@ -16,6 +16,7 @@ static void process_init(process_t *self)
     self->cycle_to_wait = 0;
     self->carry = false;
     self->instruction = NULL;
+    self->exec = true;
     return;
 }
 

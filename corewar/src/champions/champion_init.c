@@ -35,9 +35,11 @@ WUR champion_t *champion_create(void)
 int count_champion_alive(vm_t *vm)
 {
     int count = 0;
-    node_t *node = vm->champions->head;
+    node_t *node = NULL;
     champion_t *champion = NULL;
+    list_t *champions = vm->champions;
 
+    node = champions->head;
     while (node != NULL) {
         champion = node->data;
         if (champion->alive)

@@ -34,7 +34,7 @@
 
 static int core_end(vm_t *vm)
 {
-    int champion_alive = 0;
+    int champion_alive = 2;
 
     champion_alive = count_champion_alive(vm);
     if (champion_alive == 0) {
