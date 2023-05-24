@@ -17,6 +17,8 @@ static void vm_init(vm_t *vm)
     vm->cycle_to_die = CYCLE_TO_DIE;
     vm->local_live = 0;
     vm->curr_period = 0;
+    vm->cycle_amount = 0;
+    vm->total_cycle = 0;
     return;
 }
 
@@ -33,7 +35,7 @@ WUR vm_t *vm_create(void)
     vm->arena = cbuffer_create(MEM_SIZE);
     ASSERT_PTR(vm->arena, NULL);
     vm->champions = list_init();
-    ASSERT_PTR(vm->arena, NULL);
+    ASSERT_PTR(vm->champions, NULL);
     vm->process = list_init();
     ASSERT_PTR(vm->process, NULL);
     cbuffer_fill(vm->arena, 0);

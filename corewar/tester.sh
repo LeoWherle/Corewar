@@ -6,7 +6,7 @@
 nb_arg=$# #number of arguments
 #take second argument and store it in a variable
 
-ebola=../assets/champions/ebola.cor
+ebola=../assets/champions/tyron.cor
 
 if [ $nb_arg -eq 1 ]
 then

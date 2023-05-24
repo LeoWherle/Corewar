@@ -31,7 +31,7 @@ static void st_to_reg(vm_t *vm, process_t *process, char *type, int *size)
         second = param_getter(process, vm, type[1], size[1]);
         if (!get_param_value(process, type[1], &second))
             return;
-        set_mem(vm, pos + second % IDX_MOD, SWAP_INT32_SAFE(first), REG_SIZE);
+        set_mem(vm, pos + second % IDX_MOD, first, REG_SIZE);
     } else {
         set_reg(process, vm, tot);
     }

@@ -40,6 +40,7 @@ int *get_size(char *type, int index)
     size = malloc(op_tab[index].nbr_args * sizeof(int));
     ASSERT_MALLOC(size, NULL);
     for (int i = 0; i < op_tab[index].nbr_args; i++) {
+        size[i] = 0;
         if (type[i] == REG_CODE)
             size[i] = 1;
         if (type[i] == DIR_CODE)
@@ -88,8 +89,9 @@ bool param_checker(char *type, int index)
             return false;
     }
     for (int i = op_tab[index].nbr_args; i < MAX_ARGS_NUMBER; i++) {
-        if (type[i] != 0)
+        if (type[i] != 0) {
             return false;
+        }
     }
     return true;
 }

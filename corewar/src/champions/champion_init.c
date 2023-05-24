@@ -12,7 +12,7 @@
 static void champion_init(champion_t *champion)
 {
     champion->id = 0;
-    champion->alive = true;
+    champion->alive = false;
     champion->file_path = NULL;
     champion->has_adress = 0;
     champion->laddress_value = 0;
@@ -35,9 +35,10 @@ WUR champion_t *champion_create(void)
 int count_champion_alive(vm_t *vm)
 {
     int count = 0;
-    node_t *node = vm->champions->head;
+    node_t *node = NULL;
     champion_t *champion = NULL;
 
+    node = vm->champions->head;
     while (node != NULL) {
         champion = node->data;
         if (champion->alive)
