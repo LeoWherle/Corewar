@@ -81,8 +81,10 @@ int code_parser(header_t *header, FILE *fd, list_t *com_list,
         ASSERT_PTR(pars.line, 84);
         pars.args = my_str_to_word_array(pars.line, " \t,\n");
         ASSERT_PTR(pars.args, 84);
-        if (edge_cases(&pars, label_list, header))
+        if (edge_cases(&pars, label_list, header)) {
+            pars.line = NULL;
             continue;
+        }
         if (line_parsing(&pars, header, com_list) == 84) {
             free(pars.line);
             free_matrix(pars.args);
