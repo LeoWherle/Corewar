@@ -14,7 +14,8 @@ The first one must be a register.
 The other two can be indexes or registers.
 sti r2,%4,%5 copies the content of r2 into the address PC + (4+5)% IDX_MOD.
 */
-static void sti_to_reg(vm_t *vm, process_t *process, char *type, int *size)
+static void sti_to_reg(vm_t *vm, process_t *process, unsigned char *type,
+                        int *size)
 {
     int first = 0;
     int second = 0;
@@ -33,15 +34,14 @@ static void sti_to_reg(vm_t *vm, process_t *process, char *type, int *size)
         return;
     if (type[1] == IND_CODE)
         first = cbuffer_geti(vm->arena, pos + first % IDX_MOD);
-    set_mem(vm, pos + (first + second) % IDX_MOD,
-    SWAP_INT32_SAFE(reg), REG_SIZE);
+    set_mem(vm, pos + (first + second) % IDX_MOD, reg, REG_SIZE);
 }
 
 void cmd_sti(vm_t *vm, process_t *process)
 {
-    char coding_byte = '\0';
+    unsigned char coding_byte = '\0';
     char command = 11;
-    char *type = NULL;
+    unsigned char *type = NULL;
     int *size = NULL;
 
     coding_byte = cbuffer_getb(vm->arena, process->index + 1);

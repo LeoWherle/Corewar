@@ -68,5 +68,7 @@
     bool print_comp(list_t *command, header_t *head, char *name);
     bool search_in_command(list_t *commands, list_t *labels);
     int free_list(list_t *com_list, list_t *label_list, int r);
+    void initilalize_com(command_t *com);
+    void free_line_args(parser_t *pars);
 
 #endif /* ASM_H */

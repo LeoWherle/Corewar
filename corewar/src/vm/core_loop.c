@@ -30,10 +30,11 @@
 #include "serrorh.h"
 #include "instructions.h"
 #include "mystr.h"
+#include "ansi_colors.h"
 
 static int core_end(vm_t *vm)
 {
-    int champion_alive = 0;
+    int champion_alive = 2;
 
     champion_alive = count_champion_alive(vm);
     if (champion_alive == 0) {
@@ -92,8 +93,10 @@ static int core_check(vm_t *vm)
         if (vm->local_live >= NBR_LIVE) {
             vm->cycle_to_die -= CYCLE_DELTA;
             vm->local_live = 0;
-            list_foreach_wargs(vm->champions, &champion_reset_live, vm, NULL);
         }
+        if (core_end(vm))
+            return 1;
+        list_foreach_wargs(vm->champions, &champion_reset_live, vm, NULL);
     }
     return 0;
 }
@@ -104,8 +107,6 @@ void core_loop(vm_t *vm)
         instruction_get(vm);
         instruction_exec(vm);
         if (core_check(vm))
-            return;
-        if (core_end(vm))
             return;
         core_cleanup(vm);
     }

@@ -21,6 +21,7 @@ command_t *get_command_struct(int inst_in, char *type, int *size, char **args)
 
     new = malloc(sizeof(command_t));
     ASSERT_MALLOC(new, NULL);
+    initilalize_com(new);
     new->code_command = inst_in + 1;
     new->param_type = type;
     new->param_size = size;
@@ -67,8 +68,11 @@ int check_valid_line(char **args, list_t *com_list, header_t *header)
 
     ASSERT_MALLOC(type, 84);
     ASSERT_MALLOC(size, 84);
-    if (!check_valid_type(args, type, inst_in))
+    if (!check_valid_type(args, type, inst_in)) {
+        free(type);
+        free(size);
         return 84;
+    }
     for (int i = 0; i < op_tab[inst_in].nbr_args ; i++)
         header->prog_size += size[i];
     header->prog_size +=

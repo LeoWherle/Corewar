@@ -18,7 +18,8 @@ The sum is named S.REG_SIZE bytes are read
 from the address PC + S % IDX_MOD and copied into r1.
 */
 
-int ldi_to_reg(vm_t *vm, process_t *process, char *type, int *size)
+int ldi_to_reg(vm_t *vm, process_t *process, unsigned char *type,
+                int *size)
 {
     ldi_t ldi = {0, 0, 0, 0, 0};
 
@@ -44,9 +45,9 @@ int ldi_to_reg(vm_t *vm, process_t *process, char *type, int *size)
 
 void cmd_ldi(vm_t *vm, process_t *process)
 {
-    char coding_byte = '\0';
+    unsigned char coding_byte = '\0';
     char command = 10;
-    char *type = NULL;
+    unsigned char *type = NULL;
     int *size = NULL;
 
     coding_byte = cbuffer_getb(vm->arena, process->index + 1);

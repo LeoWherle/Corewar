@@ -64,6 +64,7 @@
         command_t instruction;
         // registers
         int registr[REG_NUMBER];
+        bool exec;
     } process_t;
 
     typedef struct vm_s {

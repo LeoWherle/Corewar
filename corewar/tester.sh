@@ -6,11 +6,11 @@
 nb_arg=$# #number of arguments
 #take second argument and store it in a variable
 
-ebola=../assets/champions/ebola.cor
+ebola=../assets/champions/tyron.cor
 
 if [ $nb_arg -eq 1 ]
 then
-    ./corewar -dump 3 ${ebola} -a 1000 ${ebola} ${ebola} ${ebola}
+    ./corewar -dump 9999 ${ebola} -a 1000 ${ebola} ${ebola} ${ebola}
 else
     ./corewar -dump 1 ${ebola} ${ebola} ${ebola} ${ebola}
 fi

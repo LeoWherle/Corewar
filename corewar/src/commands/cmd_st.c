@@ -15,7 +15,8 @@ the second (whether a register or a number).
 st r4,34 stores the content of r4 at the address PC + 34 % IDX_MOD.
 st r3,r8 copies the content of r3 into r8.
 */
-static void st_to_reg(vm_t *vm, process_t *process, char *type, int *size)
+static void st_to_reg(vm_t *vm, process_t *process, unsigned char *type,
+                        int *size)
 {
     int first = 0;
     int second = 0;
@@ -31,7 +32,7 @@ static void st_to_reg(vm_t *vm, process_t *process, char *type, int *size)
         second = param_getter(process, vm, type[1], size[1]);
         if (!get_param_value(process, type[1], &second))
             return;
-        set_mem(vm, pos + second % IDX_MOD, SWAP_INT32_SAFE(first), REG_SIZE);
+        set_mem(vm, pos + second % IDX_MOD, first, REG_SIZE);
     } else {
         set_reg(process, vm, tot);
     }
@@ -39,9 +40,9 @@ static void st_to_reg(vm_t *vm, process_t *process, char *type, int *size)
 
 void cmd_st(vm_t *vm, process_t *process)
 {
-    char coding_byte = '\0';
+    unsigned char coding_byte = '\0';
     char command = 3;
-    char *type = NULL;
+    unsigned char *type = NULL;
     int *size = NULL;
 
     coding_byte = cbuffer_getb(vm->arena, process->index + 1);

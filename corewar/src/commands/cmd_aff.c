@@ -15,11 +15,12 @@ the character whose ASCII code is the content of the register (in base 10).
 A 256 modulo is applied to this ASCII code.
 aff r3 displays ’*’ if r3 contains 42.
 */
-static void print_reg(vm_t *vm, process_t *process, char *type, int *size)
+static void print_reg(vm_t *vm, process_t *process, unsigned char *type,
+                        int *size)
 {
     int reg_nb = 0;
     int value = 0;
-    char c = '\0';
+    unsigned char c = '\0';
 
     process->index++;
     reg_nb = param_getter(process, vm, type[0], size[0]);
@@ -34,9 +35,9 @@ static void print_reg(vm_t *vm, process_t *process, char *type, int *size)
 
 void cmd_aff(vm_t *vm, process_t *process)
 {
-    char coding_byte = '\0';
+    unsigned char coding_byte = '\0';
     char command = 16;
-    char *type = NULL;
+    unsigned char *type = NULL;
     int *size = NULL;
 
     process->index++;

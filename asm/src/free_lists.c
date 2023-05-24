@@ -14,6 +14,22 @@
 #include "op.h"
 #include "asm.h"
 
+void initilalize_com(command_t *com)
+{
+    com->line = NULL;
+    com->code_command = 0;
+    com->coding_byte = 0;
+    com->param_type = NULL;
+    com->param_size = NULL;
+    com->parameters = NULL;
+}
+
+void free_line_args(parser_t *pars)
+{
+    free_matrix(pars->args);
+    free(pars->line);
+}
+
 void free_label(void *ptr)
 {
     label_t *label = NULL;
