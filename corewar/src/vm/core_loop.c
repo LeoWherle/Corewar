@@ -34,7 +34,7 @@
 
 static int core_end(vm_t *vm)
 {
-    int champion_alive = 2;
+    int champion_alive = 0;
 
     champion_alive = count_champion_alive(vm);
     if (champion_alive == 0) {
@@ -66,17 +66,17 @@ static void kill_champion_processes(vm_t *vm, champion_t *champion)
     }
 }
 
-static void champion_reset_live(any_t data, void *vm_ptr, UNUSED void *none)
+static void champion_get_kill(any_t data, void *vm_ptr, UNUSED void *none)
 {
     champion_t *champion = data;
     vm_t *vm = vm_ptr;
 
-    if (champion->alive == false) {
+    if (champion->alive == false && champion->dead == false) {
         my_fprintf(1, "The player %d(%s) has been killed by the game.\n",
         champion->id, champion->header.prog_name);
         kill_champion_processes(vm, champion);
+        champion->dead = true;
     }
-    champion->alive = false;
 }
 
 static int core_check(vm_t *vm)
@@ -94,6 +94,7 @@ static int core_check(vm_t *vm)
             vm->cycle_to_die -= CYCLE_DELTA;
             vm->local_live = 0;
         }
+        list_foreach_wargs(vm->champions, &champion_get_kill, vm, NULL);
         if (core_end(vm))
             return 1;
         list_foreach_wargs(vm->champions, &champion_reset_live, vm, NULL);

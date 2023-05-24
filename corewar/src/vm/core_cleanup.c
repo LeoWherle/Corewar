@@ -7,6 +7,13 @@
 
 #include "vm.h"
 
+void champion_reset_live(any_t data, UNUSED void *vm_ptr, UNUSED void *none)
+{
+    champion_t *champion = data;
+
+    champion->alive = false;
+}
+
 void p_clean_all(vm_t *vm, process_t *process, UNUSED void *none)
 {
     process->index = process->index % vm->arena->size;

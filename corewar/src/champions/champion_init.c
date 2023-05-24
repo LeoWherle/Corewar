@@ -16,6 +16,7 @@ static void champion_init(champion_t *champion)
     champion->file_path = NULL;
     champion->has_adress = 0;
     champion->laddress_value = 0;
+    champion->dead = false;
     return;
 }
 
