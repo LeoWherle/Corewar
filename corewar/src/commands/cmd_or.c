@@ -11,7 +11,8 @@
 /*
 Similar to and, but performing a binary OR.
 */
-static void or_to_reg(vm_t *vm, process_t *process, char *type, int *size)
+static void or_to_reg(vm_t *vm, process_t *process, unsigned char *type,
+                        int *size)
 {
     int first = 0;
     int second = 0;
@@ -37,9 +38,9 @@ static void or_to_reg(vm_t *vm, process_t *process, char *type, int *size)
 
 void cmd_or(vm_t *vm, process_t *process)
 {
-    char coding_byte = '\0';
+    unsigned char coding_byte = '\0';
     char command = 7;
-    char *type = NULL;
+    unsigned char *type = NULL;
     int *size = NULL;
 
     coding_byte = cbuffer_getb(vm->arena, process->index + 1);

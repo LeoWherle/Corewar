@@ -16,7 +16,8 @@ which must be a register (not the PC). This operation modifies the carry.
 ld 34,r3 loads the REG_SIZE bytes starting
 at the address PC + 34 % IDX_MOD into r3.
 */
-int ld_to_reg(vm_t *vm, process_t *process, char *type, int *size)
+int ld_to_reg(vm_t *vm, process_t *process, unsigned char *type,
+                int *size)
 {
     int value = 0;
     int tot = 0;
@@ -38,9 +39,9 @@ int ld_to_reg(vm_t *vm, process_t *process, char *type, int *size)
 
 void cmd_ld(vm_t *vm, process_t *process)
 {
-    char coding_byte = '\0';
+    unsigned char coding_byte = '\0';
     char command = 2;
-    char *type = NULL;
+    unsigned char *type = NULL;
     int *size = NULL;
 
     coding_byte = cbuffer_getb(vm->arena, process->index + 1);

@@ -16,7 +16,8 @@ This operation modifies the carry.
 and r2, %0,r3 puts r2 & 0 into r3.
 */
 
-static void and_to_reg(vm_t *vm, process_t *process, char *type, int *size)
+static void and_to_reg(vm_t *vm, process_t *process, unsigned char *type,
+                        int *size)
 {
     int first = 0;
     int second = 0;
@@ -42,9 +43,9 @@ static void and_to_reg(vm_t *vm, process_t *process, char *type, int *size)
 
 void cmd_and(vm_t *vm, process_t *process)
 {
-    char coding_byte = '\0';
+    unsigned char coding_byte = '\0';
     char command = 6;
-    char *type = NULL;
+    unsigned char *type = NULL;
     int *size = NULL;
 
     coding_byte = cbuffer_getb(vm->arena, process->index + 1);
