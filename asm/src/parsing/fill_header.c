@@ -83,9 +83,11 @@ char *clear_line(char *line)
     int i = 0;
 
     comment_tab = my_str_to_word_array(line, "#");
+    ASSERT_PTR(comment_tab, NULL);
     new_line = malloc(sizeof(char) * my_strlen(comment_tab[0]) + 1);
     ASSERT_MALLOC(new_line, NULL);
-    while (comment_tab[0][in] == ' ' || comment_tab[0][in] == '\t')
+    while ((comment_tab[0][in] == ' ' || comment_tab[0][in] == '\t')
+        && comment_tab[0][in] != '\0')
         in++;
     for (i = 0; comment_tab[0][in]; i++, in++)
         new_line[i] = comment_tab[0][in];
