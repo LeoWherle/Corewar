@@ -22,8 +22,6 @@
 static void instruction_exec_process(process_t *process, vm_t *vm)
 {
     if (process->instruction == NULL) {
-        // kill_process(process, vm);
-        process->index++;
         return;
     }
     if (process->cycle_to_wait == 0) {
