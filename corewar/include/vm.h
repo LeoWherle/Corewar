@@ -123,6 +123,7 @@
     champion_t *champion_create(void);
     void champion_destroy(void *champion);
     int count_champion_alive(vm_t *vm);
+    champion_t *get_champion_alive(list_t *champions);
 
     /*
     ** process
