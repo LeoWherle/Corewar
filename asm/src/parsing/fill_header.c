@@ -23,7 +23,7 @@ static bool get_name(header_t *header, char *line)
     if (line[i] == '\0')
         return false;
     i++;
-    for (j = 0; line[i] != '"'; i++, j++)
+    for (j = 0; line[i] && line[i] != '"'; i++, j++)
         header->prog_name[j] = line[i];
     if (j > PROG_NAME_LENGTH)
         return false;
