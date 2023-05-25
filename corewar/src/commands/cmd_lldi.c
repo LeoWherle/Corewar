@@ -26,8 +26,8 @@ int lldi_to_reg(vm_t *vm, process_t *process, unsigned char *type,
         return 0;
     if (type[0] == IND_CODE) {
         ldi.tot = ldi.pos + ldi.value;
-        ldi.s = cbuffer_gets(vm->arena, ldi.tot);
-    }
+        ldi.s += cbuffer_gets(vm->arena, ldi.tot);
+    } else ldi.s += ldi.value;
     ldi.s += ldi.to_add;
     ldi.tot = ldi.pos + ldi.s;
     ldi.value = cbuffer_geti(vm->arena, ldi.tot);

@@ -33,7 +33,7 @@ static void sti_to_reg(vm_t *vm, process_t *process, unsigned char *type,
     if (!get_param_value(process, type[2], &second))
         return;
     if (type[1] == IND_CODE)
-        first = cbuffer_geti(vm->arena, pos + first % IDX_MOD);
+        first = cbuffer_gets(vm->arena, pos + first % IDX_MOD);
     set_mem(vm, pos + (first + second) % IDX_MOD, reg, REG_SIZE);
 }
 

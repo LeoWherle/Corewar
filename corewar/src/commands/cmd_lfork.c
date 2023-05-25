@@ -13,9 +13,9 @@ Similar to fork without the % IDX_MOD.
 */
 void cmd_lfork(vm_t *vm, process_t *process)
 {
-    int param = 0;
+    short param = 0;
     process_t *child = NULL;
-    int new_index = 0;
+    unsigned int new_index = 0;
 
     process->index++;
     param = param_getter(process, vm, IND_CODE, IND_SIZE);

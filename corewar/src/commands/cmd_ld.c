@@ -30,7 +30,7 @@ int ld_to_reg(vm_t *vm, process_t *process, unsigned char *type,
         return 0;
     if (type[0] == IND_CODE) {
         tot = pos + value % IDX_MOD;
-        value = cbuffer_geti(vm->arena, tot);
+        value = cbuffer_gets(vm->arena, tot);
     }
     process->carry = (value == 0) ? 1 : 0;
     set_reg(process, vm, value);
