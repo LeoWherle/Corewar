@@ -21,6 +21,19 @@ static int get_reg(process_t *process, vm_t *vm)
     return r;
 }
 
+static int initialise_int(char buff)
+{
+    int r = 0;
+
+    if (buff & 128){
+        for (int i = 0; i < 32; i++) {
+            r <<= 1;
+            r++;
+        }
+    }
+    return r;
+}
+
 static int get_dir_ind(process_t *process, vm_t *vm, int size)
 {
     char *buffer = NULL;
@@ -30,6 +43,7 @@ static int get_dir_ind(process_t *process, vm_t *vm, int size)
     buffer = malloc(sizeof(char) * size);
     ASSERT_MALLOC(buffer, 0);
     cbuffer_get(vm->arena, buffer, size, process->index);
+    r = initialise_int(buffer[0]);
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < 8; j++) {
             r <<= 1;
