@@ -22,7 +22,6 @@ int ldi_to_reg(vm_t *vm, process_t *process, unsigned char *type,
                 int *size)
 {
     ldi_t ldi = {0, 0, 0, 0, 0};
-
     ldi.pos = process->index;
     process->index += 2;
     ldi.value = param_getter(process, vm, type[0], size[0]);
@@ -34,7 +33,8 @@ int ldi_to_reg(vm_t *vm, process_t *process, unsigned char *type,
     if (type[0] == IND_CODE) {
         ldi.tot = ldi.pos + ldi.value % IDX_MOD;
         ldi.s += cbuffer_gets(vm->arena, ldi.tot);
-    } else ldi.s += ldi.value;
+    } else
+        ldi.s += ldi.value;
     ldi.s += ldi.to_add;
     ldi.tot = ldi.pos + ldi.s % IDX_MOD;
     ldi.value = cbuffer_geti(vm->arena, ldi.tot);
