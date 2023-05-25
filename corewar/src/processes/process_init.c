@@ -59,7 +59,11 @@ process_t *process_duplicate(process_t *process, int index)
     ASSERT_MALLOC(new, NULL);
     new->carry = process->carry;
     new->index = index;
+    new->cycle_to_wait = 2;
+    new->instruction = process->instruction;
+    new->exec = true;
     for (int i = 0; i < REG_NUMBER; i++)
         new->registr[i] = process->registr[i];
+    process->champion->process_count++;
     return new;
 }
