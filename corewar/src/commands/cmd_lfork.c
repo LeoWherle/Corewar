@@ -21,8 +21,6 @@ void cmd_lfork(vm_t *vm, process_t *process)
     param = param_getter(process, vm, IND_CODE, IND_SIZE);
     new_index = process->index + (param - (1 + IND_SIZE));
     child = process_duplicate(process, new_index);
-    if (!child)
-        kill_process(process, vm);
-    else
+    if (child)
         node_append(vm->process, child);
 }

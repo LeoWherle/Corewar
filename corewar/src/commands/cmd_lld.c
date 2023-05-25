@@ -37,15 +37,18 @@ void cmd_lld(vm_t *vm, process_t *process)
     char command = 13;
     unsigned char *type = NULL;
     int *size = NULL;
+    int future_index = 0;
 
     coding_byte = cbuffer_getb(vm->arena, process->index + 1);
     type = get_coding_byte(coding_byte);
     size = get_size(type, command - 1);
-    if (!param_checker(type, command - 1)) {
-        kill_process(process, vm);
-    } else {
+    future_index = process->index + 2;
+    for (int i = 0; i < op_tab[command - 1].nbr_args; i++)
+        future_index += size[i];
+    if (param_checker(type, command - 1)) {
         lld_to_reg(vm, process, type, size);
     }
+    process->index = future_index;
     free(type);
     free(size);
 }
