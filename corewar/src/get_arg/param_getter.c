@@ -16,7 +16,6 @@ static int get_reg(process_t *process, vm_t *vm)
     cbuffer_get(vm->arena, &r, sizeof(char), process->index);
     process->index++;
     if (r < 1 || r > REG_NUMBER) {
-        kill_process(process, vm);
         return -1;
     }
     return r;

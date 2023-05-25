@@ -19,8 +19,8 @@ void cmd_zjmp(vm_t *vm, process_t *process)
     short param = 0;
 
     process->index++;
+    param = param_getter(process, vm, IND_CODE, IND_SIZE);
     if (process->carry == 1){
-        param = param_getter(process, vm, IND_CODE, IND_SIZE);
         process->index += (param % IDX_MOD - (1 + IND_SIZE));
     }
 }

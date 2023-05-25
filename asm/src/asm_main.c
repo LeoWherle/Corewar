@@ -38,8 +38,10 @@ FILE *open_file(char *name, header_t *header)
     fd = fopen(name, "r");
     if (!fd)
         return NULL;
-    if (my_strcmp(name + my_strlen(name) - 2, ".s") != 0)
+    if (my_strcmp(name + my_strlen(name) - 2, ".s") != 0) {
+        fclose(fd);
         return NULL;
+    }
     header->magic = COREWAR_EXEC_MAGIC;
     header->prog_size = 0;
     return fd;
