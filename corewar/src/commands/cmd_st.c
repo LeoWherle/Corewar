@@ -20,7 +20,6 @@ static void st_to_reg(vm_t *vm, process_t *process, unsigned char *type,
 {
     int first = 0;
     int second = 0;
-    int tot = 0;
     int pos = 0;
 
     pos = process->index;
@@ -34,7 +33,7 @@ static void st_to_reg(vm_t *vm, process_t *process, unsigned char *type,
             return;
         set_mem(vm, pos + second % IDX_MOD, first, REG_SIZE);
     } else {
-        set_reg(process, vm, tot);
+        set_reg(process, vm, first);
     }
 }
 
