@@ -45,9 +45,8 @@ void process_destroy(void *self)
 void kill_process(process_t *process, vm_t *vm)
 {
     process->champion->process_count--;
-    DEBUGF(REDB"process of champion :");
-    DEBUGF("%s", process->champion->header.prog_name);
-    DEBUGF("has been killed"CRESET);
+    DEBUGF(REDB"process of champion : %s", process->champion->header.prog_name);
+    DEBUGF("%chas been killed"CRESET, ' ');
     node_delete(vm->process, process, process_destroy);
 }
 
