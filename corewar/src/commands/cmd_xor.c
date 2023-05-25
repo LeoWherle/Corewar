@@ -16,22 +16,18 @@ static void xor_to_reg(vm_t *vm, process_t *process, unsigned char *type,
 {
     int first = 0;
     int second = 0;
-    int pos = 0;
 
-    pos = process->index;
     process->index += 2;
     first = param_getter(process, vm, type[0], size[0]);
     second = param_getter(process, vm, type[1], size[1]);
     if (type[0] == REG_CODE) {
         if (first < 1 || first > REG_NUMBER) return;
         first = process->registr[first - 1];
-    } else if (type[0] == IND_CODE)
-        first = cbuffer_gets(vm->arena, pos + first);
+    }
     if (type[1] == REG_CODE) {
         if (second < 1 || second > REG_NUMBER) return;
         second = process->registr[second - 1];
-    } else if (type[1] == IND_CODE)
-        second = cbuffer_gets(vm->arena, pos + second);
+    }
     if (set_reg(process, vm, first ^ second) == -1) return;
     process->carry = (first ^ second) ? 0 : 1;
 }
