@@ -8,6 +8,8 @@
 #include <stdlib.h>
 #include "vm.h"
 #include "herror.h"
+#include "serrorh.h"
+#include "ansi_colors.h"
 
 static void process_init(process_t *self)
 {
@@ -43,6 +45,8 @@ void process_destroy(void *self)
 void kill_process(process_t *process, vm_t *vm)
 {
     process->champion->process_count--;
+    DEBUGF(REDB"process of champion : %s", process->champion->header.prog_name);
+    DEBUGF("%chas been killed"CRESET, ' ');
     node_delete(vm->process, process, process_destroy);
 }
 
@@ -54,7 +58,11 @@ process_t *process_duplicate(process_t *process, int index)
     ASSERT_MALLOC(new, NULL);
     new->carry = process->carry;
     new->index = index;
+    new->cycle_to_wait = 2;
+    new->instruction = process->instruction;
+    new->exec = true;
     for (int i = 0; i < REG_NUMBER; i++)
         new->registr[i] = process->registr[i];
+    process->champion->process_count++;
     return new;
 }

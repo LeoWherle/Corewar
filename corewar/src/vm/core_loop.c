@@ -34,19 +34,18 @@
 
 static int core_end(vm_t *vm)
 {
-    int champion_alive = 2;
+    int champion_alive = 0;
+    champion_t *champion = NULL;
 
     champion_alive = count_champion_alive(vm);
     if (champion_alive == 0) {
         my_fputstr(1, "No winner\n");
         return (1);
     }
-    if (champion_alive == 1) {
-        my_fputstr(1, "The player ");
-        my_fputnbr(1, ((champion_t *)vm->champions->head)->id);
-        my_fputstr(1, "(");
-        my_fputstr(1, ((champion_t *)vm->champions->head)->header.prog_name);
-        my_fputstr(1, ")has won.\n");
+    champion = get_champion_alive(vm->champions);
+    if (champion_alive == 1 && champion != NULL) {
+        my_fprintf(1, "The player %d(%s) has won.\n",
+            champion->id, champion->header.prog_name);
         return (1);
     }
     return (0);
@@ -66,17 +65,17 @@ static void kill_champion_processes(vm_t *vm, champion_t *champion)
     }
 }
 
-static void champion_reset_live(any_t data, void *vm_ptr, UNUSED void *none)
+static void champion_get_kill(any_t data, void *vm_ptr, UNUSED void *none)
 {
     champion_t *champion = data;
     vm_t *vm = vm_ptr;
 
-    if (champion->alive == false) {
+    if (champion->alive == false && champion->dead == false) {
         my_fprintf(1, "The player %d(%s) has been killed by the game.\n",
         champion->id, champion->header.prog_name);
         kill_champion_processes(vm, champion);
+        champion->dead = true;
     }
-    champion->alive = false;
 }
 
 static int core_check(vm_t *vm)
@@ -86,17 +85,18 @@ static int core_check(vm_t *vm)
     if (vm->cycle_amount >= vm->cycle_to_die) {
         vm->cycle_amount = 0;
         vm->curr_period++;
-        if (vm->has_dump && vm->total_cycle >= vm->dump_cycle) {
-            print_string_byte_per_byte(vm->arena->data, vm->arena->size);
-            return 1;
-        }
         if (vm->local_live >= NBR_LIVE) {
             vm->cycle_to_die -= CYCLE_DELTA;
             vm->local_live = 0;
         }
+        list_foreach_wargs(vm->champions, &champion_get_kill, vm, NULL);
         if (core_end(vm))
             return 1;
         list_foreach_wargs(vm->champions, &champion_reset_live, vm, NULL);
+    }
+    if (vm->has_dump && vm->total_cycle >= vm->dump_cycle) {
+        print_string_byte_per_byte(vm->arena->data, vm->arena->size);
+        return 1;
     }
     return 0;
 }
