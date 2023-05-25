@@ -25,7 +25,6 @@ static void print_reg(vm_t *vm, process_t *process, unsigned char *type,
     process->index++;
     reg_nb = param_getter(process, vm, type[0], size[0]);
     if (reg_nb < 1 || reg_nb > REG_NUMBER) {
-        kill_process(process, vm);
         return;
     }
     value = process->registr[reg_nb - 1];
@@ -39,16 +38,19 @@ void cmd_aff(vm_t *vm, process_t *process)
     char command = 16;
     unsigned char *type = NULL;
     int *size = NULL;
+    int future_index = 0;
 
     process->index++;
     coding_byte = cbuffer_getb(vm->arena, process->index);
     type = get_coding_byte(coding_byte);
     size = get_size(type, command - 1);
-    if (!param_checker(type, command - 1)) {
-        kill_process(process, vm);
-    } else {
+    future_index = process->index + 1;
+    for (int i = 0; i < op_tab[command - 1].nbr_args; i++)
+        future_index += size[i];
+    if (param_checker(type, command - 1)) {
         print_reg(vm, process, type, size);
     }
+    process->index = future_index;
     free(type);
     free(size);
 }

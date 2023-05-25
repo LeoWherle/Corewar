@@ -22,7 +22,6 @@ int set_reg(process_t *process, vm_t *vm, int new)
 
     reg = cbuffer_getb(vm->arena, process->index);
     if (reg < 1 || reg > REG_NUMBER) {
-        kill_process(process, vm);
         return -1;
     }
     process->registr[reg - 1] = new;
