@@ -8,6 +8,7 @@
 #include "vm.h"
 #include "cbuffer.h"
 #include "serrorh.h"
+#include "ansi_colors.h"
 #include "instructions.h"
 
 static const instruction_t instructions[] = {
@@ -53,8 +54,10 @@ static void instruction_get_process(any_t data, void *vm_ptr, UNUSED void *none)
         process->instruction = instructions[instruction_byte - 1].command;
         process->cycle_to_wait = instructions[instruction_byte - 1].cycles;
         process->exec = false;
-        DEBUGF("champ_id : %d instruction : %s\n",
-        process->champion->id, op_tab[instruction_byte - 1].mnemonique);
+        DEBUGF("champion: "BLU"%s"CRESET"\tid: "GRN"%d"CRESET
+        "\tinstruction : "CYN"%s"CRESET"\n",
+        process->champion->header.prog_name, process->champion->id,
+        op_tab[instruction_byte - 1].mnemonique);
     }
 }
 

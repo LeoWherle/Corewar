@@ -8,6 +8,8 @@
 #include <stdlib.h>
 #include "vm.h"
 #include "herror.h"
+#include "serrorh.h"
+#include "ansi_colors.h"
 
 static void process_init(process_t *self)
 {
@@ -43,6 +45,9 @@ void process_destroy(void *self)
 void kill_process(process_t *process, vm_t *vm)
 {
     process->champion->process_count--;
+    DEBUGF(REDB"process of champion :");
+    DEBUGF("%s", process->champion->header.prog_name);
+    DEBUGF("has been killed"CRESET);
     node_delete(vm->process, process, process_destroy);
 }
 

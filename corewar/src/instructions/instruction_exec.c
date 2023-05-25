@@ -9,6 +9,7 @@
 #include "cbuffer.h"
 #include "serrorh.h"
 #include "instructions.h"
+#include "ansi_colors.h"
 
 /**
  * @brief if the instruction is NULL (kill the process | set do dead)
@@ -22,7 +23,7 @@ static void instruction_exec_process(process_t *process, vm_t *vm)
 {
     if (process->instruction == NULL) {
         process->champion->process_count--;
-        node_pop(vm->process, process);
+        kill_process(process, vm);
         return;
     }
     if (process->cycle_to_wait == 0) {
