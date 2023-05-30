@@ -147,14 +147,17 @@ panel_t *vm_viewer(program_t *p)
 
 panel_t *win_panel(program_t *p)
 {
-    rectransform_t *mrect = rtrans_create_centered(
-        (sfVector2f){0, 0}, (sfVector2f){400, 200});
-    mrect->xanchor = ANCHOR_MIDDLE;
-    mrect->yanchor = ANCHOR_MIDDLE;
-    panel_t *main = panel_empty_create(mrect, sfColor_fromRGBA(100, 100, 100, 100));
-    main->state = PANEL_STATE_INACTIVE;
-    init_text(&(main->text), p->galaxy_font, "WINNER", 32);
-    return main;
+    panel_t *fmain = make_flex((sfVector2i){1, 3},
+        (sfVector2f){2.5 * (ELEMX + ELEMMARGIN), 1.5 * (ELEMY + ELEMMARGIN)});
+    fmain->rect->xanchor = ANCHOR_MIDDLE;
+    fmain->rect->yanchor = ANCHOR_MIDDLE;
+    panel_add_childs(fmain, 3,
+        make_label(p->font, "WINNER IS", 32),
+        make_label(p->font, "", 32),
+        make_butt("quit", p, quit_program, p->font));
+    init_rshape(&(fmain->shape), sfColor_fromRGBA(100, 100, 100, 200));
+    fmain->state = PANEL_STATE_INACTIVE;
+    return fmain;
 }
 
 panel_t *game_interface(program_t *p)
