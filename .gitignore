@@ -87,3 +87,5 @@ dkms.conf
 # IDE
 .idea/
 .vscode/
+
+*:Zone.Identifier
