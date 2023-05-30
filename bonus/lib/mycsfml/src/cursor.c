@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include "cursor.h"
 #include "program.h"
+#include "theme.h"
 
 cursor_t *cursor_create(void)
 {
@@ -16,7 +17,7 @@ cursor_t *cursor_create(void)
     if (!c)
         return NULL;
     c->pos = (sfVector2i){0, 0};
-    c->texture = sfTexture_createFromFile(PATHTOASSETS "cursor.png", NULL);
+    c->texture = sfTexture_createFromFile(PATHTOASSETS CURSOR, NULL);
     c->sprite = sfSprite_create();
     sfSprite_setTexture(c->sprite, c->texture, sfTrue);
     sfSprite_setOrigin(c->sprite, (sfVector2f){8, 8});
