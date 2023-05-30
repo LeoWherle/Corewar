@@ -44,3 +44,12 @@ void cbuffer_fill(cbuffer_t *buffer, char data)
         buffer->data[i] = data;
     }
 }
+
+void cbuffer_setbforn(cbuffer_t *buffer, char data, size_t pos, size_t n)
+{
+    size_t i = 0;
+
+    for (; i < n; i++) {
+        buffer->data[(pos + i) % buffer->size] = data;
+    }
+}

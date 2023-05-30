@@ -38,10 +38,11 @@ int set_reg(process_t *process, vm_t *vm, int new)
  * @param new the value to write
  * @param size the size of the write
  */
-void set_mem(vm_t *vm, int pos, int new, int size)
+void set_mem(vm_t *vm, int pos, int new, int size, char champid)
 {
     int correct_new = 0;
 
     correct_new = SWAP_INT32_SAFE(new);
     cbuffer_set(vm->arena, &correct_new, size, pos);
+    cbuffer_setbforn(vm->arena_ownership, champid, pos, size);
 }

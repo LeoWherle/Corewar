@@ -34,7 +34,7 @@ static void sti_to_reg(vm_t *vm, process_t *process, unsigned char *type,
         return;
     if (type[1] == IND_CODE)
         first = cbuffer_gets(vm->arena, pos + first % IDX_MOD);
-    set_mem(vm, pos + (first + second) % IDX_MOD, reg, REG_SIZE);
+    set_mem(vm, pos + (first + second) % IDX_MOD, reg, REG_SIZE, process->champion->id);
 }
 
 void cmd_sti(vm_t *vm, process_t *process)

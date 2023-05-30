@@ -78,7 +78,7 @@ static void champion_get_kill(any_t data, void *vm_ptr, UNUSED void *none)
     }
 }
 
-static int core_check(vm_t *vm)
+int core_check(vm_t *vm)
 {
     vm->cycle_amount++;
     vm->total_cycle++;

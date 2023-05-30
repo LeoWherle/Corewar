@@ -44,4 +44,8 @@
     void cbuffer_get(cbuffer_t *buffer, char *data, size_t size, size_t pos);
 
     void cbuffer_fill(cbuffer_t *buffer, char data);
+
+    // Salut ça va c'est moi Lucien
+    void cbuffer_setbforn(cbuffer_t *buffer, char data, size_t pos, size_t n);
+
 #endif /* !CBUFFER_H_ */

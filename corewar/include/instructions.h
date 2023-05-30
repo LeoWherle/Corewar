@@ -60,6 +60,6 @@
     unsigned char *get_coding_byte(unsigned char coding_byte);
     bool param_checker(unsigned char *type, int index);
     int set_reg(process_t *process, vm_t *vm, int new);
-    void set_mem(vm_t *vm, int pos, int new, int size);
+    void set_mem(vm_t *vm, int pos, int new, int size, char champid);
 
 #endif /* !INSTRUCTIONS_H_ */

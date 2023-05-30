@@ -16,6 +16,7 @@
 
     // check if nbr(index) is between index and index + size
     #define TRUE_MAGIC      -209458688
+    #define SWAP_CHAR(x) (x >> 8 | x << 8)
     #define SWAP_INT32(x) (((x) >> 24) | (((x) << 8) & 0x00FF0000) \
 | (((x) >> 8) & 0x0000FF00) | ((x) << 24))
 
@@ -70,6 +71,7 @@
 
     typedef struct vm_s {
         cbuffer_t *arena;
+        cbuffer_t *arena_ownership;
         // list of champions
         list_t *champions;
         // list of processes (champions)
@@ -104,6 +106,7 @@
     void instruction_exec(vm_t *vm);
     void instruction_get(vm_t *vm);
     void core_cleanup(vm_t *vm);
+    int core_check(vm_t *vm);
     /*
     ** Display functions
     */

@@ -44,10 +44,12 @@ lib_build:
 clean:
 	@$(MAKE) -C corewar clean
 	@$(MAKE) -C asm clean
+	@$(MAKE) -C bonus clean
 
 fclean: clean
 	@$(MAKE) -C corewar fclean
 	@$(MAKE) -C asm fclean
+	@$(MAKE) -C bonus fclean
 
 re: fclean all
 
@@ -71,5 +73,10 @@ perf: lib_build $(OBJ)
 
 tests_run:
 	@for i in $(LIBS); do $(MAKE) -C $$i tests_run; done
+
+bonus: lib_build
+	@$(MAKE) -C corewar bonus -s
+	@$(MAKE) -C bonus -s
+	@./bonus/bonus assets/champions/42.cor assets/champions/fenix.cor assets/champions/ebola.cor assets/champions/octobrerouge.cor
 
 .PHONY: all clean fclean re debug gprof perf tests_run lib_build
