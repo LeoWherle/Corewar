@@ -164,7 +164,7 @@ int vm_container_update(vm_container_t *vmc, float seconds)
         if (core_check(vmc->vm)) {
             ret = -1;
             vmc->winpanel->state = PANEL_STATE_ACTIVE;
-            update_text(vmc->winpanel->text, get_champion_alive(vmc->vm->champions)->header.prog_name);
+            update_text(vmc->winpanel->childs[1]->text, get_champion_alive(vmc->vm->champions)->header.prog_name);
             break;
         }
     }
