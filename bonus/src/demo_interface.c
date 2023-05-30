@@ -49,7 +49,7 @@ static panel_t *vmflex(program_t *p)
     for (int i = 0; i < MEM_SIZE; i++) {
         childs[i] = make_ibutt("OO", NULL, NULL, p->font2);
         panel = childs[i];
-        interface_text_rect_set(panel, 0.6);
+        interface_text_rect_set(panel, 0.55);
         sfText_setColor(panel->text, sfColor_fromRGBA(255, 215, 50, 100));
     }
     childs[MEM_SIZE] = NULL;
