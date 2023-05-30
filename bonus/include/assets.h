@@ -26,6 +26,9 @@
     #ifndef FONT_TEXT
         #define FONT_TEXT "Starjedi.ttf"
     #endif /* !FONT_TEXT */
+    #ifndef FONT_MEM
+        #define FONT_MEM "VeraMono.ttf"
+    #endif /* !FONT_TITLE */
     #ifndef LOGO
         #define LOGO "logo.png"
     #endif /* !LOGO */

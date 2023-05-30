@@ -26,4 +26,9 @@ rand_music=${music[index]}
 
 echo "make CLICK=$rand_click"
 
-# make bonus CLICK=$rand_click
+make CLICK=$rand_click \
+    CLICKRELEASE=$rand_clickrelease \
+    CHAMPIONFONT=$rand_Championfont \
+    TEXTFONT=$rand_Textfont \
+    LOGO=$rand_logo \
+    MUSIC=$rand_music
