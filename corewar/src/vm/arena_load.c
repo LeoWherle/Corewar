@@ -32,6 +32,7 @@ static int load_champion(vm_t *vm, champion_t *champion, size_t pos)
     fseek(filestream, sizeof(header_t), SEEK_SET);
     fread(buffer, sizeof(char), champion->header.prog_size, filestream);
     cbuffer_set(vm->arena, buffer, champion->header.prog_size, pos);
+    cbuffer_setbforn(vm->arena_ownership, champion->id, pos, champion->header.prog_size);
     free(buffer);
     fclose(filestream);
     return 0;

@@ -1,6 +1,7 @@
 # Compiled
 corewar/corewar
 asm/asm
+bonus/bonus
 
 # Coding style
 *.log
@@ -86,3 +87,5 @@ dkms.conf
 # IDE
 .idea/
 .vscode/
+
+*:Zone.Identifier

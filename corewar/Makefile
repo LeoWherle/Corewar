@@ -146,4 +146,7 @@ perf: lib_build $(OBJ)
 	@echo -e "$(CLEARL)$(BLUE)⚙️  Performance Mode$(RESET)"
 	@bash -c "time ./$(NAME)"
 
+bonus: lib_build $(OBJ)
+	@ar rc libmycorewar.a $(OBJ)
+
 .PHONY: all clean fclean re debug gprof perf lib_build

@@ -78,17 +78,17 @@ static void champion_get_kill(any_t data, void *vm_ptr, UNUSED void *none)
     }
 }
 
-static int core_check(vm_t *vm)
+int core_check(vm_t *vm)
 {
     vm->cycle_amount++;
     vm->total_cycle++;
+    if (vm->local_live >= NBR_LIVE) {
+        vm->cycle_to_die -= CYCLE_DELTA;
+        vm->local_live = 0;
+    }
     if (vm->cycle_amount >= vm->cycle_to_die) {
         vm->cycle_amount = 0;
         vm->curr_period++;
-        if (vm->local_live >= NBR_LIVE) {
-            vm->cycle_to_die -= CYCLE_DELTA;
-            vm->local_live = 0;
-        }
         list_foreach_wargs(vm->champions, &champion_get_kill, vm, NULL);
         if (core_end(vm))
             return 1;
