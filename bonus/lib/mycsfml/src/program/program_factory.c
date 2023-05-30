@@ -23,6 +23,7 @@ program_t *create_program(program_maker_t maker)
     prog->current_scene = -1;
     prog->font = sfFont_createFromFile(PATHTOASSETS "Starjedi.ttf");
     prog->font2 = sfFont_createFromFile(PATHTOASSETS "VeraMono.ttf");
+    prog->galaxy_font = sfFont_createFromFile(PATHTOASSETS "Galaxy.ttf");
     prog->music = sfMusic_createFromFile(PATHTOASSETS "music.ogg");
     prog->clock = sfClock_create();
     sfMusic_setLoop(prog->music, sfTrue);
@@ -44,6 +45,7 @@ void destroy_program(program_t *p)
         scenes_destroy(p->scenes);
     sfFont_destroy(p->font);
     sfFont_destroy(p->font2);
+    sfFont_destroy(p->galaxy_font);
     save_hyperparams(&(p->params), PATHTOASSETS "hyperprog.txt");
     sfMusic_destroy(p->music);
     free(p);

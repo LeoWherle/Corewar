@@ -79,4 +79,4 @@ bonus: lib_build
 	@$(MAKE) -C bonus -s
 	@./bonus/bonus assets/champions/42.cor assets/champions/fenix.cor assets/champions/ebola.cor assets/champions/octobrerouge.cor
 
-.PHONY: all clean fclean re debug gprof perf tests_run lib_build
+.PHONY: all clean fclean re debug gprof perf tests_run lib_build bonus

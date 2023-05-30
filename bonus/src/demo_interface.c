@@ -105,8 +105,8 @@ panel_t *champ_info1(program_t *p)
     fmain->rect->xanchor = ANCHOR_START;
     fmain->rect->yanchor = ANCHOR_START;
     panel_add_childs(fmain, 2,
-        make_label_pair(p->font, "", make_label(p->font, "", 16), 16),
-        make_label_pair(p->font, "", make_label(p->font, "", 16), 16));
+        make_label_pair(p->galaxy_font, "", make_label(p->galaxy_font, "", 16), 16),
+        make_label_pair(p->galaxy_font, "", make_label(p->galaxy_font, "", 16), 16));
     init_rshape(&(fmain->shape), MENU);
     return fmain;
 }
@@ -118,8 +118,8 @@ panel_t *champ_info2(program_t *p)
     fmain->rect->xanchor = ANCHOR_START;
     fmain->rect->yanchor = ANCHOR_START;
     panel_add_childs(fmain, 2,
-        make_label_pair(p->font, "", make_label(p->font, "", 16), 16),
-        make_label_pair(p->font, "", make_label(p->font, "", 16), 16));
+        make_label_pair(p->galaxy_font, "", make_label(p->galaxy_font, "", 16), 16),
+        make_label_pair(p->galaxy_font, "", make_label(p->galaxy_font, "", 16), 16));
     init_rshape(&(fmain->shape), MENU);
     return fmain;
 }
@@ -153,7 +153,7 @@ panel_t *win_panel(program_t *p)
     mrect->yanchor = ANCHOR_MIDDLE;
     panel_t *main = panel_empty_create(mrect, sfColor_fromRGBA(100, 100, 100, 100));
     main->state = PANEL_STATE_INACTIVE;
-    init_text(&(main->text), p->font, "WINNER", 32);
+    init_text(&(main->text), p->galaxy_font, "WINNER", 32);
     return main;
 }
 

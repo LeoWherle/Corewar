@@ -65,6 +65,7 @@ typedef struct program_s {
     int current_scene;
     sfFont *font;
     sfFont *font2;
+    sfFont *galaxy_font;
     sfMusic *music;
     sfClock *clock;
     float dt;
