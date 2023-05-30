@@ -1,6 +1,7 @@
 # Compiled
 corewar/corewar
 asm/asm
+bonus/bonus
 
 # Coding style
 *.log
