@@ -79,4 +79,9 @@ bonus: lib_build
 	@$(MAKE) -C bonus -s
 	@./bonus/bonus assets/champions/42.cor assets/champions/fenix.cor assets/champions/ebola.cor assets/champions/octobrerouge.cor
 
+random-build: lib_build
+	@$(MAKE) -C bonus fclean
+	@$(MAKE) -C corewar bonus
+	@$(MAKE) -C bonus
+
 .PHONY: all clean fclean re debug gprof perf tests_run lib_build bonus
