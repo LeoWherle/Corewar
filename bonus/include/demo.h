@@ -10,10 +10,7 @@
     #define TIME_SCALE_MAX 2
     #define CYCLE_PER_SEC 50
     #define HELP_TEXT "BONUS\nUSAGE\n\t./bonus\nInfo:\n\tLaunch the corewar bonus\n"
-    #define COLOR1 sfColor_fromRGBA(220, 100, 100, 255)
-    #define COLOR2 sfColor_fromRGBA(120, 175, 240, 255)
-    #define COLOR3 sfColor_fromRGBA(120, 240, 120, 255)
-    #define COLOR4 sfColor_fromRGBA(190, 80, 240, 255)
+    #include "theme.h"
     #include "program.h"
     #include "vm.h"
 

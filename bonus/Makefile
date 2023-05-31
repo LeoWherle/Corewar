@@ -42,6 +42,8 @@ RST				=	\033[0m
 
 BONUSLIB		=	lib/mycsfml/libmycsfml.a
 
+THEME			=
+
 $(NAME):	$(BONUSLIB) $(OBJS)
 	@gcc -o $@ $^ $(CFLAGS) $(LDFLAGS) $(CSFML)
 	@printf "\n$(G)$(NAME) $(Y)[$(G)✓$(Y)]$(RST)\n"
@@ -49,7 +51,7 @@ $(NAME):	$(BONUSLIB) $(OBJS)
 all:		$(NAME)
 
 %.o:		%.c
-	@gcc -o $@ -c $< $(CFLAGS) $(LDFLAGS)
+	@gcc -o $@ -c $< $(CFLAGS) $(LDFLAGS) $(THEME)
 	@printf "$(Y)$(notdir $(@:.o=))[$(G)✓$(Y)]$(RST) "
 
 clean:
@@ -73,6 +75,6 @@ val_run:	debug
 	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$<
 
 $(BONUSLIB):
-	@make -C lib/mycsfml
+	@make -C lib/mycsfml THEME=$(THEME)
 
 .PHONY: all clean fclean re val_run
