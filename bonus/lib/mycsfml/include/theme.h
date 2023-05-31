@@ -12,6 +12,7 @@
     #include "themes/minecraft.h"
     #include "themes/nico.h"
     #include "themes/ff7.h"
+    #include "themes/thug.h"
 
 // don't remove this and themes should be defined above
 #include "themes/default-starwars.h"
