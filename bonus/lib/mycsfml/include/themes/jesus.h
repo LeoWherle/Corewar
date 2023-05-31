@@ -8,8 +8,10 @@
 #ifdef JESUS
     #define LOGO "jesuslogo.png"
     #define MUSIC "avemaria.ogg"
-    #define CLEAR_COLOR sfColor_fromRGB(212, 173, 105)
+    #define CLEAR_COLOR sfColor_fromRGB(30, 30, 30)
     #define FONT_TEXT "aretha.ttf"
     #define FONT_CHAMP "aretha.ttf"
-    #define TEXT_COLOR sfColor_fromRGBA(55, 55, 55, 200)
+    #define PRESS_SOUND "amen.ogg"
+    #define TEXT_COLOR sfColor_fromRGBA(255, 255, 255, 200)
+    #define TEXT_COLOR2 sfColor_fromRGBA(255, 255, 255, 50)
 #endif
