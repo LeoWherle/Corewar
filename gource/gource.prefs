@@ -4,6 +4,7 @@ fullscreen=true
 [gource]
 auto-skip-seconds=1
 background-image=gource/background.png
+default-user-image=gource/default.png
 filename-time=2
 font-colour=FFFFFF
 font-file=gource/CooperBits.ttf
@@ -17,7 +18,3 @@ path=.
 title=Corewar
 user-image-dir=gource/user_images
 
-
-[filetypes]
-.c=#FF0000
-.h=#FF0000

@@ -8,6 +8,7 @@ BACKGROUND_IMAGE="gource/background.png"
 
 # Set the path to the directory containing contributor images
 CONTRIBUTOR_IMAGES="gource/user_images"
+DEFAULT_IMAGE="gource/default.png"
 
 param=$1
 
@@ -17,10 +18,11 @@ if [ "$param" == "save" ]; then
         -f \
         --background-image $BACKGROUND_IMAGE \
         --user-image-dir $CONTRIBUTOR_IMAGES \
+        --default-user-image $DEFAULT_IMAGE \
         --auto-skip-seconds 1 \
         --font-colour FFFFFF \
         --highlight-dirs \
-        --hide bloom,dirnames \
+        --hide dirnames \
         --filename-time 2 \
         --key \
         --logo gource/logo.png \
