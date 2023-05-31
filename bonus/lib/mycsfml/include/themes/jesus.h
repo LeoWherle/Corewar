@@ -7,7 +7,7 @@
 
 #ifdef JESUS
     #define LOGO "jesuslogo.png"
-    #define MUSIC "avemaria.ogg"
+    #define MUSIC "Ameno.ogg"
     #define CLEAR_COLOR sfColor_fromRGB(30, 30, 30)
     #define FONT_TEXT "aretha.ttf"
     #define FONT_CHAMP "aretha.ttf"
