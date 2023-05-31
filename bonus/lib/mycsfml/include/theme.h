@@ -14,6 +14,7 @@
     #include "themes/ff7.h"
     #include "themes/thug.h"
     #include "themes/avengers.h"
+    #include "themes/mario.h"
 
 // don't remove this and themes should be defined above
 #include "themes/default-starwars.h"
