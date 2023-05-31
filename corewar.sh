@@ -11,7 +11,7 @@ then
     echo "    -n prog_number sets the next program's number. By default, the first free number in the parameter order"
     echo "    -a load_address sets the next program's loading address. When no address is specified, optimize the addresses so that the processes are as far away from each other as possible. The addresses are MEM_SIZE modulo."
 else
-    theme_list=("NICO" "defaultstarwars" "ETIPECH" "FIGHTER" "MINECRAFT")
+    theme_list=("NICO" "defaultstarwars" "ETIPECH" "FIGHTER" "MINECRAFT" "FF7")
 
     length=${#theme_list[@]}
     # generate a random index
