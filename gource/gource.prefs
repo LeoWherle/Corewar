@@ -3,7 +3,7 @@ fullscreen=true
 
 [gource]
 auto-skip-seconds=1
-background-image=gource/background.png
+background-colour=000000
 default-user-image=gource/default.png
 filename-time=2
 font-colour=FFFFFF

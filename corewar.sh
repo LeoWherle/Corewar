@@ -21,7 +21,7 @@ then
     printf "   $GREEN -n$RESET prog_number sets the next program's number. By default, the first free number in the parameter order\n"
     printf "   $GREEN -a$RESET load_address sets the next program's loading address. When no address is specified, optimize the addresses so that the processes are as far away from each other as possible. The addresses are MEM_SIZE modulo.\n"
 else
-    theme_list=("NICO" "defaultstarwars" "ETIPECH" "FIGHTER" "MINECRAFT" "FF7")
+    theme_list=("NICO" "defaultstarwars" "ETIPECH" "FIGHTER" "MINECRAFT" "FF7" "THUG" "AVENGERS" "MARIO" "JESUS")
 
     length=${#theme_list[@]}
     # generate a random index
