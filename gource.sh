@@ -14,9 +14,10 @@ param=$1
 
 if [ "$param" == "save" ]; then
     echo "Saving gource.prefs"
+    # --background-image $BACKGROUND_IMAGE \
     gource $GOURCE_REPO \
         -f \
-        --background-image $BACKGROUND_IMAGE \
+        --background-colour 000000 \
         --user-image-dir $CONTRIBUTOR_IMAGES \
         --default-user-image $DEFAULT_IMAGE \
         --auto-skip-seconds 1 \
