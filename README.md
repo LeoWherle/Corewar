@@ -32,10 +32,19 @@
   - make
 
 ## How to use:
-    
-    ```
-    $ ./asm file_name.s
-    ```
-    ```
-    $ ./corewar [-dump nbr_cycle] [[-n prog_number] [-a load_address ] prog_name] ...
-    ```
+
+### Terminal
+
+    $ ./asm/asm file_name.s
+
+    $ ./corewar/corewar [-dump nbr_cycle] [[-n prog_number] [-a load_address ] prog_name] ...
+
+### Graphical
+
+  on branch, **main** : *takes the "default" champions for demonstration*
+
+    $ make bonus
+
+  on branch, **tournament** :
+
+    $ ./corewar.sh [-dump nbr_cycle] [[-n prog_number] [-a load_address ] prog_name] ...
