@@ -88,6 +88,7 @@
         unsigned int total_cycle;
         bool has_dump;
         unsigned int dump_cycle;
+        champion_t *last_live;
     } vm_t;
 
     /*

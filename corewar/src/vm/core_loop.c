@@ -45,7 +45,7 @@ static int core_end(vm_t *vm)
     champion = get_champion_alive(vm->champions);
     if (champion_alive == 1 && champion != NULL) {
         my_fprintf(1, "The player %d(%s) has won.\n",
-            champion->id, champion->header.prog_name);
+            champion->id, vm->last_live->header.prog_name);
         return (1);
     }
     return (0);
