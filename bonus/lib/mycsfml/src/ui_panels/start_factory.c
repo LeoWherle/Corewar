@@ -21,7 +21,7 @@ static panel_t *titleimg(void)
 {
     panel_t *title = NULL;
     sfTexture *texture = sfTexture_createFromFile(
-        PATHTOASSETS "logo.png", NULL);
+        PATHTOASSETS LOGO, NULL);
 
     if (!texture)
         return NULL;
@@ -43,7 +43,7 @@ static panel_t *menuflex(program_t *p)
         make_butt("options", p, mopen_options, p->font),
         make_butt("quit", p, quit_program, p->font)
     );
-    init_rshape(&(fmain->shape), sfColor_fromRGBA(0, 0, 0, 0));
+    init_rshape(&(fmain->shape), START_MENU_BG);
     return fmain;
 }
 
