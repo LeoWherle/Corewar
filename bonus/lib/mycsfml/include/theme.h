@@ -16,6 +16,7 @@
     #include "themes/avengers.h"
     #include "themes/mario.h"
     #include "themes/jesus.h"
+    #include "themes/persona.h"
 
 // don't remove this and themes should be defined above
 #include "themes/default-starwars.h"
