@@ -34,11 +34,14 @@ int show_help(void)
 int main(int ac, const char **av)
 {
     program_t *prog = NULL;
+    vm_t *vm = bonusmain(ac, av);
+
     prog = create_program(demo_scenes);
-    prog->scenes[1]->content = demo_content_maker(prog, ac, av);
+    prog->scenes[1]->content = demo_content_maker(prog, vm);
     if (!prog->scenes[1]->content) {
         destroy_program(prog);
         return 84;
     }
+    intro_main(prog, vm);
     return execute_program(prog);
 }

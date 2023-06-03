@@ -162,9 +162,9 @@ vm_t *bonusmain(int ac, const char **av)
     return vm;
 }
 
-void initialize_content(content_t *content, program_t *prog, int ac, const char **av)
+void initialize_content(content_t *content, program_t *prog, vm_t *vm)
 {
-    content->content = vm_container_create(prog, bonusmain(ac, av));
+    content->content = vm_container_create(prog, vm);
     content->maker = NULL;
     content->destroyer = NULL;
     content->drawer = NULL;
@@ -187,13 +187,13 @@ void initialize_content(content_t *content, program_t *prog, int ac, const char 
     content->loader = NULL;
 }
 
-content_t *demo_content_maker(program_t *prog, int ac, const char **av)
+content_t *demo_content_maker(program_t *prog, vm_t *vm)
 {
     content_t *content = malloc(sizeof(content_t));
 
     if (!content)
         return NULL;
-    initialize_content(content, prog, ac, av);
+    initialize_content(content, prog, vm);
     if (!content->content)
         return NULL;
     content->destroyer = demo_content_destroyer;

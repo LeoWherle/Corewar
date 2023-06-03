@@ -50,7 +50,7 @@ static panel_t *vmflex(program_t *p)
         childs[i] = make_ibutt("OO", NULL, NULL, p->font2);
         panel = childs[i];
         interface_text_rect_set(panel, 0.6);
-        sfText_setColor(panel->text, sfColor_fromRGBA(255, 215, 50, 100));
+        sfText_setColor(panel->text, TEXT_COLOR2);
     }
     childs[MEM_SIZE] = NULL;
     fmain->childs = childs;
@@ -105,8 +105,8 @@ panel_t *champ_info1(program_t *p)
     fmain->rect->xanchor = ANCHOR_START;
     fmain->rect->yanchor = ANCHOR_START;
     panel_add_childs(fmain, 2,
-        make_label_pair(p->galaxy_font, "", make_label(p->galaxy_font, "", 16), 16),
-        make_label_pair(p->galaxy_font, "", make_label(p->galaxy_font, "", 16), 16));
+        make_label_pair(p->font3, "", make_label(p->font3, "", 16), 16),
+        make_label_pair(p->font3, "", make_label(p->font3, "", 16), 16));
     init_rshape(&(fmain->shape), MENU);
     return fmain;
 }
@@ -118,8 +118,8 @@ panel_t *champ_info2(program_t *p)
     fmain->rect->xanchor = ANCHOR_START;
     fmain->rect->yanchor = ANCHOR_START;
     panel_add_childs(fmain, 2,
-        make_label_pair(p->galaxy_font, "", make_label(p->galaxy_font, "", 16), 16),
-        make_label_pair(p->galaxy_font, "", make_label(p->galaxy_font, "", 16), 16));
+        make_label_pair(p->font3, "", make_label(p->font3, "", 16), 16),
+        make_label_pair(p->font3, "", make_label(p->font3, "", 16), 16));
     init_rshape(&(fmain->shape), MENU);
     return fmain;
 }
