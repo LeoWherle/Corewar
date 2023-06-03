@@ -41,10 +41,11 @@ intro_t *intro_init()
     intro->window = sfRenderWindow_create(
         (sfVideoMode){1920, 1080, 32}, "Corewar", sfFullscreen, NULL);
     //TMP WINDOW
-    sfRenderWindow_setFramerateLimit(intro->window, 60);
+    sfRenderWindow_setFramerateLimit(intro->window, 30);
     intro->frame = sfTexture_createFromFile("bonus/ressources/intros/DeeCam/image-1.png", NULL);
     intro->sprite = sfSprite_create();
     sfSprite_setTexture(intro->sprite, intro->frame, sfTrue);
+    sfSprite_setScale(intro->sprite, (sfVector2f){1.5, 1.5});
     intro->frame_nb = 1;
     intro->path = malloc(sizeof(char) * 70);
     intro->walkout = true;
@@ -68,7 +69,6 @@ int detroy_intro(intro_t *intro, int champs_nb)
     for (int i = 0; i < intro->preload_index; i++)
         sfImage_destroy(intro->images[i]);
     sfFont_destroy(intro->font);
-    printf("destroyed\n");
     for (int i = 0; i < champs_nb; i++)
         sfText_destroy(intro->champions[i]);
     free(intro->path);
