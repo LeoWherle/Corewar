@@ -12,7 +12,11 @@ SRCS			=	demo_content.c	\
 					demo_main.c		\
 					demo_interface.c\
 					user_param.c\
-					vm_container.c
+					vm_container.c \
+					cutscene/intro_main.c \
+					cutscene/play_video.c \
+					cutscene/display_champs.c \
+					
 
 LIBS = ../lib/clist ../lib/op ../lib/cbuffer ../lib/mystr ../lib/serrorh
 

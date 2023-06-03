@@ -36,6 +36,8 @@ typedef struct vm_container_s {
 vm_container_t *vm_container_create(program_t *p, vm_t *vm);
 int vm_container_update(vm_container_t *vmc, float seconds);
 panel_t *demogame(program_t *p);
-content_t *demo_content_maker(program_t *prog, int ac, const char **av);
+content_t *demo_content_maker(program_t *prog, vm_t *vm);
+vm_t *bonusmain(int ac, const char **av);
 panel_t *game_interface(program_t *p);
+int intro_main(program_t *prog, vm_t *vm);
 #endif /* DEMO_H */
