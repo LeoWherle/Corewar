@@ -16,16 +16,9 @@
 #include "intro.h"
 #include "vm.h"
 
-static const char intros[9][70] = {
+static const char intros[2][70] = {
     "bonus/ressources/intros/DeeCam/image-",
-    "bonus/ressources/intros/GuiRyu/image-",
-    "bonus/ressources/intros/HonBla/image-",
-    "bonus/ressources/intros/JurJam/image-",
-    "bonus/ressources/intros/KenChu/image-",
-    "bonus/ressources/intros/KimLuk/image-",
-    "bonus/ressources/intros/LilJp/image-",
     "bonus/ressources/intros/ManMar/image-",
-    "bonus/ressources/intros/ZanDha/image-"
 };
 
 static const char vsscreens[3][70] = {
@@ -74,9 +67,9 @@ int play_walkout(intro_t *intro, vm_t *vm)
         intro->frame_nb = 1;
         if (vm->champions->size > 2 && !intro->second_walkout) {
             intro->second_walkout = true;
-            intro->intro_index = rand() % 9;
+            intro->intro_index = rand() % NB_DUOS;
             while (intro->intro_index == keep)
-                intro->intro_index = rand() % 9;
+                intro->intro_index = rand() % NB_DUOS;
             return 0;
         }
         sfMusic_stop(intro->music);

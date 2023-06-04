@@ -51,7 +51,7 @@ intro_t *intro_init()
     intro->walkout = true;
     intro->versus = false;
     intro->end = false;
-    intro->intro_index = rand() % 9;
+    intro->intro_index = rand() % NB_DUOS;
     intro->preload_index = 0;
     intro->no_frame = false;
     intro->music = sfMusic_createFromFile("bonus/ressources/intro_theme.ogg");

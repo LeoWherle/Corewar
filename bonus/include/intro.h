@@ -16,6 +16,7 @@
     #define INTRO_H
 
     #define FRAME_PRELOAD 20
+    #define NB_DUOS 2
 
     typedef struct intro_s {
         //TMP WINDOW
