@@ -19,4 +19,5 @@
     #define COLOR2 sfColor_fromRGBA(255, 255, 0, 255)
     #define COLOR3 sfColor_fromRGBA(255, 133, 200, 255)
     #define COLOR4 sfColor_fromRGBA(55, 255, 0, 255)
+    #define CURSOR "marvin-mouse.png"
 #endif
