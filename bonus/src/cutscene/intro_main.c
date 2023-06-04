@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#include <string.h>
 #include "program.h"
 #include "intro.h"
 #include "vm.h"
@@ -47,7 +48,7 @@ intro_t *intro_init()
     sfSprite_setTexture(intro->sprite, intro->frame, sfTrue);
     sfSprite_setScale(intro->sprite, (sfVector2f){1.5, 1.5});
     intro->frame_nb = 1;
-    intro->path = malloc(sizeof(char) * 70);
+    memset(intro->path, 0, 70);
     intro->walkout = true;
     intro->versus = false;
     intro->end = false;
@@ -71,7 +72,6 @@ int detroy_intro(intro_t *intro, int champs_nb)
     sfFont_destroy(intro->font);
     for (int i = 0; i < champs_nb; i++)
         sfText_destroy(intro->champions[i]);
-    free(intro->path);
     sfRenderWindow_destroy(intro->window);
     free(intro);
     return 0;

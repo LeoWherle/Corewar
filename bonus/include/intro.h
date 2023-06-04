@@ -32,7 +32,7 @@
         int preload_index;
         int frame_nb;
         char nb_str[10];
-        char *path;
+        char path[70];
         int intro_index;
         bool no_frame;
         bool walkout;

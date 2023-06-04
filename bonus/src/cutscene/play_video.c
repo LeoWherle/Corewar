@@ -38,8 +38,8 @@ void initial_preload(intro_t *intro)
 {
     for (int i = 0; i < FRAME_PRELOAD; i++) {
         sprintf(intro->nb_str, "%d.png", intro->frame_nb + i);
-        intro->path = strcpy(intro->path, intros[intro->intro_index]);
-        intro->path = strcat(intro->path, intro->nb_str);
+        strcpy(intro->path, intros[intro->intro_index]);
+        strcat(intro->path, intro->nb_str);
         intro->images[i] = sfImage_createFromFile(intro->path);
     }
 }
@@ -49,8 +49,8 @@ int set_frame(intro_t *intro, const char *folder)
     sfImage *next_frame = NULL;
 
     sprintf(intro->nb_str, "%d.png", intro->frame_nb);
-    intro->path = strcpy(intro->path, folder);
-    intro->path = strcat(intro->path, intro->nb_str);
+    strcpy(intro->path, folder);
+    strcat(intro->path, intro->nb_str);
     next_frame = sfImage_createFromFile(intro->path);
     if (!next_frame)
         return 84;
