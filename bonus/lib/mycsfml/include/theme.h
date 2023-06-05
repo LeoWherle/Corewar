@@ -18,6 +18,7 @@
     #include "themes/jesus.h"
     #include "themes/persona.h"
     #include "themes/marvin.h"
+    #include "themes/lapassion.h"
 
 // don't remove this and themes should be defined above
 #include "themes/default-starwars.h"
