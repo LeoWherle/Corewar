@@ -19,7 +19,8 @@
     #include "themes/persona.h"
     #include "themes/marvin.h"
     #include "themes/lapassion.h"
-
+    #include "themes/death-note.h"
+    
 // don't remove this and themes should be defined above
 #include "themes/default-starwars.h"
 #endif /* THEME_H */
