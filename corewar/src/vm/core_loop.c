@@ -43,7 +43,7 @@ static int core_end(vm_t *vm)
         return (1);
     }
     champion = get_champion_alive(vm->champions);
-    if (champion_alive == 1 && champion != NULL) {
+    if (vm->cycle_to_die == 0 || (champion_alive == 1 && champion != NULL)) {
         my_fprintf(1, "The player %d(%s) has won.\n",
             champion->id, vm->last_live->header.prog_name);
         return (1);
@@ -87,6 +87,7 @@ int core_check(vm_t *vm)
         vm->local_live = 0;
         if (((int)vm->cycle_to_die) <= 0) {
             vm->cycle_to_die = 0;
+            return 1;
         }
     }
     if (vm->cycle_amount >= vm->cycle_to_die) {
