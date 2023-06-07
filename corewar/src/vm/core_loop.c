@@ -37,9 +37,6 @@ static int core_end(vm_t *vm)
     int champion_alive = 0;
     champion_t *champion = NULL;
 
-    if (vm->cycle_to_die <= 0) { // doesn't stop if cycle_to_die is negative
-        return (1);
-    }
     champion_alive = count_champion_alive(vm);
     if (champion_alive == 0) {
         my_fputstr(1, "No winner\n");
@@ -88,6 +85,9 @@ int core_check(vm_t *vm)
     if (vm->local_live >= NBR_LIVE) {
         vm->cycle_to_die -= CYCLE_DELTA;
         vm->local_live = 0;
+        if (((int)vm->cycle_to_die) <= 0) {
+            vm->cycle_to_die = 0;
+        }
     }
     if (vm->cycle_amount >= vm->cycle_to_die) {
         vm->cycle_amount = 0;
