@@ -13,11 +13,11 @@
 
 static void load_canvas_sounds(canvas_t *canvas)
 {
-    canvas->spbuf = sfSoundBuffer_createFromFile(PATHTOASSETS "clickpress.ogg");
+    canvas->spbuf = sfSoundBuffer_createFromFile(PATHTOASSETS PRESS_SOUND);
     canvas->soundppress = sfSound_create();
     sfSound_setBuffer(canvas->soundppress, canvas->spbuf);
     sfSound_setVolume(canvas->soundppress, SOUNDVOLUME);
-    canvas->srbuf = sfSoundBuffer_createFromFile(PATHTOASSETS "clickrelease.ogg");
+    canvas->srbuf = sfSoundBuffer_createFromFile(PATHTOASSETS RELEASE_SOUND);
     canvas->soundprelease = sfSound_create();
     sfSound_setBuffer(canvas->soundprelease, canvas->srbuf);
     sfSound_setVolume(canvas->soundprelease, SOUNDVOLUME);

@@ -8,6 +8,7 @@
 #include <SFML/Graphics.h>
 #include "rectransform.h"
 #include "program.h"
+#include "theme.h"
 
 void init_text(sfText **text, sfFont *font, const char *str, unsigned int size)
 {
@@ -19,7 +20,7 @@ void init_text(sfText **text, sfFont *font, const char *str, unsigned int size)
     if (!*text)
         return;
     sfText_setFont(*text, font);
-    sfText_setColor(*text, sfColor_fromRGBA(255, 215, 50, 200));
+    sfText_setColor(*text, TEXT_COLOR);
     sfText_setString(*text, str);
     sfText_setCharacterSize(*text, size);
     trect = sfText_getLocalBounds(*text);

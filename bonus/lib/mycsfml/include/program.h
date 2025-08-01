@@ -25,9 +25,9 @@
     #include "param.h"
     #define INVENTORYX 8
     #define INVENTORYY 5
-    #define ITEMSIZEX 24
-    #define ITEMSIZEY 20
-    #define ITEMMARGIN 2
+    #define ITEMSIZEX 16
+    #define ITEMSIZEY 14
+    #define ITEMMARGIN 1
     #define HANDLEX 12.5
     #define ELEMX 150
     #define ELEMY 30
@@ -65,7 +65,7 @@ typedef struct program_s {
     int current_scene;
     sfFont *font;
     sfFont *font2;
-    sfFont *galaxy_font;
+    sfFont *font3;
     sfMusic *music;
     sfClock *clock;
     float dt;

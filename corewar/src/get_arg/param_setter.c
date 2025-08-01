@@ -42,6 +42,9 @@ void set_mem(vm_t *vm, int pos, int new, int size, char champid)
 {
     int correct_new = 0;
 
+    if (pos < 0) {
+        pos = (MEM_SIZE + pos);
+    }
     correct_new = SWAP_INT32_SAFE(new);
     cbuffer_set(vm->arena, &correct_new, size, pos);
     cbuffer_setbforn(vm->arena_ownership, champid, pos, size);

@@ -65,6 +65,8 @@ SRCS			:=	$(addprefix src/, $(SRCS))
 
 OBJS			=	$(SRCS:.c=.o)
 
+THEME			=
+
 $(LNAME):	$(OBJS)
 	@ar rcs $@ $(OBJS)
 	@printf "\n$(G)$(LNAME) $(Y)[$(G)✓$(Y)]$(RST)\n"
@@ -72,7 +74,7 @@ $(LNAME):	$(OBJS)
 all:		$(LNAME)
 
 %.o:		%.c
-	@gcc -o $@ -c $< $(CFLAGS)
+	@gcc -o $@ -c $< $(CFLAGS) $(THEME)
 	@printf "$(Y)$(notdir $(@:.o=))[$(G)✓$(Y)]$(RST) "
 
 clean:
